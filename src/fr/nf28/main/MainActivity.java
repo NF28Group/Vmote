@@ -1,23 +1,21 @@
 package fr.nf28.main;
 
 import com.actionbarsherlock.sample.styled.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class MainActivity extends SherlockFragmentActivity {
+public class MainActivity extends Activity {
 	
 	
-
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
         final ActionBar ab = getSupportActionBar();
-        
     }
 
     @Override
