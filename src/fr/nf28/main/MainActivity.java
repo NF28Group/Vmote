@@ -1,4 +1,4 @@
-package com.example.vmote_v0;
+package fr.nf28.main;
 
 import android.os.Bundle;
 import android.app.Activity;
