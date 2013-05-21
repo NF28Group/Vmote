@@ -1,8 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
 
-</LinearLayout>
+    <TableRow
+        android:layout_marginTop="200dp" 
+        android:layout_width="fill_parent"
+        >
+        <Button
+        android:id="@+id/buttonPlayRewind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rew" />
+
+    	<Button
+        android:id="@+id/buttonPlayGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go" />
+
+    	<Button
+        android:id="@+id/buttonPlayStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop" />
+
+    	<Button
+        android:id="@+id/buttonPlayFastForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forw" />
+    </TableRow>
+    
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_marginTop="20dp" 
+	    >
+	     <Button	         
+        android:id="@+id/buttonPlayDirectory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dir" />
+
+    <Button
+        android:id="@+id/buttonPlayRepeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repeat" />
+
+    <Button
+        android:id="@+id/buttonPlayRandom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Random" />
+	    
+	</TableRow>
+   
+	<TableRow 
+	    android:layout_width="fill_parent"
+	    android:layout_marginTop="20dp">
+	    <Button
+        android:id="@+id/buttonPlaySound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mute" />
+	    
+	     <SeekBar
+        android:id="@+id/seekBarPlaySound"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+	    
+	</TableRow>
+   
+</TableLayout>
