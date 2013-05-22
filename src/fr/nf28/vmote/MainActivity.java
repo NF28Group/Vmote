@@ -5,6 +5,9 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.history.view.HistoryVideoFragment;
+import fr.nf28.vmote.play.view.PlayMainFragment;
+import fr.nf28.vmote.series.view.SeriesHomeFragment;
 
 
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 public class MainActivity extends SherlockFragmentActivity implements ActionBar.TabListener {
 	private boolean useLogo = false;
     private boolean showHomeUp = false;
+    private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,27 +31,13 @@ public class MainActivity extends SherlockFragmentActivity implements ActionBar.
         ab.setDisplayUseLogoEnabled(useLogo);
 
         // set up tabs nav
-        ab.addTab(ab.newTab().setText("Lecture").setTabListener(this));
-        ab.addTab(ab.newTab().setText("Historique").setTabListener(this));
-        ab.addTab(ab.newTab().setText("Series").setTabListener(this));
+        ab.addTab(ab.newTab().setText("Lecture").setTabListener(this).setTag(1));
+        ab.addTab(ab.newTab().setText("Historique").setTabListener(this).setTag(2));
+        ab.addTab(ab.newTab().setText("Series").setTabListener(this).setTag(3));
 
         // default to tab navigation
         showTabsNav();
 
-        // create a couple of simple fragments as placeholders
-       //final int MARGIN = 16;
-        /*
-        leftFrag = new RoundedColourFragment(getResources().getColor(
-                R.color.android_green), 1f, MARGIN, MARGIN / 2, MARGIN, MARGIN);
-        rightFrag = new RoundedColourFragment(getResources().getColor(
-                R.color.honeycombish_blue), 2f, MARGIN / 2, MARGIN, MARGIN,
-                MARGIN);
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.root, leftFrag);
-        ft.add(R.id.root, rightFrag);
-        ft.commit();
-        */
     }
 
     
@@ -55,18 +45,54 @@ public class MainActivity extends SherlockFragmentActivity implements ActionBar.
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		Toast.makeText(this, "tab : " + tab.getText(), Toast.LENGTH_SHORT).show();
+		int sel = (Integer) tab.getTag();
+		
+		AbstractFragment fragment;
+		Bundle arguments;
+		
+		switch (sel) {
+		case 1: // play
+			fragment = new PlayMainFragment();
+			arguments = new Bundle();
+			arguments.putString(PlayMainFragment.ARG_ITEM_ID, "main_play_fragment");
+	        fragment.setArguments(arguments);
+			getSupportFragmentManager().beginTransaction()
+				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+				.addToBackStack(null)
+				.commit();
+			
+			break;
+		case 2: // histo
+			fragment = new HistoryVideoFragment();
+			arguments = new Bundle();
+			arguments.putString(HistoryVideoFragment.ARG_ITEM_ID, "history_video_fragment");
+	        fragment.setArguments(arguments);
+			getSupportFragmentManager().beginTransaction()
+				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+				.addToBackStack(null)
+				.commit();
+			break;
+		case 3: // series
+			fragment = new SeriesHomeFragment();
+			arguments = new Bundle();
+			arguments.putString(SeriesHomeFragment.ARG_ITEM_ID, "serie_home_fragment");
+	        fragment.setArguments(arguments);
+			getSupportFragmentManager().beginTransaction()
+				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+				.addToBackStack(null)
+				.commit();
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {		
 	}
 
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {		
 	}
 
     private void showTabsNav() {
