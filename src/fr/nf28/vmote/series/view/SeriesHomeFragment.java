@@ -39,11 +39,16 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     	
     	tvShowListView = (ListView) rootView.findViewById(R.id.tvShowsListView);
     	
+    	//Initialize List of TV Shows
     	initList();
     	
+    	//Instantiate ListAdapter
     	TvShowListAdapter listAdapter = new TvShowListAdapter(rootView.getContext(), R.layout.tvseries_main_list_cell, seriesList);
     	
+    	//Set Adapter
     	tvShowListView.setAdapter(listAdapter);
+    	
+    	//Set onClickListener -> Changer fragment
     	tvShowListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     		  @Override
     		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -57,11 +62,13 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     		      transaction.commit();
     		      
     		  }
-    		});
+    	});
     	return rootView;
     }
 
 	public void initList(){
+		//TODO Get the real code
+		
 		seriesList = new ArrayList<TvShow>();
 
 		TvShow tvShow1 = new TvShow(0, "Game Of Thrones", "", "HBO", "Fantastique", 0, 0, "");

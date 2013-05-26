@@ -3,19 +3,19 @@ package fr.nf28.vmote.series.adapter;
 import java.util.List;
 
 import fr.nf28.vmote.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TvShowListAdapter extends ArrayAdapter<TvShow> {
+public class TvShowSeasonAdapter extends ArrayAdapter<String> {
 	private final Context context;
-	private final List<TvShow> list;
+	private final List<String> list;
 
-	public TvShowListAdapter(Context context, int textViewResourceId, List<TvShow> objects) {
+	public TvShowSeasonAdapter(Context context, int textViewResourceId, List<String> objects) {
 		super(context, textViewResourceId, objects);
 		this.context = context;
 		this.list = objects;
@@ -27,18 +27,22 @@ public class TvShowListAdapter extends ArrayAdapter<TvShow> {
 		View rowView = null;
 		if(convertView != null) // If convertView != null, view is recycled, just get it
 			rowView = convertView;
-		else // Else, first time => inflate
-			rowView = inflater.inflate(R.layout.tvseries_main_list_cell, parent, false);
+		else // Else inflate
+			rowView = inflater.inflate(R.layout.tvseries_season_list_cell, parent, false);
 		
-		//Fill textView in view with good values
-		TextView tvShowName = (TextView) rowView.findViewById(R.id.tvShowName);
-		TextView tvShowRemain = (TextView) rowView.findViewById(R.id.tvShowText);
+		TextView seasonLabel = (TextView) rowView.findViewById(R.id.tvShowSeasonLabel);
+		ImageView checkImageView = (ImageView) rowView.findViewById(R.id.tvShowSeasonCheck);
 		
-		tvShowName.setText(list.get(position).getName());
-		//TODO : Calculate the number of remaining episodes
-		tvShowRemain.setText("3 episodes restants");
+		seasonLabel.setText(list.get(position));
+		
+		//TODO Change the imageView with the good value of boolean (all see/unseen)
+//		if(//Test boolean){
+//			checkImageView.setImageResource(...);
+//		} 
+//		else {
+//			checkImageView.setImageResource(...);
+//		}
 		
 		return rowView;
 	}
-
 }

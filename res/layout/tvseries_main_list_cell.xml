@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="110dip"
-    android:orientation="horizontal" >
+    android:orientation="horizontal" 
+    android:background="#f5f5f5">
 
     <ImageView
         android:id="@+id/tvShowPoster"
         android:layout_width="0dip"
         android:layout_height="match_parent"
+        android:background="#FFFFFF"
         android:layout_weight="0.25" />
     
     <LinearLayout
