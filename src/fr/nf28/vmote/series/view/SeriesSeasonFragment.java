@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,14 +61,16 @@ public class SeriesSeasonFragment extends AbstractSeriesFragment {
     	seasonList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
   		  @Override
   		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-  		    System.out.println(seasons.get(position));
+  		      System.out.println(seasons.get(position));
   		      
-  		    SeriesEpisodeFragment fragment = new SeriesEpisodeFragment();
+  		      /*
+  		      SeriesSeasonFragment fragment = new SeriesSeasonFragment(seriesList.get(position));
 
-  		    android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
-  		    FragmentTransaction transaction = fm.beginTransaction();
-  		    transaction.replace(R.id.applicationview_detail_container, fragment);
-  		    transaction.commit();
+  		      android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+  		      FragmentTransaction transaction = fm.beginTransaction();
+  		      transaction.replace(R.id.applicationview_detail_container, fragment);
+  		      transaction.commit();*/
+  		      
   		  }
   		});
     	

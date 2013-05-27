@@ -3,41 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dip"
-        android:background="#232323" >
-
-        <TextView
-            android:id="@+id/tvShowTitleEpisodeView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingTop="10dip"
-            android:text="TV Show title"
-            android:textColor="#FFFFFF"
-            android:textSize="19dip" />
-        
-        <TextView
-            android:id="@+id/tvShowSeasonEpisodeView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvShowTitleEpisodeView"
-            android:layout_centerHorizontal="true"
-            android:textColor="#FFFFFF"
-            android:layout_centerVertical="true"
-            
-            android:text="Season 0" />
-        
-    </RelativeLayout>
     
-    <ListView 
-      android:id="@+id/tvShowEpisodeListView"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" >
-        
-    </ListView>
 
 </LinearLayout>

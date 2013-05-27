@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dip"
-        android:background="#232323"
+        android:background="#383838"
         android:orientation="horizontal" >
         
         <ImageView

@@ -3,14 +3,12 @@ package fr.nf28.vmote.series.view;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.series.adapter.TvShow;
@@ -58,44 +56,12 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     		      SeriesSeasonFragment fragment = new SeriesSeasonFragment(seriesList.get(position));
 
     		      android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
-    		      android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+    		      FragmentTransaction transaction = fm.beginTransaction();
     		      transaction.replace(R.id.applicationview_detail_container, fragment);
     		      transaction.commit();
     		      
     		  }
     	});
-    	
-    	Button addButton = (Button) rootView.findViewById(R.id.tvShowAdd);
-    	Button planningButton = (Button) rootView.findViewById(R.id.tvShowPlanning);
-    	
-    	addButton.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-				SeriesAddFragment fragment = new SeriesAddFragment();
-
-				android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
-				android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-				transaction.replace(R.id.applicationview_detail_container, fragment);
-				transaction.commit();
-				
-			}
-    	});
-    	
-    	
-    	planningButton.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-				SeriesPlanningFragment fragment = new SeriesPlanningFragment();
-
-				android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
-				android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-				transaction.replace(R.id.applicationview_detail_container, fragment);
-				transaction.commit();
-				
-			}
-    	});
-    	
-    	
     	return rootView;
     }
 
