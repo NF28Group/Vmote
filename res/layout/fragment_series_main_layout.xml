@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <ListView
-      android:id="@+id/tvShowsListView"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" >
-	</ListView>
+        android:id="@+id/tvShowsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
     
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_gravity="bottom"
+        android:background="#0a0a0a" >
+
+    <Button
+        android:id="@+id/tvShowAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:textColor="#FFFFFF"
+        android:text="Add" />
+
+    <Button
+        android:id="@+id/tvShowPlanning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:text="Planning" />
+    
+     </LinearLayout>
+
+</FrameLayout>
 
