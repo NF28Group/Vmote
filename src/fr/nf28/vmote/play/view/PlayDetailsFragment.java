@@ -16,8 +16,14 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	private View rootView;
 	private PlayModel model;
 	
-private OnChangePageListener changePageCallback = sDummyChangePageCallback;
+	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
 	
+	public PlayDetailsFragment() {}
+	
+	public static PlayDetailsFragment newInstance() {
+		PlayDetailsFragment fragment = new PlayDetailsFragment();
+	    return fragment;
+	}
 
 	private static OnChangePageListener 
 	sDummyChangePageCallback = new OnChangePageListener() {
@@ -47,9 +53,6 @@ private OnChangePageListener changePageCallback = sDummyChangePageCallback;
         super.onDetach();
         changePageCallback = sDummyChangePageCallback;
     }
-    
-	public PlayDetailsFragment() {
-	}
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

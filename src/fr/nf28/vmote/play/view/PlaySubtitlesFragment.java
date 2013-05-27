@@ -16,8 +16,15 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 	private View rootView;
 	private PlayModel model;
 	
-private OnChangePageListener changePageCallback = sDummyChangePageCallback;
+	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
+		
 	
+	public PlaySubtitlesFragment() {}
+	
+	public static PlaySubtitlesFragment newInstance() {
+		PlaySubtitlesFragment fragment = new PlaySubtitlesFragment();
+	    return fragment;
+	}
 
 	private static OnChangePageListener 
 	sDummyChangePageCallback = new OnChangePageListener() {
@@ -47,9 +54,6 @@ private OnChangePageListener changePageCallback = sDummyChangePageCallback;
         super.onDetach();
         changePageCallback = sDummyChangePageCallback;
     }
-	
-	public PlaySubtitlesFragment() {
-	}
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

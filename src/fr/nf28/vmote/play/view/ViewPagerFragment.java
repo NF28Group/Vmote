@@ -9,14 +9,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.play.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.PlayModel;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 
-public class ViewPagerFragment extends AbstractPlayFragment implements OnChangePageListener {
+public class ViewPagerFragment extends AbstractPlayFragment {
 	public static final String ARG_ITEM_ID = "pager_play_fragment";
     static final int NUM_ITEMS = 10;
 	
@@ -45,11 +44,9 @@ public class ViewPagerFragment extends AbstractPlayFragment implements OnChangeP
     	
     	rootView = inflater.inflate(
     			R.layout.fragment_lecture_top_layout, container, false);
-    	
-        mCollectionPagerAdapter = new collectionPagerAdapter(getActivity().getSupportFragmentManager());
-        
+    	        
         mViewPager = (ViewPager) rootView.findViewById(R.id.playPager);
-        mViewPager.setAdapter(mCollectionPagerAdapter);
+        mViewPager.setAdapter(new collectionPagerAdapter(getChildFragmentManager()));
     	
         // buttons
         buttonToDetails = (Button) rootView.findViewById(R.id.goto_first);
@@ -59,35 +56,38 @@ public class ViewPagerFragment extends AbstractPlayFragment implements OnChangeP
         buttonToDetails.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				selectPage(0);
+				mViewPager.setCurrentItem(0);
 			}
 		});
         
         buttonToMain.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				selectPage(1);
+				mViewPager.setCurrentItem(1);
 			}
 		});
         
         buttonToSubtitles.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				selectPage(2);
+				mViewPager.setCurrentItem(2);
 			}
 		});
+        
+        // init main
+        mViewPager.setCurrentItem(1);
         
     	return rootView;
     }
     
-    @Override
+ /*   @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
+    	super.onViewCreated(view, savedInstanceState);
 
     mViewPager = (ViewPager) view.findViewById(R.id.playPager);
     mViewPager.setAdapter(new collectionPagerAdapter(getChildFragmentManager()));
     }
-
+*/
 	public PlayModel getModel() {
 		return model;
 	}
@@ -127,17 +127,20 @@ public class ViewPagerFragment extends AbstractPlayFragment implements OnChangeP
 	
 	    @Override
 	    public Fragment getItem(int i) {
-	        Fragment fragment = new Fragment();
+	        Fragment fragment = null;
 	        Bundle arguments = new Bundle();
-	        Log.i("SWIPE","dans getItem");
+	        Log.i("SWIPE","dans getItem i:" + i);
 	        switch (i) {
 			case 0:
+				fragment = PlayDetailsFragment.newInstance();
 				arguments.putString(PlayDetailsFragment.ARG_ITEM_ID, "details_play_fragment");
 				break;
 			case 1:
+				fragment = PlayMainFragment.newInstance();
 				arguments.putString(PlayMainFragment.ARG_ITEM_ID, "main_play_fragment");
 				break;
-			case 2:
+			default:
+				fragment = PlaySubtitlesFragment.newInstance();
 				arguments.putString(PlaySubtitlesFragment.ARG_ITEM_ID, "subtitles_play_fragment");
 				break;
 			}
@@ -151,9 +154,4 @@ public class ViewPagerFragment extends AbstractPlayFragment implements OnChangeP
 	        return NUM_ITEMS;
 	    }
 	}
-	
-	@Override
-    public void selectPage(int page) {
-         mViewPager.setCurrentItem(page);        
-    }
 }

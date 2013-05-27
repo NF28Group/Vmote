@@ -20,6 +20,13 @@ public class PlayMainFragment extends AbstractPlayFragment {
 	
 	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
 	
+	
+	public PlayMainFragment() {}
+	
+	public static PlayMainFragment newInstance() {
+		PlayMainFragment fragment = new PlayMainFragment();
+	    return fragment;
+	}
 
 	private static OnChangePageListener 
 	sDummyChangePageCallback = new OnChangePageListener() {
@@ -49,8 +56,6 @@ public class PlayMainFragment extends AbstractPlayFragment {
         super.onDetach();
         changePageCallback = sDummyChangePageCallback;
     }
-	
-	public PlayMainFragment() {}
 
     
     @Override
