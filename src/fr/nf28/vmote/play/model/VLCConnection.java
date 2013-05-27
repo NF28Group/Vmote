@@ -18,6 +18,7 @@ public class VLCConnection {
     private static final String COMMAND_PAUSE = "pl_pause";
     private static final String COMMAND_NEXT = "pl_next";
     private static final String COMMAND_PREVIOUS = "pl_previous";
+    private static final String COMMAND_RANDOM = "pl_random";
     
 	private VLCConnection() {	
 	}
@@ -115,6 +116,31 @@ public class VLCConnection {
     	protected Object doInBackground(Object... arg0) {
     		HttpRequest request = HttpRequest.get(BASE_URL, true,
                     PARAM_COMMAND, COMMAND_PREVIOUS);
+            try {
+				validateResponse(request);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            request.body();
+            System.out.println("Next");
+    		return null;
+    	}
+
+    }
+    
+    /* Définition de la fonction RANDOM */
+    @SuppressWarnings("unchecked")
+	public void random() throws Exception {
+    	new Random().execute();
+    }
+    
+    @SuppressWarnings("rawtypes")
+	private class Random extends AsyncTask {
+    	@Override
+    	protected Object doInBackground(Object... arg0) {
+    		HttpRequest request = HttpRequest.get(BASE_URL, true,
+                    PARAM_COMMAND, COMMAND_RANDOM);
             try {
 				validateResponse(request);
 			} catch (Exception e) {

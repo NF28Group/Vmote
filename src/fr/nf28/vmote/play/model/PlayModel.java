@@ -72,4 +72,13 @@ public class PlayModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public void commandRandom(){
+		try {
+			this.vlcConnection.random();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
