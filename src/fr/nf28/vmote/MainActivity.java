@@ -6,7 +6,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.history.view.HistoryVideoFragment;
-import fr.nf28.vmote.play.view.PlayMainFragment;
+import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
 
 
@@ -52,9 +52,9 @@ public class MainActivity extends SherlockFragmentActivity implements ActionBar.
 		
 		switch (sel) {
 		case 1: // play
-			fragment = new PlayMainFragment();
+			fragment = new ViewPagerFragment();
 			arguments = new Bundle();
-			arguments.putString(PlayMainFragment.ARG_ITEM_ID, "main_play_fragment");
+			arguments.putString(ViewPagerFragment.ARG_ITEM_ID, "pager_play_fragment");
 	        fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)

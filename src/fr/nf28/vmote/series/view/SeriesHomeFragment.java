@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.play.view.PlayMainFragment;
 import fr.nf28.vmote.series.adapter.TvShow;
 import fr.nf28.vmote.series.adapter.TvShowListAdapter;
 
