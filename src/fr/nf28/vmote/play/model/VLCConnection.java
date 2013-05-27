@@ -1,5 +1,6 @@
 package fr.nf28.vmote.play.model;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.github.kevinsawicki.http.HttpRequest;
@@ -28,9 +29,28 @@ public class VLCConnection {
     }
     
     public void pause() throws Exception {
+    	new Pause().execute();
+    }
+    
+    private class Pause extends AsyncTask {
+
+    	@Override
+    	protected Object doInBackground(Object... arg0) {
+    		CommandPause();
+    		return null;
+    	}
+
+    }
+
+    private void CommandPause() {
         HttpRequest request = HttpRequest.get(BASE_URL, true,
                 PARAM_COMMAND, COMMAND_PAUSE);
-        validateResponse(request);
+        try {
+			validateResponse(request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         request.body();
         Log.i(COMMAND_PAUSE, "Pause");
     }
