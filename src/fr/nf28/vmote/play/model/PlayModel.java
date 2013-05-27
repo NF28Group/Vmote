@@ -39,7 +39,7 @@ public class PlayModel {
 	
 	public void commandPlay(){
 		try {
-			this.vlcConnection.play();
+			this.vlcConnection.pause();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
