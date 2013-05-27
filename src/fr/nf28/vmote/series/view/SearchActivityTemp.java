@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+//TODO à muter en fragment
 public class SearchActivityTemp extends Activity {
 	private SeriesModel model;
 
