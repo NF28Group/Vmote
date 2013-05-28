@@ -39,8 +39,7 @@ public class PlayModel {
 	
 	public void commandPlay(){
 		try {
-			//TODO
-			//this.vlcConnection.play();
+			this.vlcConnection.pause();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,6 +67,24 @@ public class PlayModel {
 	public void commandPrevious(){
 		try {
 			this.vlcConnection.previous();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void commandRandom(){
+		try {
+			this.vlcConnection.random();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void commandRepeat(){
+		try {
+			this.vlcConnection.repeat();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
