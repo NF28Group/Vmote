@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dip"
-        android:background="#383838"
+        android:background="#232323"
         android:orientation="horizontal" >
         
         <ImageView
@@ -74,12 +74,11 @@
             android:paddingTop="10dip"
             android:paddingLeft="10dip"
             android:paddingBottom="10dip"
-       		android:background="#f5f5f5"
+       		android:background="#EAEAEA"
             android:text="Seasons list" />
     <View
             android:layout_width="fill_parent"
             android:layout_height="0.2dp"
-            android:id="@+id/separator"
             android:visibility="visible"
             android:background="@android:color/darker_gray"/>
 
@@ -92,7 +91,6 @@
     <View
             android:layout_width="fill_parent"
             android:layout_height="0.2dp"
-            android:id="@+id/separator"
             android:visibility="visible"
             android:background="@android:color/darker_gray"/>
 

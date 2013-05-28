@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,43 +43,50 @@ public class SeriesSeasonFragment extends AbstractSeriesFragment {
     			R.layout.fragment_series_season_layout, container, false);
     	System.out.println("rootCreated");
     	
-    	// Header TV SHow
+    	// Header TV Show
     	TextView titleView = (TextView) rootView.findViewById(R.id.tvShowTitle);
     	TextView channelView = (TextView) rootView.findViewById(R.id.tvShowChannel);
     	TextView genreView = (TextView) rootView.findViewById(R.id.tvShowGenre);
+    	TextView runtimeView = (TextView) rootView.findViewById(R.id.tvShowLength);
 
     	titleView.setText(tvShow.getName());
     	channelView.setText(tvShow.getNetwork());
-    	genreView.setText("Genre:" + tvShow.getGenre());
+    	genreView.setText("Genre: " + tvShow.getGenre());
+    	runtimeView.setText("Format: " + tvShow.getRuntime() + " min");
     	
     	//Seasons List
-    	initList();
-    	ListView seasonList = (ListView) rootView.findViewById(R.id.tvShowSeasonListView);
+    	loadData();
+    	
+    	// Get the seasonListView
+    	ListView seasonListView = (ListView) rootView.findViewById(R.id.tvShowSeasonListView);
  
     	TvShowSeasonAdapter adapter = new TvShowSeasonAdapter(rootView.getContext(), R.layout.tvseries_season_list_cell, seasons);
-    	seasonList.setAdapter(adapter);
+    	seasonListView.setAdapter(adapter);
     	
-    	seasonList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    	seasonListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
   		  @Override
   		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-  		      System.out.println(seasons.get(position));
-  		      
-  		      /*
-  		      SeriesSeasonFragment fragment = new SeriesSeasonFragment(seriesList.get(position));
+  			  
+  			  int seasonNumber = seasons.size() - position;
+  		      SeriesEpisodeFragment fragment = new SeriesEpisodeFragment(tvShow, seasonNumber);
 
   		      android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
-  		      FragmentTransaction transaction = fm.beginTransaction();
+  		      android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
   		      transaction.replace(R.id.applicationview_detail_container, fragment);
-  		      transaction.commit();*/
-  		      
+  		      transaction.commit();
   		  }
   		});
     	
     	return rootView;
     }
 	
-	public void initList(){
+	public void loadData(){
 		seasons = new ArrayList<String>();
+		
+		// Get number of seasons
+//		for(int i = 0; i < numberOfSeasons; i++){
+//			seasons.add("Saison " + numberOfSeasons - i);
+//		}
 		
     	seasons.add("Saison 5");
     	seasons.add("Saison 4");

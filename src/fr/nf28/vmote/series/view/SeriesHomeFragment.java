@@ -31,29 +31,25 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
 	}
 	
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-    	
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	rootView = inflater.inflate(
     			R.layout.fragment_series_main_layout, container, false);
     	
     	tvShowListView = (ListView) rootView.findViewById(R.id.tvShowsListView);
     	
-    	//Initialize List of TV Shows
-    	initList();
+    	// Initialize List of TV Shows
+    	loadData();
     	
-    	//Instantiate ListAdapter
+    	// Instantiate ListAdapter
     	TvShowListAdapter listAdapter = new TvShowListAdapter(rootView.getContext(), R.layout.tvseries_main_list_cell, seriesList);
     	
-    	//Set Adapter
+    	// Set Adapter
     	tvShowListView.setAdapter(listAdapter);
     	
-    	//Set onClickListener -> Changer fragment
+    	// Set onClickListener -> Changer fragment
     	tvShowListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     		  @Override
-    		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-    		      System.out.println("Serie : " + seriesList.get(position).getName());
-    		      
+    		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {      
     		      SeriesSeasonFragment fragment = new SeriesSeasonFragment(seriesList.get(position));
 
     		      android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -64,9 +60,11 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     		  }
     	});
     	
+    	// Button configuration
     	Button addTvShowButton = (Button) rootView.findViewById(R.id.tvShowAddButton);
     	Button planningButton = (Button) rootView.findViewById(R.id.tvShowPlanningButton);
     	
+    	// Add button
     	addTvShowButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -81,6 +79,7 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
 			}
 		});
     	
+    	// Planning Button
     	planningButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -90,8 +89,6 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
   		      	FragmentTransaction transaction = fm.beginTransaction();
   		      	transaction.replace(R.id.applicationview_detail_container, fragment);
   		      	transaction.commit();
-				
-				
 			}
 		});
     	
@@ -99,18 +96,18 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     	return rootView;
     }
 
-	public void initList(){
+	public void loadData(){
 		//TODO Get the real code
 		
 		seriesList = new ArrayList<TvShow>();
 
-		TvShow tvShow1 = new TvShow(0, "Game Of Thrones", "", "HBO", "Fantastique", 0, 0, "");
-		TvShow tvShow2 = new TvShow(0, "Breaking Bad", "","AMC", "Thriller", 0, 0, "");
-		TvShow tvShow3 = new TvShow(0, "Big Bang Theory", "", "", "Comedie", 0, 0, "");
-		TvShow tvShow4 = new TvShow(0, "How I Met Your Mother", "", "", "Comedie", 0, 0, "");
-		TvShow tvShow5 = new TvShow(0, "Mentalist", "", "CBS","Policier", 0, 0, "");
-		TvShow tvShow6 = new TvShow(0, "Prison Break", "","Fox", "Thriller", 0, 0, "");
-		TvShow tvShow7 = new TvShow(0, "The Walking Dead", "", "AMC" , "Horreur", 0, 0, "");
+		TvShow tvShow1 = new TvShow(0, "Game Of Thrones", "", "HBO", "Fantastique", 52, 0, "");
+		TvShow tvShow2 = new TvShow(0, "Breaking Bad", "","AMC", "Thriller", 42, 0, "");
+		TvShow tvShow3 = new TvShow(0, "Big Bang Theory", "", "", "Comedie", 20, 0, "");
+		TvShow tvShow4 = new TvShow(0, "How I Met Your Mother", "", "", "Comedie", 20, 0, "");
+		TvShow tvShow5 = new TvShow(0, "Mentalist", "", "CBS","Policier", 42, 0, "");
+		TvShow tvShow6 = new TvShow(0, "Prison Break", "","Fox", "Thriller", 42, 0, "");
+		TvShow tvShow7 = new TvShow(0, "The Walking Dead", "", "AMC" , "Horreur", 42, 0, "");
 		
 		seriesList.add(tvShow1);
 		seriesList.add(tvShow2);
