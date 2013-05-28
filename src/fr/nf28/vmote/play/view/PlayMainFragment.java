@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class PlayMainFragment extends AbstractPlayFragment {
 	public static final String ARG_ITEM_ID = "main_play_fragment";
@@ -73,6 +75,8 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	ImageButton button_next = (ImageButton) rootView.findViewById(R.id.buttonForward);
     	ImageButton button_shuffle = (ImageButton) rootView.findViewById(R.id.buttonShuffle);
     	ImageButton button_repeat = (ImageButton) rootView.findViewById(R.id.buttonRepeat);
+    	ImageButton button_mute = (ImageButton) rootView.findViewById(R.id.buttonMute);
+    	final SeekBar slider_volume = (SeekBar) rootView.findViewById(R.id.seekBarPlaySound);
 
 	    button_pause.setOnClickListener(new OnClickListener() {
 			
@@ -127,6 +131,41 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandRepeat();
+			}
+		});
+	    
+	    button_mute.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				model.commandVolume(0);
+				slider_volume.setProgress(0);
+			}
+		});
+	    
+	    slider_volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				/*
+				 * Pour avoir le résultat du progress en pourcentage 
+				*/
+				float value = (float) (progress*2.56);			
+				model.commandVolume(value);
+				
 			}
 		});
     	

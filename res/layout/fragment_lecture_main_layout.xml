@@ -83,7 +83,8 @@
             android:id="@+id/seekBarPlaySound"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:minHeight="13dp" />
+            android:minHeight="13dp"
+            android:progress="100" />
 
     </TableRow>
 

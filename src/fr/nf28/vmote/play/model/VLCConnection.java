@@ -21,6 +21,7 @@ public class VLCConnection {
     private static final String COMMAND_RANDOM = "pl_random";
     private static final String COMMAND_LOOP = "pl_loop";
     private static final String COMMAND_REPEAT = "pl_repeat";
+    private static final String COMMAND_VOLUME = "volume&val=%VALUE%";
     
 	private VLCConnection() {	
 	}
@@ -193,6 +194,32 @@ public class VLCConnection {
     	protected Object doInBackground(Object... arg0) {
     		HttpRequest request = HttpRequest.get(BASE_URL, true,
                     PARAM_COMMAND, COMMAND_REPEAT);
+            try {
+				validateResponse(request);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            request.body();
+            System.out.println("Next");
+    		return null;
+    	}
+
+    }
+    
+    /* Définition de la fonction VOLUME */
+    @SuppressWarnings("unchecked")
+	public void volume(float value) throws Exception {
+    	new Volume().execute(value);
+    }
+    
+    @SuppressWarnings("rawtypes")
+	private class Volume extends AsyncTask {
+    	@Override
+    	protected Object doInBackground(Object... value) {
+    		String command = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(value[0]));
+    		HttpRequest request = HttpRequest.get(BASE_URL, true,
+                    PARAM_COMMAND, command);
             try {
 				validateResponse(request);
 			} catch (Exception e) {

@@ -105,4 +105,14 @@ public class PlayModel {
 			e.printStackTrace();
 		}
 	}
+	
+
+	public void commandVolume(float value){
+		try {
+			this.vlcConnection.volume(value);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
