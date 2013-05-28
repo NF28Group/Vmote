@@ -241,7 +241,6 @@ public class VLCConnection {
 	public void setNameMedia(TextView tv) {
 		try {
 			Thread.sleep(1500);
-			System.out.println("set name media" + media.getName());
 	    	tv.setText(media.getName());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
