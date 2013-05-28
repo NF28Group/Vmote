@@ -51,12 +51,12 @@ public class VLCConnection {
 	                PARAM_COMMAND, COMMAND_PAUSE);
 	        try {
 				validateResponse(request);
-				media.setName(JsonReader.getNameMedia());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	        request.body();
+			media.setName(JsonReader.getNameMedia());
     		return null;
     	}
 
@@ -81,6 +81,7 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
+			media.setName("");
     		return null;
     	}
 
@@ -105,7 +106,8 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
-            System.out.println("Next");
+			media.setName(JsonReader.getNameMedia());
+			System.out.println("NEXT" + media.getName());
     		return null;
     	}
 
@@ -130,7 +132,7 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
-            System.out.println("Next");
+			media.setName(JsonReader.getNameMedia());
     		return null;
     	}
 
@@ -238,7 +240,8 @@ public class VLCConnection {
     /* Définition de la fonction nameMedia */
 	public void setNameMedia(TextView tv) {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(1500);
+			System.out.println("set name media" + media.getName());
 	    	tv.setText(media.getName());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

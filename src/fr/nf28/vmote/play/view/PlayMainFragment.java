@@ -105,6 +105,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandStop();
+				model.setNameMedia(text_NameMedia);
 			}
 		});
 	    
@@ -113,6 +114,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandPrevious();
+				model.setNameMedia(text_NameMedia);
 			}
 		});
 	    
@@ -121,6 +123,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandNext();
+				model.setNameMedia(text_NameMedia);
 			}
 		});
 	    
