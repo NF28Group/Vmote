@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="false"
     android:orientation="vertical" >
     
     <ListView
       android:id="@+id/tvShowsListView"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" >
+      android:layout_height="wrap_content" 
+      android:layout_above="@+id/tvShowButtonBackground">
 	</ListView>
-    
-</LinearLayout>
+	
+     <View 
+	        android:layout_width="match_parent"
+	       	android:layout_height="1dip"
+	       	android:layout_above="@+id/tvShowButtonBackground"
+	       	android:background="#CCCCCC"
+       		 />
+
+    <LinearLayout
+        android:id="@+id/tvShowButtonBackground"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#EAEAEA" >
+        
+       
+
+        <Button
+            android:id="@+id/tvShowAddButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#EAEAEA"
+            android:textColor="#595959"
+            android:textSize="35dip"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/tvShowPlanningButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Planning" 
+            android:textColor="#595959"
+            android:background="#EAEAEA"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
 

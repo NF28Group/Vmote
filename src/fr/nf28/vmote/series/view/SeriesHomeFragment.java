@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.series.adapter.TvShow;
@@ -62,6 +63,39 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     		      
     		  }
     	});
+    	
+    	Button addTvShowButton = (Button) rootView.findViewById(R.id.tvShowAddButton);
+    	Button planningButton = (Button) rootView.findViewById(R.id.tvShowPlanningButton);
+    	
+    	addTvShowButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SeriesAddFragment fragment = new SeriesAddFragment();
+
+  		      	android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+  		      	FragmentTransaction transaction = fm.beginTransaction();
+  		      	transaction.replace(R.id.applicationview_detail_container, fragment);
+  		      	transaction.commit();
+				
+				
+			}
+		});
+    	
+    	planningButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SeriesPlanningFragment fragment = new SeriesPlanningFragment();
+
+  		      	android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+  		      	FragmentTransaction transaction = fm.beginTransaction();
+  		      	transaction.replace(R.id.applicationview_detail_container, fragment);
+  		      	transaction.commit();
+				
+				
+			}
+		});
+    	
+    	
     	return rootView;
     }
 
