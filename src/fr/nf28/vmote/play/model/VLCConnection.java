@@ -2,12 +2,15 @@ package fr.nf28.vmote.play.model;
 
 import fr.nf28.vmote.lib.HttpRequest;
 import fr.nf28.vmote.lib.JsonReader;
+import fr.nf28.vmote.play.media.Media;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.widget.TextView;
 
 
 public class VLCConnection {
-
+	
+	private static Media media;
+	
 	private static final String BASE_URL =
             "http://192.168.0.10:8080/requests/status.xml";
 
@@ -24,7 +27,8 @@ public class VLCConnection {
     private static final String COMMAND_REPEAT = "pl_repeat";
     private static final String COMMAND_VOLUME = "volume&val=%VALUE%";
     
-	private VLCConnection() {	
+	private VLCConnection() {
+		media = new Media();
 	}
 	
     private static void validateResponse(HttpRequest request) throws Exception {
@@ -47,13 +51,12 @@ public class VLCConnection {
 	                PARAM_COMMAND, COMMAND_PAUSE);
 	        try {
 				validateResponse(request);
-				JsonReader.ToJson();
+				media.setName(JsonReader.getNameMedia());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	        request.body();
-	        Log.i(COMMAND_PAUSE, "Pause");
     		return null;
     	}
 
@@ -78,7 +81,6 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
-            System.out.println("Stop");
     		return null;
     	}
 
@@ -153,7 +155,6 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
-            System.out.println("Next");
     		return null;
     	}
 
@@ -178,7 +179,6 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
-            System.out.println("Next");
     		return null;
     	}
 
@@ -203,7 +203,6 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
-            System.out.println("Next");
     		return null;
     	}
 
@@ -230,12 +229,23 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
-            System.out.println("Next");
     		return null;
     	}
 
     }
-	
+
+    
+    /* Définition de la fonction nameMedia */
+	public void setNameMedia(TextView tv) {
+		try {
+			Thread.sleep(1000);
+	    	tv.setText(media.getName());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
 	private static class ConnectionHolder {
 		private final static VLCConnection instance = new VLCConnection();
 	}

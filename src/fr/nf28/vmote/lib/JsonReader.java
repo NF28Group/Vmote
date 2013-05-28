@@ -6,8 +6,8 @@ import java.net.URL;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class JsonReader {
@@ -33,34 +33,31 @@ public class JsonReader {
 
 	}
 	
-	public static void ToJson(){
+	private static JsonObject getJsonObject(){
 		String json;
 		try {
 			json = readUrl(BASE_URL);
-			Gson gson = new Gson(); 
 			
-			Media media = gson.fromJson(json, Media.class);
-			Log.i("JSON", media.toString());
-			System.out.println(media.toString());
-
-			/*Fullscreen Fullscreen = gson.fromJson(json, Fullscreen.class);
-			Log.i("JSON", Fullscreen.fullscreen);
-			System.out.println(Fullscreen.fullscreen);*/
-			/*Information information = gson.fromJson(json, Information.class);
+	        JsonParser parser = new JsonParser();
+			JsonObject obj = (JsonObject)parser.parse(json);
+			return obj;
 			
-			for (Category category : information.categories){
-				for (Meta meta : category.metas){
-					for (Filename filename : meta.filenames){
-						Log.i("JSON", filename.name);
-						System.out.println("ICI "+filename.name);
-					}
-				}
-			}*/
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 
+	}
+	
+	public static String getNameMedia(){
+		JsonObject obj = getJsonObject();
+		JsonObject information = (JsonObject) obj.get("information");
+		JsonObject category = (JsonObject) information.get("category");
+		JsonObject meta = (JsonObject) category.get("meta");
+        JsonElement filename = meta.get("filename");
+        Log.i("JSON", filename.toString());
+		return filename.toString();
 	}
 }

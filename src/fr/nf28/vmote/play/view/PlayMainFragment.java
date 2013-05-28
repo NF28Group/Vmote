@@ -1,7 +1,6 @@
 package fr.nf28.vmote.play.view;
 
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.lib.JsonReader;
 import fr.nf28.vmote.play.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.PlayModel;
 import android.app.Activity;
@@ -13,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class PlayMainFragment extends AbstractPlayFragment {
@@ -21,6 +21,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 	private View rootView;
 	private PlayModel model;
 	
+	@SuppressWarnings("unused")
 	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
 	
 	
@@ -78,12 +79,15 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	ImageButton button_repeat = (ImageButton) rootView.findViewById(R.id.buttonRepeat);
     	ImageButton button_mute = (ImageButton) rootView.findViewById(R.id.buttonMute);
     	final SeekBar slider_volume = (SeekBar) rootView.findViewById(R.id.seekBarPlaySound);
+    	final TextView text_NameMedia = (TextView) rootView.findViewById(R.id.textNameMedia);
 
 	    button_pause.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandPause();
+				model.setNameMedia(text_NameMedia);
+				System.out.println("ici");
 			}
 		});
 	    
@@ -92,6 +96,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandPlay();
+				model.setNameMedia(text_NameMedia);
 			}
 		});
 	    

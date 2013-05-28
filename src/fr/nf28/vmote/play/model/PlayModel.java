@@ -1,6 +1,6 @@
 package fr.nf28.vmote.play.model;
 
-import android.util.Log;
+import android.widget.TextView;
 
 public class PlayModel {
 	
@@ -31,11 +31,9 @@ public class PlayModel {
 	public void commandPause(){
 		try {
 			this.vlcConnection.pause();
-	        Log.i("OK", "Pause");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-	        Log.i("ERREUR", "Pause");
 		}
 	}
 	
@@ -114,5 +112,10 @@ public class PlayModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void setNameMedia(TextView tv) {
+		this.vlcConnection.setNameMedia(tv);
+		
 	}
 }

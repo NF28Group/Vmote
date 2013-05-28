@@ -16,6 +16,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	private View rootView;
 	private PlayModel model;
 	
+	@SuppressWarnings("unused")
 	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
 	
 	public PlayDetailsFragment() {}
