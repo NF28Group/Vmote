@@ -106,8 +106,13 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
+            try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			media.setName(JsonReader.getNameMedia());
-			System.out.println("NEXT" + media.getName());
     		return null;
     	}
 
@@ -132,6 +137,12 @@ public class VLCConnection {
 				e.printStackTrace();
 			}
             request.body();
+            try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			media.setName(JsonReader.getNameMedia());
     		return null;
     	}
@@ -241,6 +252,7 @@ public class VLCConnection {
 	public void setNameMedia(TextView tv) {
 		try {
 			Thread.sleep(1500);
+			System.out.println("set name media" + media.getName());
 	    	tv.setText(media.getName());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
