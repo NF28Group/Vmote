@@ -25,7 +25,7 @@ public class TvShowSearchAdapter extends ArrayAdapter<SearchSeries> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.fragment_series_add_layout, parent, false);
+		View rowView = inflater.inflate(R.layout.tvseries_add_list_cell, parent, false);
 		
 		TextView seriesName = (TextView) rowView.findViewById(R.id.seriesName);
 		TextView seriesOverview = (TextView) rowView.findViewById(R.id.seriesOverview);
