@@ -19,8 +19,8 @@ public class VLCConnection {
     private static final String COMMAND_NEXT = "pl_next";
     private static final String COMMAND_PREVIOUS = "pl_previous";
     private static final String COMMAND_RANDOM = "pl_random";
-    private static final String COMMAND_REPEAT = "pl_loop";
-    //private static final String COMMAND_REPEAT = "pl_repeat"; à distinguer des 2 cas
+    private static final String COMMAND_LOOP = "pl_loop";
+    private static final String COMMAND_REPEAT = "pl_repeat";
     
 	private VLCConnection() {	
 	}
@@ -143,6 +143,31 @@ public class VLCConnection {
     	protected Object doInBackground(Object... arg0) {
     		HttpRequest request = HttpRequest.get(BASE_URL, true,
                     PARAM_COMMAND, COMMAND_RANDOM);
+            try {
+				validateResponse(request);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            request.body();
+            System.out.println("Next");
+    		return null;
+    	}
+
+    }
+    
+    /* Définition de la fonction LOOP */
+    @SuppressWarnings("unchecked")
+	public void loop() throws Exception {
+    	new Loop().execute();
+    }
+    
+    @SuppressWarnings("rawtypes")
+	private class Loop extends AsyncTask {
+    	@Override
+    	protected Object doInBackground(Object... arg0) {
+    		HttpRequest request = HttpRequest.get(BASE_URL, true,
+                    PARAM_COMMAND, COMMAND_LOOP);
             try {
 				validateResponse(request);
 			} catch (Exception e) {

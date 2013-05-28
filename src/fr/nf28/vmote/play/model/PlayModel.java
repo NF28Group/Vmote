@@ -5,6 +5,8 @@ import android.util.Log;
 public class PlayModel {
 	
 	private VLCConnection vlcConnection;
+	private boolean is_loop = false;
+	private boolean is_repeat = false;
 	
 	private PlayModel() {
 		setVlcConnection(VLCConnection.getInstance());
@@ -84,7 +86,20 @@ public class PlayModel {
 	
 	public void commandRepeat(){
 		try {
-			this.vlcConnection.repeat();
+			if(is_loop){
+				this.vlcConnection.repeat();
+				is_loop = false;
+				is_repeat = true;
+			}
+			else if(is_repeat){
+				this.vlcConnection.loop();
+				this.vlcConnection.loop();
+				is_repeat = false;
+			}
+			else{
+				this.vlcConnection.loop();
+				is_loop = true;
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
