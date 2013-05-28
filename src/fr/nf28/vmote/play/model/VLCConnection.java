@@ -1,6 +1,7 @@
 package fr.nf28.vmote.play.model;
 
 import fr.nf28.vmote.lib.HttpRequest;
+import fr.nf28.vmote.lib.JsonReader;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -46,6 +47,7 @@ public class VLCConnection {
 	                PARAM_COMMAND, COMMAND_PAUSE);
 	        try {
 				validateResponse(request);
+				JsonReader.ToJson();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

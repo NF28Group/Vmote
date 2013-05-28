@@ -1,6 +1,7 @@
 package fr.nf28.vmote.play.view;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.lib.JsonReader;
 import fr.nf28.vmote.play.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.PlayModel;
 import android.app.Activity;
