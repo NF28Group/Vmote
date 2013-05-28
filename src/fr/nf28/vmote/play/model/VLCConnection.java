@@ -217,6 +217,7 @@ public class VLCConnection {
 	private class Volume extends AsyncTask {
     	@Override
     	protected Object doInBackground(Object... value) {
+    		// Normalement on peut modifier directement en pourcentage grâce à URLEncoder.encode("%") à la suite de la value mais ça ne passe pas
     		String command = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(value[0]));
     		HttpRequest request = HttpRequest.get(BASE_URL, true,
                     PARAM_COMMAND, command);
