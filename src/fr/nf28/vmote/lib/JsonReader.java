@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import android.util.Log;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -53,11 +51,18 @@ public class JsonReader {
 	
 	public static String getNameMedia(){
 		JsonObject obj = getJsonObject();
-		JsonObject information = (JsonObject) obj.get("information");
-		JsonObject category = (JsonObject) information.get("category");
-		JsonObject meta = (JsonObject) category.get("meta");
-        JsonElement filename = meta.get("filename");
-        Log.i("JSON", filename.toString());
+		JsonElement filename;
+		try{
+			JsonObject information = (JsonObject) obj.get("information");
+			JsonObject category = (JsonObject) information.get("category");
+			JsonObject meta = (JsonObject) category.get("meta");
+	        filename = meta.get("filename");
+			} 
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("erreur getNameMedia");
+			return "0";
+		}
 		return filename.toString();
 	}
 }

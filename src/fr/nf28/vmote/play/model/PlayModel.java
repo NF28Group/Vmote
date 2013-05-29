@@ -1,7 +1,6 @@
 package fr.nf28.vmote.play.model;
 
 import android.view.View;
-import android.widget.TextView;
 
 public class PlayModel {
 	
@@ -29,45 +28,36 @@ public class PlayModel {
 		this.vlcConnection = vlcConnection;
 	}
 	
-	public void commandPause(){
+	public void commandPlay(View rv){
 		try {
-			this.vlcConnection.pause();
+			this.vlcConnection.pause(rv);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void commandPlay(){
+	public void commandStop(View rv){
 		try {
-			this.vlcConnection.pause();
+			this.vlcConnection.stop(rv);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void commandStop(){
+	public void commandNext(View rv){
 		try {
-			this.vlcConnection.stop();
+			this.vlcConnection.next(rv);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void commandNext(){
+	public void commandPrevious(View rv){
 		try {
-			this.vlcConnection.next();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void commandPrevious(){
-		try {
-			this.vlcConnection.previous();
+			this.vlcConnection.previous(rv);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -121,5 +111,14 @@ public class PlayModel {
 	public void updateMedia(View rv) {
 		this.vlcConnection.updateMedia(rv);
 		
+	}
+
+	public void checkMedia(View rv) {
+		try {
+			this.vlcConnection.checkMedia(rv);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 }
