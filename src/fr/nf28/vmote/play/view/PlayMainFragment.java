@@ -83,8 +83,8 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	final SeekBar slider_volume = (SeekBar) rootView.findViewById(R.id.seekBarPlaySound);
     	
     	if (CheckConnection.isWifiConnected(getActivity())) {
-    		if(model.isVLCConnected()){
-    			if(model.isMediaInVLC()){
+    		//if(model.isVLCConnected()){
+    			//if(model.isMediaInVLC()){
     				model.checkMedia(rootView);
                 	
             	    button_play.setOnClickListener(new OnClickListener() {
@@ -165,7 +165,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
             			}
             		});
     			}
-    			else{
+    			/*else{
             		new AlertDialog.Builder(getActivity())
             	    .setTitle("Configuration")
             	    .setMessage("Veuillez lancer un média sur VLC !")
@@ -202,7 +202,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
         	     })
         	     .show();
         	}
-    	}
+    	}*/
     	else{
     		new AlertDialog.Builder(getActivity())
     	    .setTitle("Configuration")
