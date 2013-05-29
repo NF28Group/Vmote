@@ -20,7 +20,8 @@ public class TvShowDAO extends DAOBase {
 
 	private static final String TVSHOW_KEY = "id";
 	private static final String TVSHOW_NAME = "name";
-	private static final String TVSHOW_POSTERURL = "poster";
+	private static final String TVSHOW_POSTERURL = "posterUrl";
+	private static final String TVSHOW_POSTERPATH = "posterPath";
 	private static final String TVSHOW_NETWORK = "network";
 	private static final String TVSHOW_GENRE = "genre";
 	private static final String TVSHOW_RUNTIME = "runtime";
@@ -39,6 +40,7 @@ public class TvShowDAO extends DAOBase {
 			value.put(TVSHOW_KEY, t.getId());
 			value.put(TVSHOW_NAME, t.getName());
 			value.put(TVSHOW_POSTERURL, t.getPosterUrl());
+			value.put(TVSHOW_POSTERPATH, t.getPosterPath());
 			value.put(TVSHOW_NETWORK, t.getNetwork());
 			value.put(TVSHOW_GENRE, t.getGenre());
 			value.put(TVSHOW_RUNTIME, t.getRuntime());
@@ -63,6 +65,7 @@ public class TvShowDAO extends DAOBase {
 		ContentValues value = new ContentValues();
 		value.put(TVSHOW_NAME, t.getName());
 		value.put(TVSHOW_POSTERURL, t.getPosterUrl());
+		value.put(TVSHOW_POSTERPATH, t.getPosterPath());
 		value.put(TVSHOW_NETWORK, t.getNetwork());
 		value.put(TVSHOW_GENRE, t.getGenre());
 		value.put(TVSHOW_RUNTIME, t.getRuntime());
@@ -103,13 +106,14 @@ public class TvShowDAO extends DAOBase {
 			long id = c.getLong(c.getColumnIndex(TVSHOW_KEY));
 			String name = c.getString(c.getColumnIndex(TVSHOW_NAME));
 			String posterUrl = c.getString(c.getColumnIndex(TVSHOW_POSTERURL));
+			String posterPath = c.getString(c.getColumnIndex(TVSHOW_POSTERPATH));
 			String network = c.getString(c.getColumnIndex(TVSHOW_NETWORK));
 			String genre = c.getString(c.getColumnIndex(TVSHOW_GENRE));
 			int runtime = c.getInt(c.getColumnIndex(TVSHOW_RUNTIME));
 			float rating = c.getFloat(c.getColumnIndex(TVSHOW_RATING));
 			String overview = c.getString(c.getColumnIndex(TVSHOW_OVERVIEW));
 			
-			list.add(new TvShow (id, name, posterUrl, network, genre, runtime, rating, overview));
+			list.add(new TvShow (id, name, posterUrl, posterPath, network, genre, runtime, rating, overview));
 		}
 		c.close();
 		

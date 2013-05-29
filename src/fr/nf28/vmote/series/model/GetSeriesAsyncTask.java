@@ -4,34 +4,30 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParserException;
 
-import fr.nf28.vmote.tvdb.SearchSeries;
-import fr.nf28.vmote.tvdb.TvdbXmlParser;
+import fr.nf28.vmote.tvdb.GetSeriesXmlParser;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 //Implementation of AsyncTask used to download XML feed from stackoverflow.com.
-public class SearchSeriesAsyncTask extends AsyncTask<String, Void, List<SearchSeries>> {
-	private final static String URL_SEARCH_TVSHOW = "http://thetvdb.com/api/GetSeries.php?";
+public class GetSeriesAsyncTask extends AsyncTask<Long, Void, List<Object>> {
+	private final static String API_KEY = "4F4FD3B2346328EE";
+	private final static String URL_SEARCH_TVSHOW = "http://thetvdb.com/api/" + API_KEY + "/series/";
+	private final static String language = "fr";
+	//http://thetvdb.com/api/4F4FD3B2346328EE/series/81189/all/fr.zip 
 
 	@Override
-	protected List<SearchSeries> doInBackground(String... urls) {
+	protected List<Object> doInBackground(Long... seriesIds) {
 		try {
-			String searchName = urls[0];
+			long seriesId = seriesIds[0];
 
-			List<NameValuePair> params = new LinkedList<NameValuePair>();
-			params.add(new BasicNameValuePair("seriesname", searchName));
-			params.add(new BasicNameValuePair("language", "fr"));
-			String paramString = URLEncodedUtils.format(params, "utf-8");
-			String url = URL_SEARCH_TVSHOW + paramString;
+			String url = URL_SEARCH_TVSHOW + seriesId + "/all/" + language + ".zip";
 
 			return loadXmlFromNetwork(url);
 		} catch (IOException e) {
@@ -46,13 +42,14 @@ public class SearchSeriesAsyncTask extends AsyncTask<String, Void, List<SearchSe
 
 	// Uploads XML from stackoverflow.com, parses it, and combines it with
 	// HTML markup. Returns HTML string.
-	private List<SearchSeries> loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
+	private List<Object> loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
 		InputStream stream = null;
 		// Instantiate the parser
-		TvdbXmlParser tvdbXmlParser = new TvdbXmlParser();
+		GetSeriesXmlParser getSeriesXmlParser = new GetSeriesXmlParser();
 		stream = downloadUrl(urlString);  
-
-		List<SearchSeries> list = tvdbXmlParser.parse(stream);
+		stream = unzip(stream);
+		
+		List<Object> list = getSeriesXmlParser.parse(stream);
 		stream.close();
 
 		return list;
@@ -72,4 +69,28 @@ public class SearchSeriesAsyncTask extends AsyncTask<String, Void, List<SearchSe
 		conn.connect();
 		return conn.getInputStream();
 	}
+
+
+	public InputStream unzip(InputStream is) { 
+		ZipEntry ze = null; 
+		ZipInputStream zis = new ZipInputStream(is); 
+		try  {		
+			while ((ze = zis.getNextEntry()) != null) { 
+				Log.v("Decompress", "Unzipping " + ze.getName()); 
+
+				//while (zis.available() > 0){
+	            //    zis.read();
+				//}
+				//zis.closeEntry(); 
+				if(ze.getName().equals(language + ".xml")){
+					break;
+				}
+			} 
+			//zis.close(); 
+		} catch(Exception e) { 
+			Log.e("Decompress", "unzip", e); 
+		} 
+
+		return zis;
+	} 
 }

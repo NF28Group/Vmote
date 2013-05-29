@@ -13,7 +13,8 @@ public class DbHandler extends SQLiteOpenHelper {
 
 	private static final String TVSHOW_KEY = "id";
 	private static final String TVSHOW_NAME = "name";
-	private static final String TVSHOW_POSTERURL = "poster";
+	private static final String TVSHOW_POSTERURL = "posterUrl";
+	private static final String TVSHOW_POSTERPATH = "posterPath";
 	private static final String TVSHOW_NETWORK = "network";
 	private static final String TVSHOW_GENRE = "genre";
 	private static final String TVSHOW_RUNTIME = "runtime";
@@ -25,6 +26,7 @@ public class DbHandler extends SQLiteOpenHelper {
 					TVSHOW_KEY + " INTEGER PRIMARY KEY, " +
 					TVSHOW_NAME + " TEXT, " +
 					TVSHOW_POSTERURL + " TEXT, " +
+					TVSHOW_POSTERPATH + " TEXT, " +
 					TVSHOW_NETWORK + " TEXT, " +
 					TVSHOW_GENRE + " TEXT, " +
 					TVSHOW_RUNTIME + " INTEGER, " +

@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public abstract class DAOBase {
-	protected final static int VERSION = 1;
+	protected final static int VERSION = 3;
 	protected final static String DB_FILE = "database.db";  	// Le nom du fichier qui représente ma base
 
 	protected SQLiteDatabase mDb = null;

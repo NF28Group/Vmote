@@ -3,6 +3,7 @@ package fr.nf28.vmote.series.adapter;
 import java.util.List;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.db.tvshow.TvShow;
 
 import android.content.Context;
 import android.view.LayoutInflater;

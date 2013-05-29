@@ -17,30 +17,29 @@ import android.widget.ListView;
 
 
 public class SeriesAddFragment extends AbstractSeriesFragment {
-	
+
 	private View rootView;
 	private SeriesModel model;
 
 	private EditText searchInput;
 	private Button searchButton;
 	private ListView listResult;
-	
+
 	public SeriesAddFragment(){}
 
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-    	
-    	rootView = inflater.inflate(R.layout.fragment_series_add_layout, container, false);
-   
-    	model = new SeriesModel(getActivity());
-    	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+		rootView = inflater.inflate(R.layout.fragment_series_add_layout, container, false);
+
+		model = new SeriesModel(getActivity());
+
 		searchInput = (EditText) rootView.findViewById(R.id.search_input);
 		searchButton = (Button) rootView.findViewById(R.id.search_button);
 		listResult = (ListView) rootView.findViewById(R.id.list_result);
@@ -52,7 +51,7 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 				model.searchSeries(searchName);
 			}
 		});
-		
+
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -61,8 +60,7 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 				}
 			}
 		});
-    	
-    	return rootView;
-    }
 
+		return rootView;
+	}
 }

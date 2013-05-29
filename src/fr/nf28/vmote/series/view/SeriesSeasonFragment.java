@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.series.adapter.TvShow;
+import fr.nf28.vmote.db.tvshow.TvShow;
 import fr.nf28.vmote.series.adapter.TvShowSeasonAdapter;
 
 @SuppressLint("ValidFragment")
