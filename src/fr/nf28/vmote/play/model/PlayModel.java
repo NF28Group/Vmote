@@ -106,9 +106,13 @@ public class PlayModel {
 	}
 	
 
-	public void commandVolume(float value){
+	public void commandVolume(int value){
 		try {
-			this.vlcConnection.volume(value);
+
+			/*
+			 * Pour avoir le résultat du progress en pourcentage de 0 à 200%
+			*/	
+			this.vlcConnection.volume(value*2.56*2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

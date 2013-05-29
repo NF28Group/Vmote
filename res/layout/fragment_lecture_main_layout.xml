@@ -1,97 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textNameMedia"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.27"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_marginTop="200dp" >
-
-        <ImageButton
-            android:id="@+id/buttonBackward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/backward" />
-
-        <ImageButton
-            android:id="@+id/buttonPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/play" />
-
-        <ImageButton
-            android:id="@+id/buttonPause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pause" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="35dp" >
 
         <ImageButton
             android:id="@+id/buttonStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/buttonPlay"
             android:src="@drawable/stop" />
+
+        <ImageButton
+            android:id="@+id/buttonPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/buttonBackward"
+            android:src="@drawable/play" />
+
+        <ImageButton
+            android:id="@+id/buttonBackward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/backward" />
 
         <ImageButton
             android:id="@+id/buttonForward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/buttonStop"
             android:src="@drawable/forward" />
+    </RelativeLayout>
 
-    </TableRow>
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_marginTop="20dp" >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="60dp" >
 
         <ImageButton
             android:id="@+id/buttonOpen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:src="@drawable/open" />
-
-        <ImageButton
-            android:id="@+id/buttonRepeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/loop" />
 
         <ImageButton
             android:id="@+id/buttonShuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/buttonRepeat"
             android:src="@drawable/shuffle" />
-    </TableRow>
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_marginTop="20dp" >
+        <ImageButton
+            android:id="@+id/buttonRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/buttonOpen"
+            android:src="@drawable/loop" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
         <ImageButton
             android:id="@+id/buttonMute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/mute" />
-
-        <ImageView
-            android:id="@+id/imageVolume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:src="@drawable/volume" />
 
         <SeekBar
             android:id="@+id/seekBarPlaySound"
-            android:layout_width="fill_parent"
+            android:layout_width="23dip"
             android:layout_height="wrap_content"
-            android:minHeight="13dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/buttonMute"
             android:progress="100" />
+    </RelativeLayout>
 
-    </TableRow>
-
-</TableLayout>
+</LinearLayout>

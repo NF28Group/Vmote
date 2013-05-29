@@ -22,7 +22,7 @@ public class Media {
 
 		int i = final_name.lastIndexOf('.');
 		if (i > 0) {
-			final_name = final_name.substring(0,i);
+			final_name = final_name.substring(0,i); // enlever l'extension
 		}
 		return final_name;
 	}

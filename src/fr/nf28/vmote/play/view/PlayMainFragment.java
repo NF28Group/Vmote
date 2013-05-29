@@ -70,7 +70,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	rootView = inflater.inflate(
     			R.layout.fragment_lecture_main_layout, container, false);
     	
-    	ImageButton button_pause = (ImageButton) rootView.findViewById(R.id.buttonPause);
+    	//ImageButton button_pause = (ImageButton) rootView.findViewById(R.id.buttonPause);
     	ImageButton button_play = (ImageButton) rootView.findViewById(R.id.buttonPlay);
     	ImageButton button_stop = (ImageButton) rootView.findViewById(R.id.buttonStop);
     	ImageButton button_previous = (ImageButton) rootView.findViewById(R.id.buttonBackward);
@@ -81,14 +81,14 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	final SeekBar slider_volume = (SeekBar) rootView.findViewById(R.id.seekBarPlaySound);
     	final TextView text_NameMedia = (TextView) rootView.findViewById(R.id.textNameMedia);
 
-	    button_pause.setOnClickListener(new OnClickListener() {
+	    /*button_pause.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandPause();
 				model.updateMedia(rootView);
 			}
-		});
+		});*/
 	    
 	    button_play.setOnClickListener(new OnClickListener() {
 			
@@ -162,17 +162,12 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				/*
-				 * Pour avoir le résultat du progress en pourcentage 
-				*/
-				float value = (float) (progress*2.56);			
-				model.commandVolume(value);
+					boolean fromUser) {	
+				model.commandVolume(progress);
 				
 			}
 		});

@@ -225,8 +225,8 @@ public class VLCConnection {
     
     /* Définition de la fonction VOLUME */
     @SuppressWarnings("unchecked")
-	public void volume(float value) throws Exception {
-    	new Volume().execute(value);
+	public void volume(double d) throws Exception {
+    	new Volume().execute(d);
     }
     
     @SuppressWarnings("rawtypes")
