@@ -86,8 +86,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandPause();
-				model.setNameMedia(text_NameMedia);
-				System.out.println("ici");
+				model.updateMedia(rootView);
 			}
 		});
 	    
@@ -96,7 +95,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandPlay();
-				model.setNameMedia(text_NameMedia);
+				model.updateMedia(rootView);
 			}
 		});
 	    
@@ -105,7 +104,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandStop();
-				model.setNameMedia(text_NameMedia);
+				model.updateMedia(rootView);
 			}
 		});
 	    
@@ -114,7 +113,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandPrevious();
-				model.setNameMedia(text_NameMedia);
+				model.updateMedia(rootView);
 			}
 		});
 	    
@@ -123,7 +122,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				model.commandNext();
-				model.setNameMedia(text_NameMedia);
+				model.updateMedia(rootView);
 			}
 		});
 	    

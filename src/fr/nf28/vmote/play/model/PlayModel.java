@@ -1,5 +1,6 @@
 package fr.nf28.vmote.play.model;
 
+import android.view.View;
 import android.widget.TextView;
 
 public class PlayModel {
@@ -114,8 +115,8 @@ public class PlayModel {
 		}
 	}
 
-	public void setNameMedia(TextView tv) {
-		this.vlcConnection.setNameMedia(tv);
+	public void updateMedia(View rv) {
+		this.vlcConnection.updateMedia(rv);
 		
 	}
 }

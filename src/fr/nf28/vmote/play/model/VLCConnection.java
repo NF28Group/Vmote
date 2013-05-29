@@ -1,9 +1,11 @@
 package fr.nf28.vmote.play.model;
 
+import fr.nf28.vmote.R;
 import fr.nf28.vmote.lib.HttpRequest;
 import fr.nf28.vmote.lib.JsonReader;
 import fr.nf28.vmote.play.media.Media;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -249,16 +251,19 @@ public class VLCConnection {
 
     
     /* Définition de la fonction nameMedia */
-	public void setNameMedia(TextView tv) {
+	public void updateMedia(View rv) {
 		try {
 			Thread.sleep(1500);
-			System.out.println("set name media" + media.getName());
-	    	tv.setText(media.getName());
+			upateNameMedia((TextView) rv.findViewById(R.id.textNameMedia));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
+	
+	private void upateNameMedia(TextView tv){
+    	tv.setText(media.getName());
+	}
     
 	private static class ConnectionHolder {
 		private final static VLCConnection instance = new VLCConnection();

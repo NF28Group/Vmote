@@ -13,6 +13,17 @@ public class Media {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = manageName(name);
+	}
+	
+	private String manageName(String n){
+		String final_name = n;
+		final_name = final_name.replace("\"", ""); // enlever les quotes
+
+		int i = final_name.lastIndexOf('.');
+		if (i > 0) {
+			final_name = final_name.substring(0,i);
+		}
+		return final_name;
 	}
 }
