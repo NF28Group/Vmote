@@ -2,8 +2,12 @@ package fr.nf28.vmote.play.view;
 
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.play.interfaces.OnChangePageListener;
+import fr.nf28.vmote.play.model.CheckConnection;
 import fr.nf28.vmote.play.model.PlayModel;
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,85 +82,87 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	ImageButton button_mute = (ImageButton) rootView.findViewById(R.id.buttonMute);
     	final SeekBar slider_volume = (SeekBar) rootView.findViewById(R.id.seekBarPlaySound);
     	
-    	model.checkMedia(rootView);
-    	
-	    button_play.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandPlay(rootView);
-			}
-		});
-	    
-	    button_stop.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandStop(rootView);
-			}
-		});
-	    
-	    button_previous.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandPrevious(rootView);
-			}
-		});
-	    
-	    button_next.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandNext(rootView);
-			}
-		});
-	    
-	    button_shuffle.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandRandom();
-			}
-		});
-	    
-	    button_repeat.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandRepeat();
-			}
-		});
-	    
-	    button_mute.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandVolume(0);
-				slider_volume.setProgress(0);
-			}
-		});
-	    
-	    slider_volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-			}
-			
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {	
-				model.commandVolume(progress);
-				
-			}
-		});
+    	if (CheckConnection.isConnected(getActivity())) {
+    		model.checkMedia(rootView);
+        	
+    	    button_play.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandPlay(rootView);
+    			}
+    		});
+    	    
+    	    button_stop.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandStop(rootView);
+    			}
+    		});
+    	    
+    	    button_previous.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandPrevious(rootView);
+    			}
+    		});
+    	    
+    	    button_next.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandNext(rootView);
+    			}
+    		});
+    	    
+    	    button_shuffle.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandRandom();
+    			}
+    		});
+    	    
+    	    button_repeat.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandRepeat();
+    			}
+    		});
+    	    
+    	    button_mute.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandVolume(0);
+    				slider_volume.setProgress(0);
+    			}
+    		});
+    	    
+    	    slider_volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+    			
+    			@Override
+    			public void onStopTrackingTouch(SeekBar seekBar) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+    			
+    			@Override
+    			public void onStartTrackingTouch(SeekBar seekBar) {
+    				// TODO Auto-generated method stub
+    			}
+    			
+    			@Override
+    			public void onProgressChanged(SeekBar seekBar, int progress,
+    					boolean fromUser) {	
+    				model.commandVolume(progress);
+    				
+    			}
+    		});
+    	}
     	
     	return rootView;
     }

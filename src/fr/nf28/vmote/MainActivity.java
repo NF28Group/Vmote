@@ -9,8 +9,6 @@ import fr.nf28.vmote.history.view.HistoryVideoFragment;
 import fr.nf28.vmote.play.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
-
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
@@ -18,6 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends SherlockFragmentActivity 
 	implements ActionBar.TabListener, OnChangePageListener {
 	private boolean useLogo = false;
+	public boolean isConnected = false;
     private boolean showHomeUp = false;
     private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 	

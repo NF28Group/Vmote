@@ -6,6 +6,9 @@ import fr.nf28.vmote.R;
 import fr.nf28.vmote.lib.HttpRequest;
 import fr.nf28.vmote.lib.JsonReader;
 import fr.nf28.vmote.play.media.Media;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
@@ -237,7 +240,4 @@ public class VLCConnection {
 	public static VLCConnection getInstance() {
 		return ConnectionHolder.instance;
 	}
-	
-	
-
 }
