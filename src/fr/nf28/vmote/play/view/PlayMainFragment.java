@@ -5,7 +5,10 @@ import fr.nf28.vmote.play.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.CheckConnection;
 import fr.nf28.vmote.play.model.PlayModel;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class PlayMainFragment extends AbstractPlayFragment {
@@ -162,6 +166,24 @@ public class PlayMainFragment extends AbstractPlayFragment {
     				
     			}
     		});
+    	}
+    	else{
+    		new AlertDialog.Builder(getActivity())
+    	    .setTitle("Configuration")
+    	    .setMessage("Veuillez vous connecter à un réseau Wi-Fi !")
+    	    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    	        public void onClick(DialogInterface dialog, int which) { 
+    	        	Intent intent = new Intent(Intent.ACTION_MAIN);
+    	        	intent.addCategory(Intent.CATEGORY_HOME);
+    	        	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    	        	startActivity(intent);
+    	        }
+    	     })
+    	    .setNegativeButton("Debug mode", new DialogInterface.OnClickListener() {
+    	        public void onClick(DialogInterface dialog, int which) {
+    	        }
+    	     })
+    	     .show();
     	}
     	
     	return rootView;
