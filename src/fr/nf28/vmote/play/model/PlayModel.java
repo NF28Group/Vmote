@@ -108,7 +108,6 @@ public class PlayModel {
 
 	public void commandVolume(int value){
 		try {
-
 			/*
 			 * Pour avoir le résultat du progress en pourcentage de 0 à 200%
 			*/	
