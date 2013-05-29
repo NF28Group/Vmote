@@ -101,7 +101,7 @@ public class PlayModel {
 			/*
 			 * Pour avoir le résultat du progress en pourcentage de 0 à 200%
 			*/	
-			this.vlcConnection.volume(value*2.56*2);
+			this.vlcConnection.volume((int) (value*2.56*2));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
