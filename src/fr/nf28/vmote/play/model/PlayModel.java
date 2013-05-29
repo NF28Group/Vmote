@@ -121,4 +121,22 @@ public class PlayModel {
 			e.printStackTrace();
 		}		
 	}
+
+	public boolean isVLCConnected() {
+		try {
+			return this.vlcConnection.isVLCConnected();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}		
+	}
+
+	public boolean isMediaInVLC() {
+		try {
+			return this.vlcConnection.isMediaInVLC();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}		
+	}
 }

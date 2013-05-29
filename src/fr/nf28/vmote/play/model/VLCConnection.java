@@ -46,10 +46,59 @@ public class VLCConnection {
         if (!request.ok()) {
             throw new Exception("Request failed with code: " + request.code());
         }
+    } 
+    
+    /* Définition de la isVLCConnected*/
+	public boolean isVLCConnected() throws Exception {
+		System.out.println("Passage dans la fonction isVLCConnected de VLCConnection");
+		IsVLCConnected isVLCConnected = new IsVLCConnected();
+		isVLCConnected.execute();
+		boolean result = isVLCConnected.get();
+		System.out.println("Résultat isVLCConnected = "+isVLCConnected.get());
+		return result;
+    }
+    
+	private class IsVLCConnected extends AsyncTask <Object, Boolean, Boolean> {
+    	@Override
+    	protected Boolean doInBackground(Object... rv) {
+    		HttpRequest request = HttpRequest.get(BASE_URL, true,
+                    PARAM_COMMAND, "test").readTimeout(1000).connectTimeout(1000);
+            try {
+    			validateResponse(request);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    			return false;
+    		}
+            request.body();
+    		return true;
+    	}
+    }
+    
+
+    
+    /* Définition de la isVLCConnected*/
+	public boolean isMediaInVLC() throws Exception {
+		System.out.println("Passage dans la fonction isMediaInVLC de VLCConnection");
+		IsMediaInVLC isMediaInVLC = new IsMediaInVLC();
+		isMediaInVLC.execute();
+		boolean result = isMediaInVLC.get();
+		System.out.println("Résultat isMediaInVLC = "+isMediaInVLC.get());
+		return result;
+    }
+    
+	private class IsMediaInVLC extends AsyncTask <Object, Boolean, Boolean> {
+    	@Override
+    	protected Boolean doInBackground(Object... rv) {
+    		if(JsonReader.getNameMedia() == "0")
+    			return false;
+    		else
+    			return true;
+    	}
     }
     
     /* Définition de la check Media*/
 	public void checkMedia(View rv) throws Exception {
+		System.out.println("Passage dans la fonction checkMedia de VLCConnection");
     	new CheckMedia().execute(rv);
     }
     
@@ -57,6 +106,7 @@ public class VLCConnection {
     	@Override
     	protected Void doInBackground(View... rv) {
     		String current_media = JsonReader.getNameMedia();
+    		System.out.println("Dans CheckMedia, resultat de getNameMedia = "+current_media);
     		if(current_media == "0"){
         		System.out.println("0");
     			media.setName("Pas de média ouvert");

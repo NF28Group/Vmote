@@ -13,7 +13,7 @@ public class CheckConnection {
 	/*
 	 * Vérifie si la Wi-Fi est connectée  
 	*/
-	public static boolean isConnected(Context context) {
+	public static boolean isWifiConnected(Context context) {
 		System.out.println("Passage dans isConnected de la classe CheckConnection");
 	    ConnectivityManager connectivityManager = (ConnectivityManager)
 	        context.getSystemService(Context.CONNECTIVITY_SERVICE);

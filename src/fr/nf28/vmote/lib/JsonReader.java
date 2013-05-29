@@ -44,15 +44,17 @@ public class JsonReader {
 			
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error catched in getJsonObject");
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 
 	}
 	
 	public static String getNameMedia(){
 		JsonObject obj = getJsonObject();
+		System.out.println("Résultat getNameMedia dans JsonReader = "+obj);
+		if(obj == null) return "0";
 		JsonObject information = (JsonObject) obj.get("information");
 		JsonObject category = (JsonObject) information.get("category");
 		JsonObject meta = (JsonObject) category.get("meta");
