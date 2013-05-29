@@ -85,7 +85,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	if (CheckConnection.isWifiConnected(getActivity())) {
     		//if(model.isVLCConnected()){
     			//if(model.isMediaInVLC()){
-    				model.checkMedia(rootView);
+    				//model.checkMedia(rootView);
                 	
             	    button_play.setOnClickListener(new OnClickListener() {
             			
