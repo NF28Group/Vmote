@@ -12,7 +12,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class PlayMainFragment extends AbstractPlayFragment {
@@ -70,7 +69,6 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	rootView = inflater.inflate(
     			R.layout.fragment_lecture_main_layout, container, false);
     	
-    	//ImageButton button_pause = (ImageButton) rootView.findViewById(R.id.buttonPause);
     	ImageButton button_play = (ImageButton) rootView.findViewById(R.id.buttonPlay);
     	ImageButton button_stop = (ImageButton) rootView.findViewById(R.id.buttonStop);
     	ImageButton button_previous = (ImageButton) rootView.findViewById(R.id.buttonBackward);
@@ -79,23 +77,14 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	ImageButton button_repeat = (ImageButton) rootView.findViewById(R.id.buttonRepeat);
     	ImageButton button_mute = (ImageButton) rootView.findViewById(R.id.buttonMute);
     	final SeekBar slider_volume = (SeekBar) rootView.findViewById(R.id.seekBarPlaySound);
-    	final TextView text_NameMedia = (TextView) rootView.findViewById(R.id.textNameMedia);
-
-	    /*button_pause.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				model.commandPause();
-				model.updateMedia(rootView);
-			}
-		});*/
-	    
+    	
+    	model.checkMedia(rootView);
+    	
 	    button_play.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				model.commandPlay();
-				model.updateMedia(rootView);
+				model.commandPlay(rootView);
 			}
 		});
 	    
@@ -103,8 +92,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				model.commandStop();
-				model.updateMedia(rootView);
+				model.commandStop(rootView);
 			}
 		});
 	    
@@ -112,8 +100,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				model.commandPrevious();
-				model.updateMedia(rootView);
+				model.commandPrevious(rootView);
 			}
 		});
 	    
@@ -121,8 +108,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				model.commandNext();
-				model.updateMedia(rootView);
+				model.commandNext(rootView);
 			}
 		});
 	    

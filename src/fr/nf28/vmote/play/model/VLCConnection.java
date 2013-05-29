@@ -1,5 +1,7 @@
 package fr.nf28.vmote.play.model;
 
+import java.util.concurrent.ExecutionException;
+
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.lib.HttpRequest;
 import fr.nf28.vmote.lib.JsonReader;
@@ -19,15 +21,22 @@ public class VLCConnection {
     private static final String PARAM_COMMAND = "command";
     //private static final String PARAM_INPUT = "input";
 
-    //private static final String COMMAND_PLAY = "in_play";
-    private static final String COMMAND_STOP = "pl_stop";
     private static final String COMMAND_PAUSE = "pl_pause";
+    private static final int TASK_PAUSE = 1;
+    private static final String COMMAND_STOP = "pl_stop";
+    private static final int TASK_STOP = 2;
     private static final String COMMAND_NEXT = "pl_next";
+    private static final int TASK_NEXT = 3;
     private static final String COMMAND_PREVIOUS = "pl_previous";
+    private static final int TASK_PREVIOUS = 4;
     private static final String COMMAND_RANDOM = "pl_random";
+    private static final int TASK_RANDOM = 5;
     private static final String COMMAND_LOOP = "pl_loop";
+    private static final int TASK_LOOP = 6;
     private static final String COMMAND_REPEAT = "pl_repeat";
+    private static final int TASK_REPEAT = 7;
     private static final String COMMAND_VOLUME = "volume&val=%VALUE%";
+    private static final int TASK_VOLUME = 8;
     
 	private VLCConnection() {
 		media = new Media();
@@ -39,18 +48,62 @@ public class VLCConnection {
         }
     }
     
-    /* Définition de la fonction PAUSE */
-    @SuppressWarnings("unchecked")
-	public void pause() throws Exception {
-    	new Pause().execute();
+    /* Définition de la check Media*/
+	public void checkMedia(View rv) throws Exception {
+    	new CheckMedia().execute(rv);
     }
     
-    @SuppressWarnings("rawtypes")
-	private class Pause extends AsyncTask {
+	private class CheckMedia extends AsyncTask <View, Void, Void> {
     	@Override
-    	protected Object doInBackground(Object... arg0) {    		
+    	protected Void doInBackground(View... rv) {
+    		String current_media = JsonReader.getNameMedia();
+    		if(current_media == "0"){
+        		System.out.println("0");
+    			media.setName("Pas de média ouvert");
+    			}
+    		else{
+    			media.setName(current_media);
+    		}
+    		updateMedia(rv[0]);
+    		return null;
+    	}
+
+    }
+	
+	private class Command extends AsyncTask <Integer, Integer, Integer> {
+    	protected Integer doInBackground(Integer... id_command) {
+    		String command_to_execute;
+    		
+    		switch(id_command[0]){
+    		case TASK_PAUSE : 
+    			command_to_execute = COMMAND_PAUSE;
+    			break;
+    		case TASK_STOP : 
+    			command_to_execute = COMMAND_STOP;
+    			break;
+    		case TASK_NEXT : 
+    			command_to_execute = COMMAND_NEXT;
+    			break;
+    		case TASK_PREVIOUS : 
+    			command_to_execute = COMMAND_PREVIOUS;
+    			break;
+    		case TASK_RANDOM : 
+    			command_to_execute = COMMAND_RANDOM;
+    			break;
+    		case TASK_LOOP : 
+    			command_to_execute = COMMAND_LOOP;
+    			break;
+    		case TASK_REPEAT : 
+    			command_to_execute = COMMAND_REPEAT;
+    			break;
+    		case TASK_VOLUME : 
+    			command_to_execute = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(id_command[1]));;
+    			break;
+    		default : command_to_execute = "";    			
+    		}
+    		
 	    	HttpRequest request = HttpRequest.get(BASE_URL, true,
-	                PARAM_COMMAND, COMMAND_PAUSE);
+	                PARAM_COMMAND, command_to_execute);
 	        try {
 				validateResponse(request);
 			} catch (Exception e) {
@@ -59,211 +112,123 @@ public class VLCConnection {
 			}
 	        request.body();
 			media.setName(JsonReader.getNameMedia());
-    		return null;
+    		return 1;
     	}
+    	
+        protected void onProgressUpdate(Integer... progress) {
+        	System.out.println(progress);
+        }
 
+
+        protected void onPostExecute(Integer result) {
+        	System.out.println(result);
+        }
+    }
+    
+    /* 
+     * 
+     * FONCTIONS DE PILOTAGE DU MEDIA
+     * 
+     */
+	
+    /* Définition de la fonction PAUSE */
+	public void pause(View rv) throws Exception {
+		Command pause_task = new Command();
+		pause_task.execute(TASK_PAUSE);
+    	updateMediaWhenTaskEnds(rv,pause_task);  	
     }
     
     /* Définition de la fonction STOP */
-    @SuppressWarnings("unchecked")
-	public void stop() throws Exception {
-    	new Stop().execute();
-    }
-    
-    @SuppressWarnings("rawtypes")
-	private class Stop extends AsyncTask {
-    	@Override
-    	protected Object doInBackground(Object... arg0) {
-            HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, COMMAND_STOP);
-            try {
-				validateResponse(request);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            request.body();
-			media.setName("");
-    		return null;
-    	}
-
+	public void stop(View rv) throws Exception {
+		Command stop_task = new Command();
+		stop_task.execute(TASK_STOP);
+    	updateMediaWhenTaskEnds(rv,stop_task);  
     }
     
     /* Définition de la fonction NEXT */
-    @SuppressWarnings("unchecked")
-	public void next() throws Exception {
-    	new Next().execute();
-    }
-    
-    @SuppressWarnings("rawtypes")
-	private class Next extends AsyncTask {
-    	@Override
-    	protected Object doInBackground(Object... arg0) {
-            HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, COMMAND_NEXT);
-            try {
-				validateResponse(request);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            request.body();
-            try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			media.setName(JsonReader.getNameMedia());
-    		return null;
-    	}
-
+	public void next(View rv) throws Exception {
+		Command next_task = new Command();
+		next_task.execute(TASK_NEXT);
+    	updateMediaWhenTaskEnds(rv,next_task); 
     }
     
     /* Définition de la fonction PREVIOUS */
-    @SuppressWarnings("unchecked")
-	public void previous() throws Exception {
-    	new Previous().execute();
-    }
-    
-    @SuppressWarnings("rawtypes")
-	private class Previous extends AsyncTask {
-    	@Override
-    	protected Object doInBackground(Object... arg0) {
-    		HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, COMMAND_PREVIOUS);
-            try {
-				validateResponse(request);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            request.body();
-            try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			media.setName(JsonReader.getNameMedia());
-    		return null;
-    	}
-
+	public void previous(View rv) throws Exception  {
+		Command previous_task = new Command();
+		previous_task.execute(TASK_PREVIOUS);
+    	updateMediaWhenTaskEnds(rv,previous_task); 
     }
     
     /* Définition de la fonction RANDOM */
-    @SuppressWarnings("unchecked")
 	public void random() throws Exception {
-    	new Random().execute();
-    }
-    
-    @SuppressWarnings("rawtypes")
-	private class Random extends AsyncTask {
-    	@Override
-    	protected Object doInBackground(Object... arg0) {
-    		HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, COMMAND_RANDOM);
-            try {
-				validateResponse(request);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            request.body();
-    		return null;
-    	}
-
+		Command random_task = new Command();
+		random_task.execute(TASK_RANDOM); 
     }
     
     /* Définition de la fonction LOOP */
-    @SuppressWarnings("unchecked")
 	public void loop() throws Exception {
-    	new Loop().execute();
-    }
-    
-    @SuppressWarnings("rawtypes")
-	private class Loop extends AsyncTask {
-    	@Override
-    	protected Object doInBackground(Object... arg0) {
-    		HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, COMMAND_LOOP);
-            try {
-				validateResponse(request);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            request.body();
-    		return null;
-    	}
-
+		Command loop_task = new Command();
+		loop_task.execute(TASK_LOOP); 
     }
     
     /* Définition de la fonction REPEAT */
-    @SuppressWarnings("unchecked")
 	public void repeat() throws Exception {
-    	new Repeat().execute();
-    }
-    
-    @SuppressWarnings("rawtypes")
-	private class Repeat extends AsyncTask {
-    	@Override
-    	protected Object doInBackground(Object... arg0) {
-    		HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, COMMAND_REPEAT);
-            try {
-				validateResponse(request);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            request.body();
-    		return null;
-    	}
-
+		Command repeat_task = new Command();
+		repeat_task.execute(TASK_REPEAT); 
     }
     
     /* Définition de la fonction VOLUME */
-    @SuppressWarnings("unchecked")
-	public void volume(double d) throws Exception {
-    	new Volume().execute(d);
+	public void volume(int d) throws Exception {
+		Command volume_task = new Command();
+		volume_task.execute(TASK_VOLUME,d);
     }
+
+    /* 
+     * 
+     * FIN FONCTIONS DE PILOTAGE DU MEDIA
+     * 
+     */
     
-    @SuppressWarnings("rawtypes")
-	private class Volume extends AsyncTask {
-    	@Override
-    	protected Object doInBackground(Object... value) {
-    		// Normalement on peut modifier directement en pourcentage grâce à URLEncoder.encode("%") à la suite de la value mais ça ne passe pas
-    		String command = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(value[0]));
-    		HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, command);
-            try {
-				validateResponse(request);
-			} catch (Exception e) {
+    /* 
+     * 
+     * FONCTIONS DE MISE A JOUR DU MEDIA
+     * 
+     */
+    
+	public void updateMedia(View rv) {
+		upateNameMedia((TextView) rv.findViewById(R.id.textNameMedia));
+    }
+	
+	public void updateMediaWhenTaskEnds(View rv, Command task) {		
+		while(true){
+			try {
+				System.out.println(task.get());
+				System.out.println(task.getStatus());
+				if(task.get() == 1){
+					updateMedia(rv);
+					break;
+				}
+				System.out.println(task.getStatus());
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            request.body();
-    		return null;
-    	}
-
-    }
-
-    
-    /* Définition de la fonction nameMedia */
-	public void updateMedia(View rv) {
-		try {
-			Thread.sleep(1500);
-			upateNameMedia((TextView) rv.findViewById(R.id.textNameMedia));
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
     }
 	
 	private void upateNameMedia(TextView tv){
     	tv.setText(media.getName());
 	}
+
+    
+    /* 
+     * 
+     * FIN FONCTIONS DE MISE A JOUR DU MEDIA
+     * 
+     */
     
 	private static class ConnectionHolder {
 		private final static VLCConnection instance = new VLCConnection();
