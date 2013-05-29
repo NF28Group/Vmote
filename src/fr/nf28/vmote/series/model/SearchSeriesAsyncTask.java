@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParserException;
 
 import fr.nf28.vmote.tvdb.SearchSeries;
-import fr.nf28.vmote.tvdb.TvdbXmlParser;
+import fr.nf28.vmote.tvdb.SearchSeriesXmlParser;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -49,13 +50,18 @@ public class SearchSeriesAsyncTask extends AsyncTask<String, Void, List<SearchSe
 	private List<SearchSeries> loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
 		InputStream stream = null;
 		// Instantiate the parser
-		TvdbXmlParser tvdbXmlParser = new TvdbXmlParser();
+		SearchSeriesXmlParser searchSeriesXmlParser = new SearchSeriesXmlParser();
 		stream = downloadUrl(urlString);  
 
-		List<SearchSeries> list = tvdbXmlParser.parse(stream);
+		List<Object> list = searchSeriesXmlParser.parse(stream);
 		stream.close();
+		
+		List<SearchSeries> res = new ArrayList<SearchSeries>();
+		for(Object o : list){
+			res.add((SearchSeries) o);
+		}
 
-		return list;
+		return res;
 	}
 
 	// Given a string representation of a URL, sets up a connection and gets
