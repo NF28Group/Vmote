@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.db.episode.Episode;
+import fr.nf28.vmote.db.episode.EpisodeDAO;
 import fr.nf28.vmote.db.tvshow.TvShow;
 import fr.nf28.vmote.series.adapter.TvShowEpisodeAdapter;
 import fr.nf28.vmote.series.adapter.TvShowSeasonAdapter;
@@ -58,21 +59,8 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
     }
 	
 	public void loadData(){
-		//TODO use database function
-		
+		EpisodeDAO episodeAccessObject = new EpisodeDAO(rootView.getContext());
 		episodeList = new ArrayList<Episode>();
-
-		Episode episode1 = new Episode(000, 1111, 5, 1, "Episode 1", "", new Date(), true);
-		Episode episode2 = new Episode(000, 1111, 5, 2, "Episode 2", "", new Date(), true);
-		Episode episode3 = new Episode(000, 1111, 5, 3, "Episode 3", "", new Date(), true);
-		Episode episode4 = new Episode(000, 1111, 5, 4, "Episode 4", "", new Date(), true);
-		Episode episode5 = new Episode(000, 1111, 5, 5, "Episode 5", "", new Date(), false);
-		
-		episodeList.add(episode5);
-		episodeList.add(episode4);
-		episodeList.add(episode3);
-		episodeList.add(episode2);
-		episodeList.add(episode1);
-		
+		episodeList = episodeAccessObject.selectTvShowAndSeason(tvShow.getId(), seasonNumber);
 	}
 }

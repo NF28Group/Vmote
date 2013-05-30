@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.db.tvshow.TvShow;
+import fr.nf28.vmote.db.tvshow.TvShowDAO;
 import fr.nf28.vmote.series.adapter.TvShowListAdapter;
 
 
@@ -100,22 +101,26 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
 		//TODO Get the real code
 		
 		seriesList = new ArrayList<TvShow>();
-
-		TvShow tvShow1 = new TvShow(0, "Game Of Thrones", "", "", "HBO", "Fantastique", 52, 0, "");
-		TvShow tvShow2 = new TvShow(0, "Breaking Bad", "", "","AMC", "Thriller", 42, 0, "");
-		TvShow tvShow3 = new TvShow(0, "Big Bang Theory", "", "", "", "Comedie", 20, 0, "");
-		TvShow tvShow4 = new TvShow(0, "How I Met Your Mother", "", "", "", "Comedie", 20, 0, "");
-		TvShow tvShow5 = new TvShow(0, "Mentalist", "", "", "CBS","Policier", 42, 0, "");
-		TvShow tvShow6 = new TvShow(0, "Prison Break", "","", "Fox", "Thriller", 42, 0, "");
-		TvShow tvShow7 = new TvShow(0, "The Walking Dead", "","",  "AMC" , "Horreur", 42, 0, "");
 		
-		seriesList.add(tvShow1);
-		seriesList.add(tvShow2);
-		seriesList.add(tvShow3);
-		seriesList.add(tvShow4);
-		seriesList.add(tvShow5);
-		seriesList.add(tvShow6);
-		seriesList.add(tvShow7);
+		TvShowDAO tvShowAccesObject = new TvShowDAO(rootView.getContext());
+		
+		seriesList = tvShowAccesObject.selectAll();
+		
+//		TvShow tvShow1 = new TvShow(0, "Game Of Thrones", "", "", "HBO", "Fantastique", 52, 0, "");
+//		TvShow tvShow2 = new TvShow(0, "Breaking Bad", "", "","AMC", "Thriller", 42, 0, "");
+//		TvShow tvShow3 = new TvShow(0, "Big Bang Theory", "", "", "", "Comedie", 20, 0, "");
+//		TvShow tvShow4 = new TvShow(0, "How I Met Your Mother", "", "", "", "Comedie", 20, 0, "");
+//		TvShow tvShow5 = new TvShow(0, "Mentalist", "", "", "CBS","Policier", 42, 0, "");
+//		TvShow tvShow6 = new TvShow(0, "Prison Break", "","", "Fox", "Thriller", 42, 0, "");
+//		TvShow tvShow7 = new TvShow(0, "The Walking Dead", "","",  "AMC" , "Horreur", 42, 0, "");
+//		
+//		seriesList.add(tvShow1);
+//		seriesList.add(tvShow2);
+//		seriesList.add(tvShow3);
+//		seriesList.add(tvShow4);
+//		seriesList.add(tvShow5);
+//		seriesList.add(tvShow6);
+//		seriesList.add(tvShow7);
 		
 	}
 }

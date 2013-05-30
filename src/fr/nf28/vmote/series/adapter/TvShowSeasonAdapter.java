@@ -11,11 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TvShowSeasonAdapter extends ArrayAdapter<String> {
+public class TvShowSeasonAdapter extends ArrayAdapter<Integer> {
 	private final Context context;
-	private final List<String> list;
+	private final List<Integer> list;
 
-	public TvShowSeasonAdapter(Context context, int textViewResourceId, List<String> objects) {
+	public TvShowSeasonAdapter(Context context, int textViewResourceId, List<Integer> objects) {
 		super(context, textViewResourceId, objects);
 		this.context = context;
 		this.list = objects;
@@ -33,7 +33,14 @@ public class TvShowSeasonAdapter extends ArrayAdapter<String> {
 		TextView seasonLabel = (TextView) rowView.findViewById(R.id.tvShowSeasonLabel);
 		ImageView checkImageView = (ImageView) rowView.findViewById(R.id.tvShowSeasonCheck);
 		
-		seasonLabel.setText(list.get(position));
+		Integer seasonNumber = list.get(position);
+		if(seasonNumber != 0){
+			seasonLabel.setText("Saison " + seasonNumber);
+		}
+		else {
+			seasonLabel.setText("Specials");
+		}
+		
 		
 		//TODO Change the imageView with the good value of boolean (all see/unseen)
 //		if(//Test boolean){

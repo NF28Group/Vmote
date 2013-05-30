@@ -44,9 +44,31 @@ public class Episode {
 	public int getSeasonNumber() {
 		return seasonNumber;
 	}
+	
+	public String getSeasonNumberString() {
+		String seasonNumberString;
+		if(seasonNumber < 10){
+			seasonNumberString = "0" + seasonNumber;
+		}
+		else {
+			seasonNumberString = String.valueOf(seasonNumber);
+		}
+		return seasonNumberString;
+	}
 
 	public int getEpisodeNumber() {
 		return episodeNumber;
+	}
+	
+	public String getEpisodeNumberString() {
+		String episodeNumberString;
+		if(episodeNumber < 10){
+			episodeNumberString = "0" + episodeNumber;
+		}
+		else {
+			episodeNumberString = String.valueOf(episodeNumber);
+		}
+		return episodeNumberString;
 	}
 
 	public String getEpisodeName() {
@@ -67,5 +89,9 @@ public class Episode {
 
 	public boolean isSeen() {
 		return seen;
+	}
+	
+	public void setSeen() {
+		this.seen = true;
 	}
 }

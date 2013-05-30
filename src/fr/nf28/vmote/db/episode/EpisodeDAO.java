@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import fr.nf28.vmote.db.DAOBase;
 
@@ -118,7 +119,8 @@ public class EpisodeDAO extends DAOBase {
 		Cursor c = mDb.rawQuery(
 				"SELECT * FROM " + EPISODE_TABLE_NAME + 
 				" WHERE " + EPISODE_TVSHOW_ID + " = ?" +
-				" AND " + EPISODE_SEASONNUMBER + " = ?", new String[]{String.valueOf(tvShow_id), String.valueOf(seasonNumber)});
+				" AND " + EPISODE_SEASONNUMBER + " = ?" +
+			    " ORDER BY " + EPISODE_EPISODENUMBER + " DESC", new String[]{String.valueOf(tvShow_id), String.valueOf(seasonNumber)});
 		
 		return toEpisodes(c);
 	}
@@ -156,5 +158,30 @@ public class EpisodeDAO extends DAOBase {
 		boolean exists = (cursor.getCount() > 0);
 		cursor.close();
 		return exists;
+	}
+	
+	private List<Integer> toSeasonList(Cursor c){
+		List<Integer> seasons = new ArrayList<Integer>();
+		while (c.moveToNext()) {
+			seasons.add(c.getInt(c.getColumnIndex(EPISODE_SEASONNUMBER)));
+		}
+		c.close();
+		
+		return seasons;
+	}
+	
+	public List<Integer> getSeasonNumberWithId(long tvShow_id){
+		Cursor c = mDb.rawQuery(
+				"SELECT DISTINCT " + EPISODE_SEASONNUMBER +" FROM " + EPISODE_TABLE_NAME + 
+				" WHERE " + EPISODE_TVSHOW_ID + " = ? ORDER BY " + EPISODE_SEASONNUMBER + " DESC", new String[]{String.valueOf(tvShow_id)});
+		
+		return toSeasonList(c);
+	}
+	
+	public Integer getEpisodesUnseenWithId(long tvShow_id){
+		Cursor c = mDb.rawQuery(
+				"SELECT *" + " FROM " + EPISODE_TABLE_NAME + 
+				" WHERE " + EPISODE_TVSHOW_ID + " = ? AND "  + EPISODE_SEEN + " = 0", new String[]{String.valueOf(tvShow_id)});
+		return c.getCount();
 	}
 }

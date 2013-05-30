@@ -1,15 +1,20 @@
 package fr.nf28.vmote.series.adapter;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.db.episode.EpisodeDAO;
 import fr.nf28.vmote.db.tvshow.TvShow;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TvShowListAdapter extends ArrayAdapter<TvShow> {
@@ -34,10 +39,26 @@ public class TvShowListAdapter extends ArrayAdapter<TvShow> {
 		//Fill textView in view with good values
 		TextView tvShowName = (TextView) rowView.findViewById(R.id.tvShowName);
 		TextView tvShowRemain = (TextView) rowView.findViewById(R.id.tvShowText);
+		ImageView tvShowPosterView = (ImageView) rowView.findViewById(R.id.tvShowPoster);
+		
+		TvShow currentTvShow = list.get(position);
+		System.out.println("TVSHow : " + currentTvShow.getName());
+		System.out.println("TVSHowPoster : " + currentTvShow.getPosterPath());
+		
+		
+		FileInputStream fis;
+		try {
+			fis = context.openFileInput(currentTvShow.getPosterPath());
+			tvShowPosterView.setImageBitmap(BitmapFactory.decodeStream(fis));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		tvShowName.setText(list.get(position).getName());
 		//TODO : Calculate the number of remaining episodes
-		tvShowRemain.setText("3 episodes restants");
+		EpisodeDAO episodeAccessObject = new EpisodeDAO(getContext());
+		tvShowRemain.setText(episodeAccessObject.getEpisodesUnseenWithId(currentTvShow.getId()) + " episodes restants");
 		
 		return rowView;
 	}

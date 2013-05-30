@@ -1,19 +1,24 @@
 package fr.nf28.vmote.series.view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.db.episode.EpisodeDAO;
 import fr.nf28.vmote.db.tvshow.TvShow;
 import fr.nf28.vmote.series.adapter.TvShowSeasonAdapter;
 
@@ -23,7 +28,7 @@ public class SeriesSeasonFragment extends AbstractSeriesFragment {
 
 	private View rootView;
 	private TvShow tvShow;
-	private List<String> seasons;
+	private List<Integer> seasons;
 	
 	public SeriesSeasonFragment(){}
 	public SeriesSeasonFragment(TvShow myTvShow) {
@@ -48,11 +53,21 @@ public class SeriesSeasonFragment extends AbstractSeriesFragment {
     	TextView channelView = (TextView) rootView.findViewById(R.id.tvShowChannel);
     	TextView genreView = (TextView) rootView.findViewById(R.id.tvShowGenre);
     	TextView runtimeView = (TextView) rootView.findViewById(R.id.tvShowLength);
+    	ImageView tvShowPosterView = (ImageView) rootView.findViewById(R.id.tvShowPosterView);
 
     	titleView.setText(tvShow.getName());
     	channelView.setText(tvShow.getNetwork());
     	genreView.setText("Genre: " + tvShow.getGenre());
     	runtimeView.setText("Format: " + tvShow.getRuntime() + " min");
+    	
+    	FileInputStream fis;
+		try {
+			fis = rootView.getContext().openFileInput(tvShow.getPosterPath());
+			tvShowPosterView.setImageBitmap(BitmapFactory.decodeStream(fis));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	//Seasons List
     	loadData();
@@ -67,7 +82,7 @@ public class SeriesSeasonFragment extends AbstractSeriesFragment {
   		  @Override
   		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
   			  
-  			  int seasonNumber = seasons.size() - position;
+  			  int seasonNumber = seasons.get(position);
   		      SeriesEpisodeFragment fragment = new SeriesEpisodeFragment(tvShow, seasonNumber);
 
   		      android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -81,19 +96,15 @@ public class SeriesSeasonFragment extends AbstractSeriesFragment {
     }
 	
 	public void loadData(){
-		seasons = new ArrayList<String>();
+		EpisodeDAO episodeAccessObject = new EpisodeDAO(rootView.getContext());
+		seasons = new ArrayList<Integer>();
+		seasons = episodeAccessObject.getSeasonNumberWithId(tvShow.getId());
 		
 		// Get number of seasons
-//		for(int i = 0; i < numberOfSeasons; i++){
-//			seasons.add("Saison " + numberOfSeasons - i);
-//		}
-		
-    	seasons.add("Saison 5");
-    	seasons.add("Saison 4");
-    	seasons.add("Saison 3");
-    	seasons.add("Saison 2");
-    	seasons.add("Saison 1");
-		
+		for(int i = 0; i < seasons.size(); i++){
+			System.out.println("number: " + seasons.get(i));
+		}
+
 	}
 
 }
