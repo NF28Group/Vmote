@@ -99,6 +99,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/buttonMute"
             android:progress="100" />
+
     </RelativeLayout>
 
 </LinearLayout>

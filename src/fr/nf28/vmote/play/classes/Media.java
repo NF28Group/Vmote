@@ -42,8 +42,8 @@ public class Media {
 		this.State = state;
 	}
 
-	public String getVolume() {
-		return Volume;
+	public int getVolume() {
+		return (int) (Integer.parseInt(Volume)/(2.56*2));
 	}
 
 	public void setVolume(String volume) {

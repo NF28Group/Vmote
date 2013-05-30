@@ -11,6 +11,7 @@ import fr.nf28.vmote.play.classes.Media;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 
@@ -55,14 +56,17 @@ public class VLCConnection {
     /* 
      * Définition de la fonction lauchCheck
      * return : 
-     * 		0 : erreur
+     * 		1 : OK
+     * 		2 : Pas de Wi-Fi
+     * 		3 : Pas VLC lancé
+     * 		4 : Pas de média dans VLC
      * 		
      * */
     public LaunchError lauchCheck(Context c, View rv){
     	LaunchError error = new LaunchError();
     	if(CheckConnection.isWifiConnected(c)){
     		LauchCheck lauchCheck = new LauchCheck();
-    		lauchCheck.execute();
+    		lauchCheck.execute(rv);
     		try {
 				return lauchCheck.get();
 			} catch (InterruptedException e) {
@@ -98,13 +102,18 @@ public class VLCConnection {
     			return error;
     		}
             request.body();
-            if(JsonReader.getCurrentMediaStatus().getName() == "0"){
+            
+            media = JsonReader.getCurrentMediaStatus();
+            
+            if(media.getName() == "0"){
                 error.setEtat(4);
                 error.setMessage("Veuillez lancer un média sur VLC !");
     			return error;
             }
     		else{
                 error.setEtat(1);
+                error.setMessage("Pas de problème !");
+                updateMedia(rv[0]);
     			return error;
     		}
     	}
@@ -271,6 +280,7 @@ public class VLCConnection {
     
 	public void updateMedia(View rv) {
 		upateNameMedia((TextView) rv.findViewById(R.id.textNameMedia));
+		updateVolumeMedia((SeekBar) rv.findViewById(R.id.seekBarPlaySound));
     }
 	
 	public void updateMediaWhenTaskEnds(View rv, Command task) {		
@@ -295,8 +305,11 @@ public class VLCConnection {
 	private void upateNameMedia(TextView tv){
     	tv.setText(media.getName());
 	}
+	
+	private void updateVolumeMedia(SeekBar sb){
+		sb.setProgress(media.getVolume());
+	}
 
-    
     /* 
      * 
      * FIN FONCTIONS DE MISE A JOUR DU MEDIA
