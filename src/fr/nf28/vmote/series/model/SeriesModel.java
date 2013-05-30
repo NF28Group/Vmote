@@ -74,7 +74,7 @@ public class SeriesModel {
 						if(o instanceof TvShow){
 							TvShow ts = (TvShow) o;
 							String imagePath = "img-" + ts.getId();
-							saveImage(ts.getPosterUrl(), imagePath);
+							dllAndSaveImage(ts.getPosterUrl(), imagePath);
 							ts.setPosterPath(imagePath);
 							tsDao.insert(ts);
 						}
@@ -89,7 +89,7 @@ public class SeriesModel {
 		}
 	}
 	
-	private void saveImage(String url, final String filepath){
+	private void dllAndSaveImage(String url, final String filepath){
 		ConnectivityManager connMgr = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {

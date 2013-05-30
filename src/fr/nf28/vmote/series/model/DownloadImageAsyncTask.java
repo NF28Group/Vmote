@@ -10,13 +10,14 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
-	private String filename = "image.jpg";
+	private final static String URL_DLLIMAGE_TVSHOW = "http://thetvdb.com/banners/";
+	
 	@Override
 	protected Bitmap doInBackground(String... urls) {
 
 		// params comes from the execute() call: params[0] is the url.
 		try {
-			return downloadImageUrl(urls[0], filename);
+			return downloadImageUrl(urls[0]);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -26,12 +27,13 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
 	// Given a URL, establishes an HttpUrlConnection and retrieves
 	// the web page content as a InputStream, which it returns as
 	// a string.
-	private Bitmap downloadImageUrl(String imageUrl, String filename) throws IOException {
+	private Bitmap downloadImageUrl(String imageUrl) throws IOException {
 		InputStream is = null;
 		Bitmap bmp = null;
 		
 		try {
-			URL url = new URL(imageUrl);
+			System.out.println(URL_DLLIMAGE_TVSHOW + imageUrl);
+			URL url = new URL(URL_DLLIMAGE_TVSHOW + imageUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setReadTimeout(10000 /* milliseconds */);
 			conn.setConnectTimeout(15000 /* milliseconds */);

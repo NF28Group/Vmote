@@ -5,26 +5,30 @@ import java.io.FileOutputStream;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 public class ImageHelper {
-	public static boolean saveBitmap(Bitmap bmp, Context cxt, String filename){
-		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-	    /*--- you can select your preferred CompressFormat and quality. 
-	     * I'm going to use JPEG and 100% quality ---*/
-	    bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+	public static void saveBitmap(Bitmap bmp, Context cxt, String filename){
+		if(bmp != null){
+			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		
-		FileOutputStream fos = null;
-		
-	    try {
-	        fos = cxt.openFileOutput(filename, Context.MODE_PRIVATE);
-	        fos.write(bytes.toByteArray());
-	        fos.close();
-	        
-	        return true;
-	    } 
-	    catch (Exception e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+		    /*--- you can select your preferred CompressFormat and quality. 
+		     * I'm going to use JPEG and 100% quality ---*/
+		    bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+			
+			FileOutputStream fos = null;
+			
+		    try {
+		        fos = cxt.openFileOutput(filename, Context.MODE_PRIVATE);
+		        fos.write(bytes.toByteArray());
+		        fos.close();
+		    } 
+		    catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		else {
+			Log.e("Save Bmp", "bmp pointer null");
+		}
 	}
 }
