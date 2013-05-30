@@ -1,4 +1,4 @@
-package fr.nf28.vmote.play.media;
+package fr.nf28.vmote.play.classes;
 
 public class Media {
 

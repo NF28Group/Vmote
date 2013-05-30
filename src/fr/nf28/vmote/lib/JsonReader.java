@@ -10,9 +10,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import fr.nf28.vmote.play.model.VLCConnection;
+
 public class JsonReader {
-	private static final String BASE_URL =
-            "http://192.168.0.10:8080/requests/status.json";
 	
 	private static String readUrl(String urlString) throws Exception {
 	    BufferedReader reader = null;
@@ -36,7 +36,7 @@ public class JsonReader {
 	private static JsonObject getJsonObject(){
 		String json;
 		try {
-			json = readUrl(BASE_URL);
+			json = readUrl(VLCConnection.BASE_URL);
 			
 	        JsonParser parser = new JsonParser();
 			JsonObject obj = (JsonObject)parser.parse(json);
@@ -53,9 +53,10 @@ public class JsonReader {
 	
 	public static String getNameMedia(){
 		JsonObject obj = getJsonObject();
-		System.out.println("Résultat getNameMedia dans JsonReader = "+obj);
+		System.out.println("Résultat de getJsonObject dans getNameMedia de la classe JsonReader = " + obj);
 		if(obj == null) return "0";
 		JsonObject information = (JsonObject) obj.get("information");
+		if(information == null) return "0";
 		JsonObject category = (JsonObject) information.get("category");
 		JsonObject meta = (JsonObject) category.get("meta");
         JsonElement filename = meta.get("filename");

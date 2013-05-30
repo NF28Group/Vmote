@@ -1,5 +1,7 @@
 package fr.nf28.vmote.play.model;
 
+import fr.nf28.vmote.play.classes.LaunchError;
+import android.content.Context;
 import android.view.View;
 
 public class PlayModel {
@@ -120,6 +122,10 @@ public class PlayModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	
+	public LaunchError launchCheck(Context c, View rv){
+		return this.vlcConnection.lauchCheck(c,rv);
 	}
 
 	/*public boolean isVLCConnected() {

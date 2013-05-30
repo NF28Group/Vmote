@@ -1,4 +1,4 @@
-package fr.nf28.vmote.play.model;
+package fr.nf28.vmote.play.classes;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -5,7 +5,10 @@ import java.util.concurrent.ExecutionException;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.lib.HttpRequest;
 import fr.nf28.vmote.lib.JsonReader;
-import fr.nf28.vmote.play.media.Media;
+import fr.nf28.vmote.play.classes.CheckConnection;
+import fr.nf28.vmote.play.classes.LaunchError;
+import fr.nf28.vmote.play.classes.Media;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
@@ -15,8 +18,8 @@ public class VLCConnection {
 	
 	private static Media media;
 	
-	private static final String BASE_URL =
-            "http://192.168.0.10:8080/requests/status.xml";
+	public static final String BASE_URL =
+            "http://192.168.0.10:8080/requests/status.json";
 
     private static final String PARAM_COMMAND = "command";
     //private static final String PARAM_INPUT = "input";
@@ -45,6 +48,69 @@ public class VLCConnection {
     private static void validateResponse(HttpRequest request) throws Exception {
         if (!request.ok()) {
             throw new Exception("Request failed with code: " + request.code());
+        }
+    }
+    
+
+    /* 
+     * Définition de la fonction lauchCheck
+     * return : 
+     * 		0 : erreur
+     * 		
+     * */
+    public LaunchError lauchCheck(Context c, View rv){
+    	LaunchError error = new LaunchError();
+    	if(CheckConnection.isWifiConnected(c)){
+    		LauchCheck lauchCheck = new LauchCheck();
+    		lauchCheck.execute();
+    		try {
+				return lauchCheck.get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	else{
+    		/* La Wi-Fi n'est pas connecté*/
+    		error.setEtat(2);
+    		error.setMessage("Veuillez vous connecter à un réseau Wi-Fi !");
+    		return error;
+    	}
+    	return error;
+    }
+    
+    private class LauchCheck extends AsyncTask <View, LaunchError, LaunchError> {
+    	@Override
+    	protected LaunchError doInBackground(View... rv) {
+        	LaunchError error = new LaunchError();
+    		HttpRequest request = HttpRequest.get(BASE_URL, true,
+                    PARAM_COMMAND, "test").readTimeout(1000).connectTimeout(1000);
+            try {
+    			validateResponse(request);
+    		} 
+            catch (Exception e) {
+    			e.printStackTrace();
+                error.setEtat(3);
+                error.setMessage("Veuillez lancer VLC !");
+    			return error;
+    		}
+            request.body();
+            if(JsonReader.getNameMedia() == "0"){
+                error.setEtat(4);
+                error.setMessage("Veuillez lancer un média sur VLC !");
+    			return error;
+            }
+    		else{
+                error.setEtat(1);
+    			return error;
+    		}
+    	}
+
+        protected void onPostExecute(LaunchError result) {
+        	System.out.println(result);
         }
     }
     

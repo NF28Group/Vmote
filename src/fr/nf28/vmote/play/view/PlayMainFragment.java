@@ -1,8 +1,8 @@
 package fr.nf28.vmote.play.view;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.interfaces.OnChangePageListener;
-import fr.nf28.vmote.play.model.CheckConnection;
 import fr.nf28.vmote.play.model.PlayModel;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -82,137 +82,101 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	ImageButton button_mute = (ImageButton) rootView.findViewById(R.id.buttonMute);
     	final SeekBar slider_volume = (SeekBar) rootView.findViewById(R.id.seekBarPlaySound);
     	
-    	if (CheckConnection.isWifiConnected(getActivity())) {
-    		//if(model.isVLCConnected()){
-    			//if(model.isMediaInVLC()){
-    				//model.checkMedia(rootView);
-                	
-            	    button_play.setOnClickListener(new OnClickListener() {
-            			
-            			public void onClick(View v) {
-            				// TODO Auto-generated method stub
-            				model.commandPlay(rootView);
-            			}
-            		});
-            	    
-            	    button_stop.setOnClickListener(new OnClickListener() {
-            			
-            			public void onClick(View v) {
-            				// TODO Auto-generated method stub
-            				model.commandStop(rootView);
-            			}
-            		});
-            	    
-            	    button_previous.setOnClickListener(new OnClickListener() {
-            			
-            			public void onClick(View v) {
-            				// TODO Auto-generated method stub
-            				model.commandPrevious(rootView);
-            			}
-            		});
-            	    
-            	    button_next.setOnClickListener(new OnClickListener() {
-            			
-            			public void onClick(View v) {
-            				// TODO Auto-generated method stub
-            				model.commandNext(rootView);
-            			}
-            		});
-            	    
-            	    button_shuffle.setOnClickListener(new OnClickListener() {
-            			
-            			public void onClick(View v) {
-            				// TODO Auto-generated method stub
-            				model.commandRandom();
-            			}
-            		});
-            	    
-            	    button_repeat.setOnClickListener(new OnClickListener() {
-            			
-            			public void onClick(View v) {
-            				// TODO Auto-generated method stub
-            				model.commandRepeat();
-            			}
-            		});
-            	    
-            	    button_mute.setOnClickListener(new OnClickListener() {
-            			
-            			public void onClick(View v) {
-            				// TODO Auto-generated method stub
-            				model.commandVolume(0);
-            				slider_volume.setProgress(0);
-            			}
-            		});
-            	    
-            	    slider_volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-            			
-            			@Override
-            			public void onStopTrackingTouch(SeekBar seekBar) {
-            				// TODO Auto-generated method stub
-            				
-            			}
-            			
-            			@Override
-            			public void onStartTrackingTouch(SeekBar seekBar) {
-            				// TODO Auto-generated method stub
-            			}
-            			
-            			@Override
-            			public void onProgressChanged(SeekBar seekBar, int progress,
-            					boolean fromUser) {	
-            				model.commandVolume(progress);
-            				
-            			}
-            		});
+    	LaunchError launchError = model.launchCheck(getActivity(),rootView);
+    	
+    	if (launchError.getEtat() == 1) {
+			//model.checkMedia(rootView);
+        	
+    	    button_play.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandPlay(rootView);
     			}
-    			/*else{
-            		new AlertDialog.Builder(getActivity())
-            	    .setTitle("Configuration")
-            	    .setMessage("Veuillez lancer un média sur VLC !")
-            	    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            	        public void onClick(DialogInterface dialog, int which) { 
-            	        	Intent intent = new Intent(Intent.ACTION_MAIN);
-            	        	intent.addCategory(Intent.CATEGORY_HOME);
-            	        	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            	        	startActivity(intent);
-            	        }
-            	     })
-            	    .setNegativeButton("Debug mode", new DialogInterface.OnClickListener() {
-            	        public void onClick(DialogInterface dialog, int which) {
-            	        }
-            	     })
-            	     .show();
-            	}
-    		}
-    		else{
-        		new AlertDialog.Builder(getActivity())
-        	    .setTitle("Configuration")
-        	    .setMessage("Veuillez lancer VLC sur votre ordinateur !")
-        	    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-        	        public void onClick(DialogInterface dialog, int which) { 
-        	        	Intent intent = new Intent(Intent.ACTION_MAIN);
-        	        	intent.addCategory(Intent.CATEGORY_HOME);
-        	        	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        	        	startActivity(intent);
-        	        }
-        	     })
-        	    .setNegativeButton("Debug mode", new DialogInterface.OnClickListener() {
-        	        public void onClick(DialogInterface dialog, int which) {
-        	        }
-        	     })
-        	     .show();
-        	}
-    	}*/
+    		});
+    	    
+    	    button_stop.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandStop(rootView);
+    			}
+    		});
+    	    
+    	    button_previous.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandPrevious(rootView);
+    			}
+    		});
+    	    
+    	    button_next.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandNext(rootView);
+    			}
+    		});
+    	    
+    	    button_shuffle.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandRandom();
+    			}
+    		});
+    	    
+    	    button_repeat.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandRepeat();
+    			}
+    		});
+    	    
+    	    button_mute.setOnClickListener(new OnClickListener() {
+    			
+    			public void onClick(View v) {
+    				// TODO Auto-generated method stub
+    				model.commandVolume(0);
+    				slider_volume.setProgress(0);
+    			}
+    		});
+    	    
+    	    slider_volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+    			
+    			@Override
+    			public void onStopTrackingTouch(SeekBar seekBar) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+    			
+    			@Override
+    			public void onStartTrackingTouch(SeekBar seekBar) {
+    				// TODO Auto-generated method stub
+    			}
+    			
+    			@Override
+    			public void onProgressChanged(SeekBar seekBar, int progress,
+    					boolean fromUser) {	
+    				model.commandVolume(progress);
+    				
+    			}
+    		});
+		}
     	else{
     		new AlertDialog.Builder(getActivity())
     	    .setTitle("Configuration")
-    	    .setMessage("Veuillez vous connecter à un réseau Wi-Fi !")
+    	    .setMessage(launchError.getMessage())
     	    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
     	        public void onClick(DialogInterface dialog, int which) { 
-    	        	Intent intent = new Intent(Intent.ACTION_MAIN);
+    	        	System.exit(0);
+    	            android.os.Process.killProcess(android.os.Process.myPid());
+    	        	/*Intent intent = new Intent(Intent.ACTION_MAIN);
     	        	intent.addCategory(Intent.CATEGORY_HOME);
     	        	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    	        	startActivity(intent);
+    	        	startActivity(intent);*/
     	        }
     	     })
     	    .setNegativeButton("Debug mode", new DialogInterface.OnClickListener() {
