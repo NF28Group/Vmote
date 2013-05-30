@@ -147,7 +147,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     			
     			@Override
     			public void onStopTrackingTouch(SeekBar seekBar) {
-    				// TODO Auto-generated method stub
+    				model.commandVolume(seekBar.getProgress());
     				
     			}
     			
@@ -159,7 +159,6 @@ public class PlayMainFragment extends AbstractPlayFragment {
     			@Override
     			public void onProgressChanged(SeekBar seekBar, int progress,
     					boolean fromUser) {	
-    				model.commandVolume(progress);
     				
     			}
     		});
