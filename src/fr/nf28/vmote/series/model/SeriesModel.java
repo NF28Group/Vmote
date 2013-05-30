@@ -8,10 +8,12 @@ import fr.nf28.vmote.db.episode.Episode;
 import fr.nf28.vmote.db.episode.EpisodeDAO;
 import fr.nf28.vmote.db.tvshow.TvShow;
 import fr.nf28.vmote.db.tvshow.TvShowDAO;
+import fr.nf28.vmote.lib.ImageHelper;
 import fr.nf28.vmote.series.adapter.TvShowSearchAdapter;
 import fr.nf28.vmote.tvdb.SearchSeries;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
@@ -70,7 +72,11 @@ public class SeriesModel {
 					EpisodeDAO epDao = new EpisodeDAO(cxt);
 					for(Object o : result){
 						if(o instanceof TvShow){
-							tsDao.insert((TvShow) o);
+							TvShow ts = (TvShow) o;
+							String imagePath = "img-" + ts.getId();
+							saveImage(ts.getPosterUrl(), imagePath);
+							ts.setPosterPath(imagePath);
+							tsDao.insert(ts);
 						}
 						else if(o instanceof Episode){
 							epDao.insert((Episode) o);
@@ -83,7 +89,20 @@ public class SeriesModel {
 		}
 	}
 	
-	
+	private void saveImage(String url, final String filepath){
+		ConnectivityManager connMgr = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		if (networkInfo != null && networkInfo.isConnected()) {
+			new DownloadImageAsyncTask(){
+				@Override
+				protected void onPostExecute(Bitmap result) { //Callback
+					ImageHelper.saveBitmap(result, cxt, filepath);
+				}
+			}.execute(url);
+		} else {
+			Toast.makeText(cxt, "No network connection available.", Toast.LENGTH_SHORT).show();
+		}
+	}
 	
 	/** PropertyChangeListener Pattern **/
 	public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {

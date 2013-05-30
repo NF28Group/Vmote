@@ -41,6 +41,10 @@ public class TvShow {
 		return runtime;
 	}
 	
+	public void setPosterPath(String posterPath) {
+		this.posterPath = posterPath;
+	}
+	
 	public String getPosterPath() {
 		return posterPath;
 	}
