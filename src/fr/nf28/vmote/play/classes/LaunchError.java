@@ -23,5 +23,10 @@ public class LaunchError {
 	public void setMessage(String message) {
 		Message = message;
 	}
+	
+	@Override
+	public String toString() {
+		return "call function toString LaunchError Message = "+this.Message +" Etat = "+ this.Etat;
+	}
 
 }

@@ -87,7 +87,7 @@ public class VLCConnection {
     	protected LaunchError doInBackground(View... rv) {
         	LaunchError error = new LaunchError();
     		HttpRequest request = HttpRequest.get(BASE_URL, true,
-                    PARAM_COMMAND, "test").readTimeout(1000).connectTimeout(1000);
+                    PARAM_COMMAND, "test").readTimeout(2000).connectTimeout(2000);
             try {
     			validateResponse(request);
     		} 
@@ -98,7 +98,7 @@ public class VLCConnection {
     			return error;
     		}
             request.body();
-            if(JsonReader.getNameMedia() == "0"){
+            if(JsonReader.getCurrentMediaStatus().getName() == "0"){
                 error.setEtat(4);
                 error.setMessage("Veuillez lancer un média sur VLC !");
     			return error;
@@ -110,7 +110,7 @@ public class VLCConnection {
     	}
 
         protected void onPostExecute(LaunchError result) {
-        	System.out.println(result);
+        	System.out.println("onPostExecute result = " + result);
         }
     }
     
@@ -122,7 +122,7 @@ public class VLCConnection {
 	private class CheckMedia extends AsyncTask <View, Void, Void> {
     	@Override
     	protected Void doInBackground(View... rv) {
-    		String current_media = JsonReader.getNameMedia();
+    		String current_media = JsonReader.getCurrentMediaStatus().getName();
     		if(current_media == "0"){
         		System.out.println("0");
     			media.setName("Pas de média ouvert");
@@ -136,8 +136,8 @@ public class VLCConnection {
 
     }
 	
-	private class Command extends AsyncTask <Integer, Integer, Integer> {
-    	protected Integer doInBackground(Integer... id_command) {
+	private class Command extends AsyncTask <Integer, Integer, Boolean> {
+    	protected Boolean doInBackground(Integer... id_command) {
     		String command_to_execute;
     		
     		switch(id_command[0]){
@@ -175,10 +175,18 @@ public class VLCConnection {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+	    		return false;
 			}
-	        request.body();
-			media.setName(JsonReader.getNameMedia());
-    		return 1;
+			try {
+		        request.body();
+				Thread.sleep(1000);
+				System.out.println(JsonReader.getCurrentMediaStatus());
+				media.setName((JsonReader.getCurrentMediaStatus().getName() == "0")?"Stop":JsonReader.getCurrentMediaStatus().getName());
+			} catch (InterruptedException e) {
+				System.out.println("Erreur doInBackground dans class Command");
+				e.printStackTrace();
+			}
+    		return true;
     	}
     	
         protected void onProgressUpdate(Integer... progress) {
@@ -186,8 +194,8 @@ public class VLCConnection {
         }
 
 
-        protected void onPostExecute(Integer result) {
-        	System.out.println(result);
+        protected void onPostExecute(Boolean result) {
+        	System.out.println("onPostExecute class Command " +result);
         }
     }
     
@@ -198,35 +206,35 @@ public class VLCConnection {
      */
 	
     /* Définition de la fonction PAUSE */
-	public void pause(View rv) throws Exception {
+	public void pause(View rv) {
 		Command pause_task = new Command();
 		pause_task.execute(TASK_PAUSE);
     	updateMediaWhenTaskEnds(rv,pause_task);  	
     }
     
     /* Définition de la fonction STOP */
-	public void stop(View rv) throws Exception {
+	public void stop(View rv) {
 		Command stop_task = new Command();
 		stop_task.execute(TASK_STOP);
     	updateMediaWhenTaskEnds(rv,stop_task);  
     }
     
     /* Définition de la fonction NEXT */
-	public void next(View rv) throws Exception {
+	public void next(View rv) {
 		Command next_task = new Command();
 		next_task.execute(TASK_NEXT);
     	updateMediaWhenTaskEnds(rv,next_task); 
     }
     
     /* Définition de la fonction PREVIOUS */
-	public void previous(View rv) throws Exception  {
+	public void previous(View rv)  {
 		Command previous_task = new Command();
 		previous_task.execute(TASK_PREVIOUS);
     	updateMediaWhenTaskEnds(rv,previous_task); 
     }
     
     /* Définition de la fonction RANDOM */
-	public void random() throws Exception {
+	public void random() {
 		Command random_task = new Command();
 		random_task.execute(TASK_RANDOM); 
     }
@@ -238,13 +246,13 @@ public class VLCConnection {
     }
     
     /* Définition de la fonction REPEAT */
-	public void repeat() throws Exception {
+	public void repeat() {
 		Command repeat_task = new Command();
 		repeat_task.execute(TASK_REPEAT); 
     }
     
     /* Définition de la fonction VOLUME */
-	public void volume(int d) throws Exception {
+	public void volume(int d) {
 		Command volume_task = new Command();
 		volume_task.execute(TASK_VOLUME,d);
     }
@@ -268,13 +276,12 @@ public class VLCConnection {
 	public void updateMediaWhenTaskEnds(View rv, Command task) {		
 		while(true){
 			try {
-				System.out.println(task.get());
-				System.out.println(task.getStatus());
-				if(task.get() == 1){
+				System.out.println("updateMediaWhenTaskEnds get = " +task.get());
+				System.out.println("updateMediaWhenTaskEnds getStatus = " +task.getStatus());
+				if(task.get()){
 					updateMedia(rv);
 					break;
 				}
-				System.out.println(task.getStatus());
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

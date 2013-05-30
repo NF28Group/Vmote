@@ -2,18 +2,20 @@ package fr.nf28.vmote.play.classes;
 
 public class Media {
 
-	private String name;
+	private String Name;
+	private String State;
+	private String Volume;
 	
 	public Media(){
 		
 	}
 
 	public String getName() {
-		return name;
+		return Name;
 	}
 
 	public void setName(String name) {
-		this.name = manageName(name);
+		this.Name = manageName(name);
 	}
 	
 	private String manageName(String n){
@@ -25,5 +27,26 @@ public class Media {
 			final_name = final_name.substring(0,i); // enlever l'extension
 		}
 		return final_name;
+	}
+	
+	@Override
+	public String toString() {
+		return "call function toString LaunchError Message = "+this.Name +" Etat = "+ this.State +" Volume = "+ this.Volume;
+	}
+
+	public String getState() {
+		return State;
+	}
+
+	public void setState(String state) {
+		this.State = state;
+	}
+
+	public String getVolume() {
+		return Volume;
+	}
+
+	public void setVolume(String volume) {
+		Volume = volume;
 	}
 }

@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import android.util.Log;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import fr.nf28.vmote.play.classes.Media;
 import fr.nf28.vmote.play.model.VLCConnection;
 
 public class JsonReader {
@@ -51,16 +50,21 @@ public class JsonReader {
 
 	}
 	
-	public static String getNameMedia(){
+	public static Media getCurrentMediaStatus(){
+		Media current_media = new Media();
 		JsonObject obj = getJsonObject();
-		System.out.println("Résultat de getJsonObject dans getNameMedia de la classe JsonReader = " + obj);
-		if(obj == null) return "0";
+		if(obj == null) return current_media;
+		JsonElement state = obj.get("state");
+		JsonElement volume = obj.get("volume");
 		JsonObject information = (JsonObject) obj.get("information");
-		if(information == null) return "0";
+		if(information == null) return current_media;
 		JsonObject category = (JsonObject) information.get("category");
 		JsonObject meta = (JsonObject) category.get("meta");
         JsonElement filename = meta.get("filename");
-        Log.i("JSON", filename.toString());
-		return filename.toString();
+        current_media.setName(filename.toString());
+        current_media.setState(state.toString());
+        current_media.setVolume(volume.toString());
+        System.out.println(current_media.toString());
+		return current_media;
 	}
 }
