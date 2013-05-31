@@ -4,4 +4,33 @@
     <string name="app_name">Vmote</string>
     <string name="action_settings">Settings</string>
 
+    <!-- pages play -->
+    
+    <!-- details -->
+    <string name="detailsPageTitle">Informations sur la vidéo</string>
+    <string name="detailsTitleDefault">Titre :</string>
+    <string name="detailsDurationDefault">Durée :</string>
+	<string name="detailsLengthDefault">Largeur trame :</string>
+    <string name="detailsHeightDefault">Hauteur trame :</string>
+    <string name="detailsFrameRateDefault">Fréquence d\'image :</string>
+    <string name="detailsSpeedDefault">Vitesse de transmission :</string>
+    <string name="detailsSamplingDefault">Taux d\'échantillonnage audio :</string>
+             
+    
+    <!-- main -->
+    <string name="buttonStop">Stop</string>
+    <string name="buttonPlay">Lecture</string>
+	<string name="buttonBackward">Marche arrière</string>
+    <string name="buttonForward">Avance rapide</string>
+    <string name="buttonOpen">Ouvrir répertoire</string>    
+    <string name="buttonShuffle">Lecture aléatoire</string>
+    <string name="buttonRepeat">Répéter</string>
+    <string name="buttonMute">Couper son</string>
+    
+    <!-- subtitles -->
+    <string name="subtitlePageTitle">Réglages avancées</string>
+    <string name="subtitlePageAudioSelect">Audio</string>
+    <string name="subtitlePageSubtitleSelect">Sous-titres</string>
+    <string name="subtitlePageSynchroAudio">Synchronisation audio</string>
+    <string name="subtitlePageSynchroSubtitle">Synchronisation sous-titres</string>    
 </resources>

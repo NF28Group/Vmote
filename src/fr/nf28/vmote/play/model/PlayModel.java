@@ -3,6 +3,7 @@ package fr.nf28.vmote.play.model;
 import fr.nf28.vmote.play.classes.LaunchError;
 import android.content.Context;
 import android.view.View;
+import android.widget.EditText;
 
 public class PlayModel {
 	
@@ -101,7 +102,7 @@ public class PlayModel {
 	public void commandVolume(int value){
 		try {
 			/*
-			 * Pour avoir le résultat du progress en pourcentage de 0 à 200%
+			 * Pour avoir le rï¿½sultat du progress en pourcentage de 0 ï¿½ 200%
 			*/	
 			this.vlcConnection.volume((int) (value*2.56*2));
 		} catch (Exception e) {
@@ -126,6 +127,27 @@ public class PlayModel {
 	
 	public LaunchError launchCheck(Context c, View rv){
 		return this.vlcConnection.lauchCheck(c,rv);
+	}
+
+	public void ajustAudio(int value, EditText audio) {
+		updateText(value, audio);
+		
+		//TODO call VLC
+	}
+
+	public void ajustSubtitle(int value, EditText subtitle) {
+		updateText(value, subtitle);
+		
+		//TODO call VLC
+	}
+	
+	private void updateText(int v, EditText et) {
+		if(v < 0) {
+			et.setText(" " + v + " ms");
+		}
+		else {
+			et.setText("+ " + v + " ms");			
+		}
 	}
 
 	/*public boolean isVLCConnected() {

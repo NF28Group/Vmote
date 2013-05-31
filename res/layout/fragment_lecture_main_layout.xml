@@ -21,11 +21,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:contentDescription="@string/buttonStop"
             android:layout_toRightOf="@+id/buttonPlay"
             android:src="@drawable/stop" />
 
         <ImageButton
             android:id="@+id/buttonPlay"
+            android:contentDescription="@string/buttonPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -34,6 +36,7 @@
 
         <ImageButton
             android:id="@+id/buttonBackward"
+            android:contentDescription="@string/buttonBackward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -42,6 +45,7 @@
 
         <ImageButton
             android:id="@+id/buttonForward"
+            android:contentDescription="@string/buttonForward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -56,6 +60,7 @@
 
         <ImageButton
             android:id="@+id/buttonOpen"
+            android:contentDescription="@string/buttonOpen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -64,6 +69,7 @@
 
         <ImageButton
             android:id="@+id/buttonShuffle"
+            android:contentDescription="@string/buttonShuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -72,6 +78,7 @@
 
         <ImageButton
             android:id="@+id/buttonRepeat"
+            android:contentDescription="@string/buttonRepeat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -85,6 +92,7 @@
 
         <ImageButton
             android:id="@+id/buttonMute"
+            android:contentDescription="@string/buttonMute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

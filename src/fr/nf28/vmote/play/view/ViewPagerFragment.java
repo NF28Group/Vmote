@@ -17,7 +17,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class ViewPagerFragment extends AbstractPlayFragment {
 	public static final String ARG_ITEM_ID = "pager_play_fragment";
-    static final int NUM_ITEMS = 10;
+    static final int NUM_ITEMS = 3;
 	
 	private View rootView;
 	private PlayModel model;
@@ -80,14 +80,6 @@ public class ViewPagerFragment extends AbstractPlayFragment {
     	return rootView;
     }
     
- /*   @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-    	super.onViewCreated(view, savedInstanceState);
-
-    mViewPager = (ViewPager) view.findViewById(R.id.playPager);
-    mViewPager.setAdapter(new collectionPagerAdapter(getChildFragmentManager()));
-    }
-*/
 	public PlayModel getModel() {
 		return model;
 	}
@@ -139,11 +131,16 @@ public class ViewPagerFragment extends AbstractPlayFragment {
 				fragment = PlayMainFragment.newInstance();
 				arguments.putString(PlayMainFragment.ARG_ITEM_ID, "main_play_fragment");
 				break;
-			default:
+			case 2:
 				fragment = PlaySubtitlesFragment.newInstance();
 				arguments.putString(PlaySubtitlesFragment.ARG_ITEM_ID, "subtitles_play_fragment");
 				break;
+			default: // back on main
+				fragment = PlayMainFragment.newInstance();
+				arguments.putString(PlayMainFragment.ARG_ITEM_ID, "main_play_fragment");
+				break;
 			}
+	        
 	        fragment.setArguments(arguments);
 	
 	        return fragment;

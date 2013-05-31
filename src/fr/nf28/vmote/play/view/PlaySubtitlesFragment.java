@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.play.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.PlayModel;
@@ -15,6 +18,10 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 	
 	private View rootView;
 	private PlayModel model;
+	private EditText etAudio;
+	private EditText etSubtitle;
+	private SeekBar sbAudio;
+	private SeekBar sbSubtitle;
 	
 	@SuppressWarnings("unused")
 	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
@@ -64,6 +71,44 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     	rootView = inflater.inflate(
     			R.layout.fragment_lecture_subtitles_layout, container, false);
     	
+    	etAudio = (EditText) rootView.findViewById(R.id.etSubtitlePageSynchroAudio);
+    	etSubtitle = (EditText) rootView.findViewById(R.id.etSubtitlePageSynchroSubtitle);
+    	sbAudio = (SeekBar) rootView.findViewById(R.id.seekBarAudio);
+    	sbSubtitle = (SeekBar) rootView.findViewById(R.id.seekBarSubtitle);
+    	
+    	sbAudio.setProgress(3000);
+    	sbSubtitle.setProgress(3000);
+    	sbAudio.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+    		int value = 0;
+ 
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+            	value = progress -3000; // pas de valeurs négatives...
+            	model.ajustSubtitle(value, etAudio);
+            }
+ 
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            	model.ajustSubtitle(value, etAudio);
+            }
+ 
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+    	
+    	sbSubtitle.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+    		int value = 0;
+ 
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                value = progress -3000; // pas de valeurs négatives...
+            	model.ajustSubtitle(value, etSubtitle);
+            }
+ 
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            	model.ajustSubtitle(value, etSubtitle);
+            }
+ 
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
     	
     	return rootView;
     }
@@ -74,5 +119,37 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 
 	public void setModel(PlayModel model) {
 		this.model = model;
+	}
+
+	public SeekBar getSbSubtitle() {
+		return sbSubtitle;
+	}
+
+	public void setSbSubtitle(SeekBar sbSubtitle) {
+		this.sbSubtitle = sbSubtitle;
+	}
+
+	public SeekBar getSbAudio() {
+		return sbAudio;
+	}
+
+	public void setSbAudio(SeekBar sbAudio) {
+		this.sbAudio = sbAudio;
+	}
+
+	public EditText getEtSubtitle() {
+		return etSubtitle;
+	}
+
+	public void setEtSubtitle(EditText etSubtitle) {
+		this.etSubtitle = etSubtitle;
+	}
+
+	public EditText getEtAudio() {
+		return etAudio;
+	}
+
+	public void setEtAudio(EditText etAudio) {
+		this.etAudio = etAudio;
 	}
 }

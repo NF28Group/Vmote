@@ -1,7 +1,6 @@
 package fr.nf28.vmote.series.view;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -16,7 +15,6 @@ import fr.nf28.vmote.db.episode.Episode;
 import fr.nf28.vmote.db.episode.EpisodeDAO;
 import fr.nf28.vmote.db.tvshow.TvShow;
 import fr.nf28.vmote.series.adapter.TvShowEpisodeAdapter;
-import fr.nf28.vmote.series.adapter.TvShowSeasonAdapter;
 
 @SuppressLint("ValidFragment")
 public class SeriesEpisodeFragment extends AbstractSeriesFragment {

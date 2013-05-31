@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import fr.nf28.vmote.db.DAOBase;
 
@@ -29,7 +28,7 @@ public class EpisodeDAO extends DAOBase {
 
 
 	/**
-	 * @param m le métier à ajouter à la base
+	 * @param m le mï¿½tier ï¿½ ajouter ï¿½ la base
 	 */
 	public long insert(Episode e) {
 		if(exists(e.getId())) { //UPDATE
@@ -53,14 +52,14 @@ public class EpisodeDAO extends DAOBase {
 	}
 
 	/**
-	 * @param id l'identifiant de la série à supprimer
+	 * @param id l'identifiant de la sï¿½rie ï¿½ supprimer
 	 */
 	public void delete(long id) {
 		mDb.delete(EPISODE_TABLE_NAME, EPISODE_KEY + " = ?", new String[] {String.valueOf(id)});
 	}
 
 	/**
-	 * @param m le métier modifié
+	 * @param m le mï¿½tier modifiï¿½
 	 */
 	public void update(Episode e) {
 		ContentValues value = new ContentValues();
@@ -77,7 +76,7 @@ public class EpisodeDAO extends DAOBase {
 	}
 
 	/**
-	 * Retourne toutes les séries
+	 * Retourne toutes les sï¿½ries
 	 * @return
 	 */
 	public List<Episode> selectAll() {
@@ -87,7 +86,7 @@ public class EpisodeDAO extends DAOBase {
 	}
 	
 	/**
-	 * @param id l'identifiant de la série à récupérer
+	 * @param id l'identifiant de la sï¿½rie ï¿½ rï¿½cupï¿½rer
 	 */
 	public Episode select(long id) {
 		Cursor c = mDb.rawQuery(
@@ -98,7 +97,7 @@ public class EpisodeDAO extends DAOBase {
 	}
 	
 	/**
-	 * Retourne tous les épisodes de la série d'id tvShow_Id
+	 * Retourne tous les ï¿½pisodes de la sï¿½rie d'id tvShow_Id
 	 * @param tvShow_id
 	 * @return
 	 */
@@ -111,7 +110,7 @@ public class EpisodeDAO extends DAOBase {
 	}
 	
 	/**
-	 * Retourne tous les épisodes de la saison numéro 
+	 * Retourne tous les ï¿½pisodes de la saison numï¿½ro 
 	 * @param seasonNumber
 	 * @return
 	 */

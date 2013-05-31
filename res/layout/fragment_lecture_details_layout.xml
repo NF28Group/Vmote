@@ -1,14 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+        android:layout_gravity="center"
+     >
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEST DETAILS" />
+    <TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_marginTop="5dp" 
+	    android:layout_gravity="center"
+	    android:layout_marginLeft="5dp"
+	    android:layout_marginBottom="10dp"
+	    android:layout_height="wrap_content"
+	    >
 
-</LinearLayout>
+		<TextView
+		    android:id="@+id/detailsPageTitle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="center"
+		    android:text="@string/detailsPageTitle"
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	</TableRow>
+	<TableRow 
+	    android:layout_width="fill_parent"
+	    android:layout_marginLeft="4dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginBottom="10dp">
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/detailsPageElementTitle"
+	        android:text="@string/detailsTitleDefault" 
+	        />
+	</TableRow>
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="4dp"
+	    android:layout_marginRight="4dp"
+	   	android:background="@drawable/details_page_background_text"
+	    >
+	    <RelativeLayout
+	        android:layout_marginLeft="10dp"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" 
+	        android:layout_marginBottom="5dp"
+	        android:layout_marginTop="5dp"
+	        >
+	        <TextView
+	            android:id="@+id/detailsPageDuration"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsDurationDefault"
+	 		/>
+	        <TextView
+	            android:layout_marginTop="5dp"
+	            android:id="@+id/detailsPageLength"
+	            android:layout_below="@+id/detailsPageDuration"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsLengthDefault"
+	 		/>
+	        <TextView
+	            android:layout_marginTop="5dp"
+	            android:id="@+id/detailsPageHeight"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/detailsPageLength"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsHeightDefault"
+	 		/>
+	        <TextView
+	            android:layout_marginTop="5dp"
+	            android:id="@+id/detailsPageFrameRate"
+	            android:layout_width="wrap_content"
+	            android:layout_below="@+id/detailsPageHeight"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsFrameRateDefault"
+	 		/>
+	        
+	    </RelativeLayout>
+	</TableRow>
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="15dp"
+	    android:layout_marginLeft="4dp"
+	    android:layout_marginRight="4dp"
+	   	android:background="@drawable/details_page_background_text"
+	    >
+	    <RelativeLayout
+	        android:layout_marginLeft="10dp"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" 
+	        android:layout_marginBottom="5dp"
+	        android:layout_marginTop="5dp"
+	        >
+	        <TextView
+	            android:id="@+id/detailsPageSpeed"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsSpeedDefault"
+	 		/>
+	        <TextView
+	            android:layout_marginTop="5dp"
+	            android:id="@+id/detailsPageSampling"
+	            android:layout_width="wrap_content"
+	            android:layout_below="@+id/detailsPageSpeed"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsSamplingDefault"
+	 		/>
+	    </RelativeLayout>
+	</TableRow>
+</TableLayout>

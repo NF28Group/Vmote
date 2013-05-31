@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_gravity="center"
+    >
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEST SUBTITLES" />
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_marginTop="5dp" 
+	    android:layout_gravity="center"
+	    android:layout_marginBottom="10dp"
+	    android:layout_height="wrap_content"
+	    >
 
-</LinearLayout>
+		<TextView
+		    android:id="@+id/subtitlePageTitle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="center"
+		    android:text="@string/subtitlePageTitle"
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	</TableRow>
+	<TableRow
+		android:layout_width="fill_parent" 
+		android:layout_marginBottom="5dp"
+		android:layout_height="wrap_content"
+	    >
+	    <TextView
+		    android:id="@+id/subtitlePageAudioSelect"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:text="@string/subtitlePageAudioSelect" />
+	</TableRow> 
+	<TableRow 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="15dp"
+	    >
+	    <TextView 
+	        android:id="@+id/subtitlePageSubtitleSelect"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:text="@string/subtitlePageSubtitleSelect" 
+	        />
+	    
+	</TableRow>
+	<TableRow 
+	    android:paddingLeft="5dp"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+		<RelativeLayout
+		    android:layout_width="fill_parent"
+	        android:layout_height="100dp"
+	        android:id="@+id/subtitlePageRelative1" 
+		    >
+		    <TextView
+	            android:id="@+id/subtitlePageSynchroAudio"
+	            android:layout_width="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_height="match_parent"
+	            android:text="@string/subtitlePageSynchroAudio" />
+
+	    <EditText
+	        android:id="@+id/etSubtitlePageSynchroAudio"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_toRightOf="@+id/subtitlePageSynchroAudio"
+	        android:ems="10"
+	        android:inputType="numberDecimal" />
+
+	    <SeekBar
+	        android:id="@+id/seekBarAudio"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	         android:layout_below="@+id/etSubtitlePageSynchroAudio"
+	         android:max="6000"
+	         />
+		</RelativeLayout>
+	        
+	</TableRow>
+	<TableRow 
+	    android:paddingLeft="5dp"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="100dp"
+	        android:id="@+id/subtitlePageRelative2"
+	        >
+	     <TextView
+		    android:id="@+id/subtitlePageSynchroSubtitle"
+		    android:layout_alignParentLeft="true"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/subtitlePageSynchroSubtitle" />
+
+	    <EditText
+	        android:id="@+id/etSubtitlePageSynchroSubtitle"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_toRightOf="@+id/subtitlePageSynchroSubtitle"
+	        android:ems="10"
+	        android:inputType="numberDecimal" >
+	    </EditText>
+
+	     <SeekBar
+	         android:id="@+id/seekBarSubtitle"
+	         android:layout_width="fill_parent"
+	         android:layout_height="wrap_content"
+	         android:layout_alignParentLeft="true"
+	         android:layout_below="@+id/etSubtitlePageSynchroSubtitle"
+	         android:max="6000"
+	         />
+
+	    </RelativeLayout>
+	</TableRow>
+
+</TableLayout>
