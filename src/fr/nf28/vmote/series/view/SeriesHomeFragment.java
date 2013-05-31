@@ -6,6 +6,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,6 +38,7 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     			R.layout.fragment_series_main_layout, container, false);
     	
     	tvShowListView = (ListView) rootView.findViewById(R.id.tvShowsListView);
+    	tvShowListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     	
     	// Initialize List of TV Shows
     	loadData();
@@ -50,16 +52,27 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     	// Set onClickListener -> Changer fragment
     	tvShowListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     		  @Override
-    		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {      
+    		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {    
     		      SeriesSeasonFragment fragment = new SeriesSeasonFragment(seriesList.get(position));
 
     		      android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
     		      FragmentTransaction transaction = fm.beginTransaction();
     		      transaction.replace(R.id.applicationview_detail_container, fragment);
     		      transaction.commit();
-    		      
     		  }
     	});
+    	
+    	tvShowListView.setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				v.setBackgroundColor(getResources().getColor(R.color.abs__background_holo_light));
+				return false;
+			}
+		});
+    	
+    	
     	
     	// Button configuration
     	Button addTvShowButton = (Button) rootView.findViewById(R.id.tvShowAddButton);

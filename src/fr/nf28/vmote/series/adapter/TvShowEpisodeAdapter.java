@@ -44,7 +44,13 @@ public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				currentEpisode.setSeen();
+				if(currentEpisode.isSeen()){
+					currentEpisode.setSeen(false);
+				}
+				else {
+					currentEpisode.setSeen(true);
+				}
+				
 				EpisodeDAO episodeAccessObject = new EpisodeDAO(getContext());
 				episodeAccessObject.update(currentEpisode);
 				notifyDataSetChanged();
@@ -58,7 +64,7 @@ public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
 	
 	public void configureCheckButton(Button checkButton, Episode currentEpisode){
 		if(currentEpisode.isSeen()){
-			checkButton.setBackgroundColor(Color.BLACK);
+			checkButton.setBackgroundResource(R.drawable.checkicon);
 		}
 		else {
 			checkButton.setBackgroundColor(0);

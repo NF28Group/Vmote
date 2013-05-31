@@ -18,6 +18,7 @@
     <Button
         android:id="@+id/tvShowEpisodeCheck"
         android:layout_width="52dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/checkicon" />
 
 </LinearLayout>

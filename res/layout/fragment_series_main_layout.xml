@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:focusableInTouchMode="false"
+    android:clickable="true"
     android:orientation="vertical" >
     
     <ListView
@@ -12,7 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvShowButtonBackground"
         android:layout_alignParentTop="true"
-        android:overScrollMode="always" >
+        android:listSelector="@android:color/holo_blue_dark"
+        android:background="@android:color/transparent"
+    	android:cacheColorHint="@android:color/transparent"
+    	android:fastScrollEnabled="true"
+    	android:persistentDrawingCache="scrolling"
+    	android:scrollingCache="false"
+        android:choiceMode="singleChoice">
 
 	</ListView>
 	

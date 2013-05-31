@@ -91,7 +91,7 @@ public class Episode {
 		return seen;
 	}
 	
-	public void setSeen() {
-		this.seen = true;
+	public void setSeen(boolean isSeen) {
+		this.seen = isSeen;
 	}
 }
