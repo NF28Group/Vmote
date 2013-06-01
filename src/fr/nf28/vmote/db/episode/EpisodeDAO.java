@@ -183,4 +183,32 @@ public class EpisodeDAO extends DAOBase {
 				" WHERE " + EPISODE_TVSHOW_ID + " = ? AND "  + EPISODE_SEEN + " = 0", new String[]{String.valueOf(tvShow_id)});
 		return c.getCount();
 	}
+	
+	public boolean isSeasonSeenWithIdAndSeason(long tvShow_id, int season){
+		List<Episode> episodes = this.selectTvShowAndSeason(tvShow_id, season);
+		
+		int seenCount = 0;
+		
+		for(int i = 0; i < episodes.size(); i++){
+			Episode episode = episodes.get(i);
+			if(episode.isSeen())
+				seenCount++;
+		}
+		
+		if(seenCount == episodes.size()){
+			return true;
+		}
+		return false;
+	}
+	
+	public void setAllEpisodesSeenInSeasonWithId(boolean isSeen, int season, long tvShow_id){
+		List<Episode> episodes = this.selectTvShowAndSeason(tvShow_id, season);
+		
+		for(int i = 0; i < episodes.size(); i++){
+			Episode episode = episodes.get(i);
+			episode.setSeen(isSeen);
+			update(episode);
+		}
+		
+	}
 }

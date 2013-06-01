@@ -15,10 +15,11 @@
         android:paddingLeft="10dip"
         android:textSize="15dip"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/tvShowEpisodeCheck"
         android:layout_width="52dp"
         android:layout_height="match_parent"
-        android:background="@drawable/checkicon" />
+        android:scaleType="center"
+        android:background="@android:color/transparent"/>
 
 </LinearLayout>

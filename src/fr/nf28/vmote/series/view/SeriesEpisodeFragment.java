@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import fr.nf28.vmote.R;
@@ -41,6 +42,7 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
     	
     	TextView tvShowTitle = (TextView) rootView.findViewById(R.id.tvShowTitleEpisodeView);
     	TextView seasonNumberTextView = (TextView) rootView.findViewById(R.id.tvShowSeasonEpisodeView);
+    	Button setAllSeenButton = (Button) rootView.findViewById(R.id.tvShowEpisodesAllSeen);
     	
     	tvShowTitle.setText(this.tvShow.getName());
     	seasonNumberTextView.setText("Saison " + seasonNumber);
@@ -50,8 +52,22 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
     	// LOAD DATA
     	loadData();
     	
-    	TvShowEpisodeAdapter adapter = new TvShowEpisodeAdapter(rootView.getContext(), R.layout.tvseries_episode_list_cell, episodeList);
+    	final TvShowEpisodeAdapter adapter = new TvShowEpisodeAdapter(rootView.getContext(), R.layout.tvseries_episode_list_cell, episodeList);
     	episodeListView.setAdapter(adapter);
+    	
+    	setAllSeenButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				EpisodeDAO episodeAccessObject = new EpisodeDAO(rootView.getContext());
+				
+				if(episodeAccessObject.isSeasonSeenWithIdAndSeason(tvShow.getId(), seasonNumber))
+					episodeAccessObject.setAllEpisodesSeenInSeasonWithId(false, seasonNumber, tvShow.getId());
+				else
+					episodeAccessObject.setAllEpisodesSeenInSeasonWithId(true, seasonNumber, tvShow.getId());
+				adapter.notifyDataSetChanged();
+			}
+		});
 
     	return rootView;
     }
