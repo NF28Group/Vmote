@@ -31,14 +31,31 @@
 
     </RelativeLayout>
     
+    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="#EAEAEA"
+	    android:orientation="horizontal" >
+    
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.70"
             android:paddingTop="10dip"
             android:paddingLeft="10dip"
             android:paddingBottom="10dip"
-       		android:background="#EAEAEA"
-            android:text="Episode list" />
+       		
+            android:text="Liste des episodes" />
+
+    <Button
+        android:id="@+id/tvShowEpisodesAllSeen"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.30"
+        android:textSize="10sp"
+        android:text="All seen" />
+    
+    </LinearLayout>
     
     <View
             android:layout_width="fill_parent"

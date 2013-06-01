@@ -64,4 +64,8 @@ public class TvShow {
 	public String getNetwork() {
 		return network;
 	}
+	
+	public boolean getSeasonSeenWithSeasonNumber(int seasonNumber){
+		return false;
+	}
 }

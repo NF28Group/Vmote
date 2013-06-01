@@ -10,6 +10,7 @@
         android:id="@+id/tvShowPoster"
         android:layout_width="0dip"
         android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:layout_weight="0.20"
         android:background="#FFFFFF" />
     

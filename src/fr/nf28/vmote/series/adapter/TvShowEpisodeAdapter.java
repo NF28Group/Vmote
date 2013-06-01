@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
@@ -34,7 +35,7 @@ public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
 			rowView = inflater.inflate(R.layout.tvseries_episode_list_cell, parent, false);
 		
 		TextView episodeTitleLabel = (TextView) rowView.findViewById(R.id.tvShowEpisodeLabel);
-		Button checkButton = (Button) rowView.findViewById(R.id.tvShowEpisodeCheck);
+		ImageButton checkButton = (ImageButton) rowView.findViewById(R.id.tvShowEpisodeCheck);
 
 		final Episode currentEpisode = list.get(position);   
 		String episodeLabel = currentEpisode.getSeasonNumberString() + "x" + currentEpisode.getEpisodeNumberString() + " - " + currentEpisode.getEpisodeName();
@@ -62,12 +63,12 @@ public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
 		return rowView;
 	}
 	
-	public void configureCheckButton(Button checkButton, Episode currentEpisode){
+	public void configureCheckButton(ImageButton checkButton, Episode currentEpisode){
 		if(currentEpisode.isSeen()){
-			checkButton.setBackgroundResource(R.drawable.checkicon);
+			checkButton.setImageResource(R.drawable.checkicon3);
 		}
 		else {
-			checkButton.setBackgroundColor(0);
+			checkButton.setImageResource(0);
 		}
 	}
 }

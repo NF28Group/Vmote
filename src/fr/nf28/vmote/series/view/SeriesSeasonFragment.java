@@ -73,7 +73,7 @@ public class SeriesSeasonFragment extends AbstractSeriesFragment {
     	// Get the seasonListView
     	ListView seasonListView = (ListView) rootView.findViewById(R.id.tvShowSeasonListView);
  
-    	TvShowSeasonAdapter adapter = new TvShowSeasonAdapter(rootView.getContext(), R.layout.tvseries_season_list_cell, seasons);
+    	TvShowSeasonAdapter adapter = new TvShowSeasonAdapter(rootView.getContext(), R.layout.tvseries_season_list_cell, seasons, tvShow.getId());
     	seasonListView.setAdapter(adapter);
     	
     	seasonListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

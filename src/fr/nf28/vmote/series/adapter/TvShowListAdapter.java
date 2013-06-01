@@ -58,7 +58,12 @@ public class TvShowListAdapter extends ArrayAdapter<TvShow> {
 		tvShowName.setText(list.get(position).getName());
 		//TODO : Calculate the number of remaining episodes
 		EpisodeDAO episodeAccessObject = new EpisodeDAO(getContext());
-		tvShowRemain.setText(episodeAccessObject.getEpisodesUnseenWithId(currentTvShow.getId()) + " episodes restants");
+		int remainingEpisodes = episodeAccessObject.getEpisodesUnseenWithId(currentTvShow.getId());
+		
+		if(remainingEpisodes > 0)
+			tvShowRemain.setText(remainingEpisodes + " episodes à voir");
+		else
+			tvShowRemain.setText("Serie à jour");
 		
 		return rowView;
 	}
