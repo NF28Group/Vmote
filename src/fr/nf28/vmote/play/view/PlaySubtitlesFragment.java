@@ -67,6 +67,7 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	this.setModel(PlayModel.getInstance());
+    	this.model.setSubtitleView(this);
     	
     	rootView = inflater.inflate(
     			R.layout.fragment_lecture_subtitles_layout, container, false);
@@ -75,6 +76,9 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     	etSubtitle = (EditText) rootView.findViewById(R.id.etSubtitlePageSynchroSubtitle);
     	sbAudio = (SeekBar) rootView.findViewById(R.id.seekBarAudio);
     	sbSubtitle = (SeekBar) rootView.findViewById(R.id.seekBarSubtitle);
+    	
+    	etAudio.setEnabled(false);
+    	etSubtitle.setEnabled(false);
     	
     	sbAudio.setProgress(3000);
     	sbSubtitle.setProgress(3000);

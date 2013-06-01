@@ -68,6 +68,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	this.setModel(PlayModel.getInstance());
+    	this.model.setDetailsView(this);
     	
     	rootView = inflater.inflate(
     			R.layout.fragment_lecture_details_layout, container, false);
@@ -80,6 +81,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
     	speed = (TextView) rootView.findViewById(R.id.detailsPageSpeed);
     	sampling = (TextView) rootView.findViewById(R.id.detailsPageSampling);
     	
+    	this.model.setDetailsElement();
     	
     	return rootView;
     }

@@ -20,7 +20,7 @@ public class VLCConnection {
 	private static Media media;
 	
 	public static final String BASE_URL =
-            "http://192.168.0.10:8080/requests/status.json";
+            "http://192.168.0.13:8080/requests/status.json";
 
     private static final String PARAM_COMMAND = "command";
     //private static final String PARAM_INPUT = "input";
@@ -54,12 +54,12 @@ public class VLCConnection {
     
 
     /* 
-     * Définition de la fonction lauchCheck
+     * Definition de la fonction lauchCheck
      * return : 
      * 		1 : OK
      * 		2 : Pas de Wi-Fi
-     * 		3 : Pas VLC lancé
-     * 		4 : Pas de média dans VLC
+     * 		3 : Pas VLC lance
+     * 		4 : Pas de media dans VLC
      * 		
      * */
     public LaunchError lauchCheck(Context c, View rv){
@@ -78,9 +78,9 @@ public class VLCConnection {
 			}
     	}
     	else{
-    		/* La Wi-Fi n'est pas connecté*/
+    		/* Le Wi-Fi n'est pas connecte*/
     		error.setEtat(2);
-    		error.setMessage("Veuillez vous connecter à un réseau Wi-Fi !");
+    		error.setMessage("Veuillez vous connecter a un reseau Wi-Fi !");
     		return error;
     	}
     	return error;
@@ -107,12 +107,12 @@ public class VLCConnection {
             
             if(media.getName() == "0"){
                 error.setEtat(4);
-                error.setMessage("Veuillez lancer un média sur VLC !");
+                error.setMessage("Veuillez lancer un mï¿½dia sur VLC !");
     			return error;
             }
     		else{
                 error.setEtat(1);
-                error.setMessage("Pas de problème !");
+                error.setMessage("Pas de problï¿½me !");
                 updateMedia(rv[0]);
     			return error;
     		}
@@ -123,7 +123,7 @@ public class VLCConnection {
         }
     }
     
-    /* Définition de la check Media*/
+    /* Dï¿½finition de la check Media*/
 	public void checkMedia(View rv) throws Exception {
     	new CheckMedia().execute(rv);
     }
@@ -134,7 +134,7 @@ public class VLCConnection {
     		String current_media = JsonReader.getCurrentMediaStatus().getName();
     		if(current_media == "0"){
         		System.out.println("0");
-    			media.setName("Pas de média ouvert");
+    			media.setName("Pas de mï¿½dia ouvert");
     			}
     		else{
     			media.setName(current_media);
@@ -214,53 +214,53 @@ public class VLCConnection {
      * 
      */
 	
-    /* Définition de la fonction PAUSE */
+    /* Dï¿½finition de la fonction PAUSE */
 	public void pause(View rv) {
 		Command pause_task = new Command();
 		pause_task.execute(TASK_PAUSE);
     	updateMediaWhenTaskEnds(rv,pause_task);  	
     }
     
-    /* Définition de la fonction STOP */
+    /* Dï¿½finition de la fonction STOP */
 	public void stop(View rv) {
 		Command stop_task = new Command();
 		stop_task.execute(TASK_STOP);
     	updateMediaWhenTaskEnds(rv,stop_task);  
     }
     
-    /* Définition de la fonction NEXT */
+    /* Dï¿½finition de la fonction NEXT */
 	public void next(View rv) {
 		Command next_task = new Command();
 		next_task.execute(TASK_NEXT);
     	updateMediaWhenTaskEnds(rv,next_task); 
     }
     
-    /* Définition de la fonction PREVIOUS */
+    /* Dï¿½finition de la fonction PREVIOUS */
 	public void previous(View rv)  {
 		Command previous_task = new Command();
 		previous_task.execute(TASK_PREVIOUS);
     	updateMediaWhenTaskEnds(rv,previous_task); 
     }
     
-    /* Définition de la fonction RANDOM */
+    /* Dï¿½finition de la fonction RANDOM */
 	public void random() {
 		Command random_task = new Command();
 		random_task.execute(TASK_RANDOM); 
     }
     
-    /* Définition de la fonction LOOP */
+    /* Dï¿½finition de la fonction LOOP */
 	public void loop() throws Exception {
 		Command loop_task = new Command();
 		loop_task.execute(TASK_LOOP); 
     }
     
-    /* Définition de la fonction REPEAT */
+    /* Dï¿½finition de la fonction REPEAT */
 	public void repeat() {
 		Command repeat_task = new Command();
 		repeat_task.execute(TASK_REPEAT); 
     }
     
-    /* Définition de la fonction VOLUME */
+    /* Dï¿½finition de la fonction VOLUME */
 	public void volume(int d) {
 		Command volume_task = new Command();
 		volume_task.execute(TASK_VOLUME,d);
@@ -315,12 +315,16 @@ public class VLCConnection {
      * FIN FONCTIONS DE MISE A JOUR DU MEDIA
      * 
      */
-    
+	
 	private static class ConnectionHolder {
 		private final static VLCConnection instance = new VLCConnection();
 	}
 	
 	public static VLCConnection getInstance() {
 		return ConnectionHolder.instance;
+	}
+
+	public Media getMedia() {
+		return media;
 	}
 }

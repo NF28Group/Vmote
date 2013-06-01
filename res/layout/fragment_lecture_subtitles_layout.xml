@@ -20,6 +20,7 @@
 		    android:layout_gravity="center"
 		    android:text="@string/subtitlePageTitle"
 		    android:textAppearance="?android:attr/textAppearanceLarge" />
+	
 
 	</TableRow>
 	<TableRow
@@ -27,23 +28,50 @@
 		android:layout_marginBottom="5dp"
 		android:layout_height="wrap_content"
 	    >
-	    <TextView
+		<RelativeLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="30dp" 
+		    >
+		  <TextView
 		    android:id="@+id/subtitlePageAudioSelect"
 		    android:layout_width="wrap_content"
-		    android:layout_height="match_parent"
+		    android:layout_height="wrap_content"
 		    android:text="@string/subtitlePageAudioSelect" />
+	    
+	    <com.devsmart.android.ui.HorizontalListView
+	        android:id="@+id/audioSelectList"
+	        android:layout_width="235dp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/subtitlePageAudioSelect"
+	        android:layout_height="20dp"
+	        />
+		</RelativeLayout>
 	</TableRow> 
 	<TableRow 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginBottom="15dp"
 	    >
-	    <TextView 
+		<RelativeLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="30dp" 
+		    >
+		  <TextView 
 	        android:id="@+id/subtitlePageSubtitleSelect"
 		    android:layout_width="wrap_content"
 		    android:layout_height="match_parent"
 		    android:text="@string/subtitlePageSubtitleSelect" 
 	        />
+	    
+	    <com.devsmart.android.ui.HorizontalListView
+	        android:id="@+id/subtitleSelectList"
+	        android:layout_width="200dp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/subtitlePageSubtitleSelect"
+	        android:layout_height="20dp"
+	        />
+		
+		</RelativeLayout>
 	    
 	</TableRow>
 	<TableRow 

@@ -1,6 +1,10 @@
 package fr.nf28.vmote.play.model;
 
 import fr.nf28.vmote.play.classes.LaunchError;
+import fr.nf28.vmote.play.classes.Media;
+import fr.nf28.vmote.play.view.PlayDetailsFragment;
+import fr.nf28.vmote.play.view.PlayMainFragment;
+import fr.nf28.vmote.play.view.PlaySubtitlesFragment;
 import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +14,10 @@ public class PlayModel {
 	private VLCConnection vlcConnection;
 	private boolean is_loop = false;
 	private boolean is_repeat = false;
+	
+	private PlayMainFragment mainView;
+	private PlayDetailsFragment detailsView;
+	private PlaySubtitlesFragment subtitleView;
 	
 	private PlayModel() {
 		setVlcConnection(VLCConnection.getInstance());
@@ -93,7 +101,6 @@ public class PlayModel {
 				is_loop = true;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -106,7 +113,6 @@ public class PlayModel {
 			*/	
 			this.vlcConnection.volume((int) (value*2.56*2));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -129,6 +135,10 @@ public class PlayModel {
 		return this.vlcConnection.lauchCheck(c,rv);
 	}
 
+	
+	/*
+	 * Methods for details and subtitle views
+	 */
 	public void ajustAudio(int value, EditText audio) {
 		updateText(value, audio);
 		
@@ -150,6 +160,35 @@ public class PlayModel {
 		}
 	}
 
+	public PlayMainFragment getMainView() {
+		return mainView;
+	}
+
+	public void setMainView(PlayMainFragment mainView) {
+		this.mainView = mainView;
+	}
+
+	public PlayDetailsFragment getDetailsView() {
+		return detailsView;
+	}
+
+	public void setDetailsView(PlayDetailsFragment detailsView) {
+		this.detailsView = detailsView;
+	}
+
+	public PlaySubtitlesFragment getSubtitleView() {
+		return subtitleView;
+	}
+
+	public void setSubtitleView(PlaySubtitlesFragment subtitleView) {
+		this.subtitleView = subtitleView;
+	}
+	
+	public void setDetailsElement() {
+		Media media = this.vlcConnection.getMedia();
+		this.detailsView.getTitle().setText(media.getName());
+	}
+	
 	/*public boolean isVLCConnected() {
 		try {
 			return this.vlcConnection.isVLCConnected();
