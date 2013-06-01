@@ -209,6 +209,5 @@ public class EpisodeDAO extends DAOBase {
 			episode.setSeen(isSeen);
 			update(episode);
 		}
-		
 	}
 }

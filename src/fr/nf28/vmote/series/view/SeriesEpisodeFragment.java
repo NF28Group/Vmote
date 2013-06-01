@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import fr.nf28.vmote.R;
@@ -23,6 +24,7 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
 	private TvShow tvShow;
 	private int seasonNumber;
 	private List<Episode> episodeList;
+	private EpisodeDAO episodeAccessObject;
 	
 	public SeriesEpisodeFragment(TvShow newTvShow, int newSeasonNumber){
 		this.tvShow = newTvShow;
@@ -42,7 +44,7 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
     	
     	TextView tvShowTitle = (TextView) rootView.findViewById(R.id.tvShowTitleEpisodeView);
     	TextView seasonNumberTextView = (TextView) rootView.findViewById(R.id.tvShowSeasonEpisodeView);
-    	Button setAllSeenButton = (Button) rootView.findViewById(R.id.tvShowEpisodesAllSeen);
+    	final ImageButton setAllSeenButton = (ImageButton) rootView.findViewById(R.id.tvShowEpisodesAllSeen);
     	
     	tvShowTitle.setText(this.tvShow.getName());
     	seasonNumberTextView.setText("Saison " + seasonNumber);
@@ -50,21 +52,35 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
     	ListView episodeListView = (ListView) rootView.findViewById(R.id.tvShowEpisodeListView);
     	
     	// LOAD DATA
+    	episodeAccessObject = new EpisodeDAO(rootView.getContext());
     	loadData();
+    	
     	
     	final TvShowEpisodeAdapter adapter = new TvShowEpisodeAdapter(rootView.getContext(), R.layout.tvseries_episode_list_cell, episodeList);
     	episodeListView.setAdapter(adapter);
     	
+    	//Button
+    	if(episodeAccessObject.isSeasonSeenWithIdAndSeason(tvShow.getId(), seasonNumber))
+    		setAllSeenButton.setImageResource(R.drawable.checkmarkgrey);
+		else
+			setAllSeenButton.setImageResource(R.drawable.uncheckmarkgrey);
+
     	setAllSeenButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				EpisodeDAO episodeAccessObject = new EpisodeDAO(rootView.getContext());
-				
-				if(episodeAccessObject.isSeasonSeenWithIdAndSeason(tvShow.getId(), seasonNumber))
+				if(episodeAccessObject.isSeasonSeenWithIdAndSeason(tvShow.getId(), seasonNumber)){
+					System.out.println("set all unseen");
 					episodeAccessObject.setAllEpisodesSeenInSeasonWithId(false, seasonNumber, tvShow.getId());
-				else
+					setAllSeenButton.setImageResource(R.drawable.uncheckmarkgrey);
+				}
+				else{
+					System.out.println("set all seen");
 					episodeAccessObject.setAllEpisodesSeenInSeasonWithId(true, seasonNumber, tvShow.getId());
+					setAllSeenButton.setImageResource(R.drawable.checkmarkgrey);
+				}
+				loadData();
+				adapter.clear();
+				adapter.addAll(episodeList);
 				adapter.notifyDataSetChanged();
 			}
 		});
@@ -73,7 +89,6 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
     }
 	
 	public void loadData(){
-		EpisodeDAO episodeAccessObject = new EpisodeDAO(rootView.getContext());
 		episodeList = new ArrayList<Episode>();
 		episodeList = episodeAccessObject.selectTvShowAndSeason(tvShow.getId(), seasonNumber);
 	}

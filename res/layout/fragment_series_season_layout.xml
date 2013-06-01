@@ -85,7 +85,9 @@
     <ListView
       android:id="@+id/tvShowSeasonListView"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" >
+      android:layout_height="wrap_content" 
+      android:listSelector="@drawable/listviewselector"
+      android:background="#F5F5F5">
 	</ListView>
 	
     <View

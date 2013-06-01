@@ -3,6 +3,7 @@ package fr.nf28.vmote.series.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.db.tvshow.TvShow;
@@ -52,7 +54,7 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     	// Set onClickListener -> Changer fragment
     	tvShowListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     		  @Override
-    		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {    
+    		  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
     		      SeriesSeasonFragment fragment = new SeriesSeasonFragment(seriesList.get(position));
 
     		      android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -61,7 +63,7 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     		      transaction.commit();
     		  }
     	});
-    	
+
     	tvShowListView.setOnTouchListener(new View.OnTouchListener() {
 			
 			@Override
@@ -71,12 +73,10 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
 				return false;
 			}
 		});
-    	
-    	
-    	
+	
     	// Button configuration
-    	Button addTvShowButton = (Button) rootView.findViewById(R.id.tvShowAddButton);
-    	Button planningButton = (Button) rootView.findViewById(R.id.tvShowPlanningButton);
+    	ImageButton addTvShowButton = (ImageButton) rootView.findViewById(R.id.tvShowAddButton);
+    	ImageButton planningButton = (ImageButton) rootView.findViewById(R.id.tvShowPlanningButton);
     	
     	// Add button
     	addTvShowButton.setOnClickListener(new View.OnClickListener() {

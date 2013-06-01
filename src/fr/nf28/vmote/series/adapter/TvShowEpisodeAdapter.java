@@ -65,7 +65,8 @@ public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
 	
 	public void configureCheckButton(ImageButton checkButton, Episode currentEpisode){
 		if(currentEpisode.isSeen()){
-			checkButton.setImageResource(R.drawable.checkicon3);
+			System.out.println("is seen");
+			checkButton.setImageResource(R.drawable.checkmark);
 		}
 		else {
 			checkButton.setImageResource(0);

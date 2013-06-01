@@ -40,20 +40,19 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.70"
+            android:layout_weight="0.90"
             android:paddingTop="10dip"
             android:paddingLeft="10dip"
             android:paddingBottom="10dip"
        		
             android:text="Liste des episodes" />
 
-    <Button
+    <ImageButton
         android:id="@+id/tvShowEpisodesAllSeen"
-        android:layout_width="wrap_content"
+        android:layout_width="52dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.30"
-        android:textSize="10sp"
-        android:text="All seen" />
+        android:background="@android:color/transparent"
+         />
     
     </LinearLayout>
     

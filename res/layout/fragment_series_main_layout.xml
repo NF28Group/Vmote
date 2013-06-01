@@ -12,12 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvShowButtonBackground"
         android:layout_alignParentTop="true"
-        android:listSelector="@android:color/holo_blue_dark"
-        android:background="@android:color/transparent"
-    	android:cacheColorHint="@android:color/transparent"
-    	android:fastScrollEnabled="true"
-    	android:persistentDrawingCache="scrolling"
-    	android:scrollingCache="false"
+        android:background="#F5F5F5"
         android:choiceMode="singleChoice">
 
 	</ListView>
@@ -37,24 +32,33 @@
         android:layout_alignParentLeft="true"
         android:background="#EAEAEA" >
         
-       
-
-        <Button
+        <ImageButton
             android:id="@+id/tvShowAddButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#EAEAEA"
+            android:src="@drawable/plus"
+            android:background="@drawable/clickbuttoneffect"
+            android:scaleType="center"
             android:textColor="#595959"
-            android:textSize="35dip"
-            android:text="+" />
+            android:textSize="35dip" 
+            android:layout_weight="0.10"/>
+        
+        <View 
+	        android:layout_width="0dip"
+	       	android:layout_height="match_parent"
+	       	android:layout_weight="0.80"
+	       	android:background="@android:color/transparent"
+       		 />
 
-        <Button
+        <ImageButton
             android:id="@+id/tvShowPlanningButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Planning" 
-            android:textColor="#595959"
-            android:background="#EAEAEA"/>
+            android:layout_weight="0.10"
+            android:background="@drawable/clickbuttoneffect"
+            android:scaleType="center"
+            android:src="@drawable/calendar"
+            android:textColor="#595959" />
 
     </LinearLayout>
 

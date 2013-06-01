@@ -49,7 +49,7 @@ public class TvShowSeasonAdapter extends ArrayAdapter<Integer> {
 		EpisodeDAO episodeAccessObject = new EpisodeDAO(context);
 		
 		if(episodeAccessObject.isSeasonSeenWithIdAndSeason(tvShow_id, seasonNumber)){
-			checkImageView.setImageResource(R.drawable.checkicon3);
+			checkImageView.setImageResource(R.drawable.checkmark);
 		} 
 		else {
 			checkImageView.setImageResource(0);
