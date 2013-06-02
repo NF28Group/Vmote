@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 
 public class SeriesAddFragment extends AbstractSeriesFragment {
@@ -21,8 +21,7 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 	private View rootView;
 	private SeriesModel model;
 
-	private EditText searchInput;
-	private Button searchButton;
+	private SearchView searchInput;
 	private ListView listResult;
 
 	public SeriesAddFragment(){}
@@ -37,18 +36,26 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		rootView = inflater.inflate(R.layout.fragment_series_add_layout, container, false);
-
 		model = new SeriesModel(getActivity());
 
-		searchInput = (EditText) rootView.findViewById(R.id.search_input);
-		searchButton = (Button) rootView.findViewById(R.id.search_button);
+		//searchInput = (EditText) rootView.findViewById(R.id.search_input);
 		listResult = (ListView) rootView.findViewById(R.id.list_result);
+		searchInput = (SearchView) rootView.findViewById(R.id.searchTvshowView);
 
+		searchInput.setOnQueryTextListener(new OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextChange(String arg0) {
+				// TODO Auto-generated method stub
+				return true;
+			}
 
-		searchButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				String searchName = searchInput.getText().toString();
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				String searchName = searchInput.getQuery().toString();
 				model.searchSeries(searchName);
+				//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				//imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
+				return true;
 			}
 		});
 
