@@ -45,7 +45,7 @@ public class MainActivity extends SherlockFragmentActivity
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		Toast.makeText(this, "tab : " + tab.getText(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "tab : " + tab.getText(), Toast.LENGTH_SHORT).show();
 		int sel = (Integer) tab.getTag();
 		
 		AbstractFragment fragment;

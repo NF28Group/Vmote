@@ -43,9 +43,15 @@ public class SeriesModel {
 			new SearchSeriesAsyncTask(){
 				@Override
 				protected void onPostExecute(List<SearchSeries> result) { //Callback
-					TvShowSearchAdapter adapter = new TvShowSearchAdapter(cxt, result, that);
-					TvShowSearchAdapter old = null;
-					pcs.firePropertyChange("listAdapter", old, adapter);
+					if(result != null){
+						TvShowSearchAdapter adapter = new TvShowSearchAdapter(cxt, result, that);
+						TvShowSearchAdapter old = null;
+						pcs.firePropertyChange("listAdapter", old, adapter);
+					}
+					else {
+						//TODO 
+						//Prévenir utilisateur
+					}
 				}
 			}.execute(seriesName);
 		} else {
@@ -67,20 +73,23 @@ public class SeriesModel {
 			new GetSeriesAsyncTask(){
 				@Override
 				protected void onPostExecute(List<Object> result) { //Callback
-					//Add series to 
-					TvShowDAO tsDao = new TvShowDAO(cxt);
-					EpisodeDAO epDao = new EpisodeDAO(cxt);
-					for(Object o : result){
-						if(o instanceof TvShow){
-							TvShow ts = (TvShow) o;
-							String imagePath = "img-" + ts.getId();
-							dllAndSaveImage(ts.getPosterUrl(), imagePath);
-							ts.setPosterPath(imagePath);
-							tsDao.insert(ts);
+					if(result != null){
+						//Add series to 
+						TvShowDAO tsDao = new TvShowDAO(cxt);
+						EpisodeDAO epDao = new EpisodeDAO(cxt);
+						for(Object o : result){
+							if(o instanceof TvShow){
+								TvShow ts = (TvShow) o;
+								String imagePath = "img-" + ts.getId();
+								dllAndSaveImage(ts.getPosterUrl(), imagePath);
+								ts.setPosterPath(imagePath);
+								tsDao.insert(ts);
+							}
+							else if(o instanceof Episode){
+								epDao.insert((Episode) o);
+							}
 						}
-						else if(o instanceof Episode){
-							epDao.insert((Episode) o);
-						}
+						Toast.makeText(cxt, "Série ajoutée", Toast.LENGTH_SHORT).show();
 					}
 				}
 			}.execute(seriesId);
@@ -96,7 +105,12 @@ public class SeriesModel {
 			new DownloadImageAsyncTask(){
 				@Override
 				protected void onPostExecute(Bitmap result) { //Callback
-					ImageHelper.saveBitmap(result, cxt, filepath);
+					if(result != null){
+						ImageHelper.saveBitmap(result, cxt, filepath);
+					}
+					else {
+						//TODO
+					}
 				}
 			}.execute(url);
 		} else {
