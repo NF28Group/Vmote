@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.play.interfaces.OnChangePageListener;
+import fr.nf28.vmote.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.PlayModel;
 
 public class PlayDetailsFragment extends AbstractPlayFragment {

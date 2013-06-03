@@ -6,7 +6,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.history.view.HistoryVideoFragment;
-import fr.nf28.vmote.play.interfaces.OnChangePageListener;
+import fr.nf28.vmote.history.view.HistoryViewPagerFragment;
+import fr.nf28.vmote.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
 import android.os.Bundle;
@@ -64,9 +65,9 @@ public class MainActivity extends SherlockFragmentActivity
 			
 			break;
 		case 2: // histo
-			fragment = new HistoryVideoFragment();
+			fragment = new HistoryViewPagerFragment();
 			arguments = new Bundle();
-			arguments.putString(HistoryVideoFragment.ARG_ITEM_ID, "history_video_fragment");
+			arguments.putString(HistoryViewPagerFragment.ARG_ITEM_ID, "pager_history_fragment");
 	        fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
