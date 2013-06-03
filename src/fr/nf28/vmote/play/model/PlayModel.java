@@ -186,6 +186,36 @@ public class PlayModel {
 	
 	public void setDetailsElement() {
 		Media media = this.vlcConnection.getMedia();
-		this.detailsView.getTitle().setText(media.getName());
+		this.detailsView.setTitle(media.getName());
+		if(media.getAlbum() == null) {
+			
+		}
+		else {
+			
+		}
+		this.detailsView.setAlbum(media.getAlbum());
+		this.detailsView.setArtist(media.getArtist());
+		this.detailsView.setDate(media.getDate());
+		if(media.getDuree() != null) {
+			int duration = Integer.parseInt(media.getDuree());
+			int hours = duration/3600;
+			int remainder = duration - hours*3600;
+			int minutes = remainder/60;
+			int seconds = remainder - minutes*60;
+			String duree;
+			if(hours != 0) {
+				duree = hours + ":" + minutes + ":" + seconds;
+			}
+			else {
+				duree = minutes + ":" + seconds;
+			}
+			this.detailsView.setDuration(duree);
+		}
+		else {
+			this.detailsView.setDuration("");
+		}
+		
+		this.detailsView.setHistory(media.getHistory());
+		this.detailsView.setGender(media.getGender());
 	}
 }

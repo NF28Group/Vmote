@@ -64,6 +64,28 @@ public class JsonReader {
         current_media.setName(filename.toString());
         current_media.setState(state.toString());
         current_media.setVolume(volume.toString());
+        
+        //page details
+        JsonElement duration = obj.get("length");
+        JsonElement date = meta.get("date");
+        JsonElement artist = meta.get("artist");
+        JsonElement album = meta.get("album");
+        JsonElement history = meta.get("HISTORY");
+        JsonElement gender = meta.get("genre");
+        // change selon la langue...
+        JsonElement trameLength = obj.get("");
+        JsonElement trameHeight = obj.get("");
+        JsonElement frameRate = obj.get("");
+        
+       	current_media.setAlbum(album.toString());
+       	current_media.setArtist(artist.toString());
+       	current_media.setDate(date.toString());
+       	current_media.setDuree(duration.toString());
+       	current_media.setGender(gender.toString());
+       	current_media.setHistory(history.toString());
+
+        
+        
         System.out.println(current_media.toString());
 		return current_media;
 	}

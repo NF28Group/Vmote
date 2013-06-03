@@ -15,6 +15,11 @@
     <string name="detailsFrameRateDefault">Fréquence d\'image :</string>
     <string name="detailsSpeedDefault">Vitesse de transmission :</string>
     <string name="detailsSamplingDefault">Taux d\'échantillonnage audio :</string>
+    <string name="detailsDateDefault">Date :</string>
+    <string name="detailsArtistDefault">Artiste :</string>
+    <string name="detailsHistoryDefault">Histoire :</string>
+    <string name="detailsAlbumDefault">Album :</string>
+    <string name="detailsGenderDefault">Genre :</string>
              
     
     <!-- main -->

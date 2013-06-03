@@ -20,7 +20,7 @@ public class VLCConnection {
 	private static Media media;
 	
 	public static final String BASE_URL =
-            "http://192.168.0.10:8080/requests/status.json";
+            "http://192.168.0.15:8080/requests/status.json";
     /* IP Milio :
  
 	public static final String BASE_URL =
@@ -70,7 +70,7 @@ public class VLCConnection {
     public LaunchError lauchCheck(Context c, View rv){
     	LaunchError error = new LaunchError();
     	if(CheckConnection.isWifiConnected(c)){
-    		LauchCheck lauchCheck = new LauchCheck();
+    		LaunchCheck lauchCheck = new LaunchCheck();
     		lauchCheck.execute(rv);
     		try {
 				return lauchCheck.get();
@@ -91,7 +91,7 @@ public class VLCConnection {
     	return error;
     }
     
-    private class LauchCheck extends AsyncTask <View, LaunchError, LaunchError> {
+    private class LaunchCheck extends AsyncTask <View, LaunchError, LaunchError> {
     	@Override
     	protected LaunchError doInBackground(View... rv) {
         	LaunchError error = new LaunchError();

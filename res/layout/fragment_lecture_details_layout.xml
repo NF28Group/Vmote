@@ -103,20 +103,47 @@
 	        android:layout_marginTop="5dp"
 	        >
 	        <TextView
-	            android:id="@+id/detailsPageSpeed"
+	            android:id="@+id/detailsPageArtist"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
-	            android:text="@string/detailsSpeedDefault"
+	            android:text="@string/detailsArtistDefault"
 	 		/>
 	        <TextView
 	            android:layout_marginTop="5dp"
-	            android:id="@+id/detailsPageSampling"
+	            android:id="@+id/detailsPageHistory"
 	            android:layout_width="wrap_content"
-	            android:layout_below="@+id/detailsPageSpeed"
+	            android:layout_below="@+id/detailsPageAlbum"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
-	            android:text="@string/detailsSamplingDefault"
+	            android:text="@string/detailsHistoryDefault"
+	 		/>
+	        <TextView
+	            android:layout_marginTop="5dp"
+	            android:id="@+id/detailsPageDate"
+	            android:layout_width="wrap_content"
+	            android:layout_below="@+id/detailsPageArtist"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsDateDefault"
+	 		/>
+	        <TextView
+	            android:layout_marginTop="5dp"
+	            android:id="@+id/detailsPageAlbum"
+	            android:layout_width="wrap_content"
+	            android:layout_below="@+id/detailsPageDate"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsAlbumDefault"
+	 		/>
+	        <TextView
+	            android:layout_marginTop="5dp"
+	            android:id="@+id/detailsPageGender"
+	            android:layout_width="wrap_content"
+	            android:layout_below="@+id/detailsPageHistory"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/detailsGenderDefault"
 	 		/>
 	    </RelativeLayout>
 	</TableRow>

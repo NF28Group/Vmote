@@ -21,8 +21,11 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	private TextView length;
 	private TextView height;
 	private TextView frameRate;
-	private TextView speed;
-	private TextView sampling;
+	private TextView date;
+	private TextView artist;
+	private TextView history;
+	private TextView album;
+	private TextView gender;
 	
 	
 	@SuppressWarnings("unused")
@@ -78,9 +81,12 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
     	length = (TextView) rootView.findViewById(R.id.detailsPageLength);
     	height = (TextView) rootView.findViewById(R.id.detailsPageHeight);
     	frameRate = (TextView) rootView.findViewById(R.id.detailsPageFrameRate);
-    	speed = (TextView) rootView.findViewById(R.id.detailsPageSpeed);
-    	sampling = (TextView) rootView.findViewById(R.id.detailsPageSampling);
-    	
+    	date = (TextView) rootView.findViewById(R.id.detailsPageDate);
+    	artist = (TextView) rootView.findViewById(R.id.detailsPageArtist);
+    	album = (TextView) rootView.findViewById(R.id.detailsPageAlbum);
+    	gender = (TextView) rootView.findViewById(R.id.detailsPageGender);
+    	history = (TextView) rootView.findViewById(R.id.detailsPageHistory);
+
     	this.model.setDetailsElement();
     	
     	return rootView;
@@ -98,55 +104,79 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 		return title;
 	}
 
-	public void setTitle(TextView title) {
-		this.title = title;
+	public void setTitle(String title) {
+		this.title.setText(getString(R.string.detailsTitleDefault) + " " + title);
 	}
-
+	
 	public TextView getDuration() {
 		return duration;
 	}
 
-	public void setDuration(TextView duration) {
-		this.duration = duration;
+	public void setDuration(String duration) {
+		this.duration.setText(getString(R.string.detailsDurationDefault) + " " + duration);
 	}
 
 	public TextView getLength() {
 		return length;
 	}
 
-	public void setLength(TextView length) {
-		this.length = length;
+	public void setLength(String length) {
+		this.length.setText(getString(R.string.detailsLengthDefault) + " " + length);
 	}
 
 	public TextView getHeight() {
 		return height;
 	}
 
-	public void setHeight(TextView height) {
-		this.height = height;
+	public void setHeight(String height) {
+		this.height.setText(getString(R.string.detailsHeightDefault) + " " + height);
 	}
 
 	public TextView getFrameRate() {
 		return frameRate;
 	}
 
-	public void setFrameRate(TextView frameRate) {
-		this.frameRate = frameRate;
+	public void setFrameRate(String frameRate) {
+		this.frameRate.setText(getString(R.string.detailsFrameRateDefault) + " " + frameRate);
 	}
 
-	public TextView getSpeed() {
-		return speed;
+	public TextView getDate() {
+		return date;
 	}
 
-	public void setSpeed(TextView speed) {
-		this.speed = speed;
+	public void setDate(String date) {
+		this.date.setText(getString(R.string.detailsDateDefault) + " " + date);
 	}
 
-	public TextView getSampling() {
-		return sampling;
+	public TextView getArtist() {
+		return artist;
 	}
 
-	public void setSampling(TextView sampling) {
-		this.sampling = sampling;
+	public void setArtist(String artist) {
+		this.artist.setText(getString(R.string.detailsArtistDefault) + " " + artist);
+	}
+
+	public TextView getHistory() {
+		return history;
+	}
+
+	public void setHistory(String history) {
+		this.history.setText(getString(R.string.detailsHistoryDefault) + " " + history);
+	}
+
+	public TextView getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(String album) {
+		this.album.setText(getString(R.string.detailsAlbumDefault) + " " + album);
+	}
+
+	public TextView getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender.setText(getString(R.string.detailsGenderDefault)+ " " + gender);
 	}
 }
