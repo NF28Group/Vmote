@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
 
 public class PlayMainFragment extends AbstractPlayFragment {
 	public static final String ARG_ITEM_ID = "main_play_fragment";
@@ -165,23 +166,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     		});
 		}
     	else{
-    		new AlertDialog.Builder(getActivity())
-    	    .setTitle("Configuration")
-    	    .setMessage(launchError.getMessage())
-    	    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-    	        public void onClick(DialogInterface dialog, int which) { 
-    	        	System.exit(0);
-    	            android.os.Process.killProcess(android.os.Process.myPid());
-    	        	/*Intent intent = new Intent(Intent.ACTION_MAIN);
-    	        	intent.addCategory(Intent.CATEGORY_HOME);
-    	        	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    	        	startActivity(intent);*/
-    	        }
-    	     })
-    	    .setNegativeButton("Debug mode", new DialogInterface.OnClickListener() {
-    	        public void onClick(DialogInterface dialog, int which) {
-    	        }
-    	     })
+    		Toast.makeText(getActivity(), launchError.getMessage(), Toast.LENGTH_LONG)
     	     .show();
     	}
     	

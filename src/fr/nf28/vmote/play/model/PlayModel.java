@@ -188,22 +188,4 @@ public class PlayModel {
 		Media media = this.vlcConnection.getMedia();
 		this.detailsView.getTitle().setText(media.getName());
 	}
-	
-	/*public boolean isVLCConnected() {
-		try {
-			return this.vlcConnection.isVLCConnected();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}		
-	}*/
-
-	/*public boolean isMediaInVLC() {
-		try {
-			return this.vlcConnection.isMediaInVLC();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}		
-	}*/
 }

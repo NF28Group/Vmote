@@ -20,7 +20,12 @@ public class VLCConnection {
 	private static Media media;
 	
 	public static final String BASE_URL =
-            "http://192.168.0.13:8080/requests/status.json";
+            "http://192.168.0.10:8080/requests/status.json";
+    /* IP Milio :
+ 
+	public static final String BASE_URL =
+            "http://192.168.0.10:8080/requests/status.json";
+    */
 
     private static final String PARAM_COMMAND = "command";
     //private static final String PARAM_INPUT = "input";
