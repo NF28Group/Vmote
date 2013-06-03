@@ -188,14 +188,24 @@ public class PlayModel {
 		Media media = this.vlcConnection.getMedia();
 		this.detailsView.setTitle(media.getName());
 		if(media.getAlbum() == null) {
-			
+			this.detailsView.setAlbum("");
 		}
 		else {
-			
+			this.detailsView.setAlbum(media.getAlbum());
 		}
-		this.detailsView.setAlbum(media.getAlbum());
-		this.detailsView.setArtist(media.getArtist());
-		this.detailsView.setDate(media.getDate());
+		if(media.getArtist() == null) {
+			this.detailsView.setArtist("");
+		}
+		else {
+			this.detailsView.setArtist(media.getArtist());
+		}
+		if(media.getDate() == null) {
+			this.detailsView.setDate("");
+		}
+		else {
+			this.detailsView.setDate(media.getDate());
+		}
+		
 		if(media.getDuree() != null) {
 			int duration = Integer.parseInt(media.getDuree());
 			int hours = duration/3600;
@@ -215,7 +225,18 @@ public class PlayModel {
 			this.detailsView.setDuration("");
 		}
 		
-		this.detailsView.setHistory(media.getHistory());
-		this.detailsView.setGender(media.getGender());
+		if(media.getHistory() == null) {
+			this.detailsView.setHistory("");
+		}
+		else {
+			this.detailsView.setHistory(media.getHistory());
+		}
+		
+		if(media.getGender() == null) {
+			this.detailsView.setGender("");
+		}
+		else {
+			this.detailsView.setGender(media.getGender());
+		}
 	}
 }
