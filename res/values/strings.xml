@@ -4,6 +4,11 @@
     <string name="app_name">Vmote</string>
     <string name="action_settings">Settings</string>
 
+    <!-- pages history -->
+    <string name="buttonGoToVideoHistory">Vidéo</string>
+    <string name="buttonGoToAudioHistory">Audio</string>
+    
+    
     <!-- pages play -->
     
     <!-- details -->
