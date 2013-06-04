@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dip"
+    android:orientation="vertical" 
+    android:background="#F5F5F5">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        
+        <TextView
+            android:id="@+id/tvShowPlanningShowTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:text="TV Show Title" />
+
+        <TextView
+            android:id="@+id/tvShowPlanningEpisodeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvShowPlanningShowTitle"
+            android:layout_below="@+id/tvShowPlanningShowTitle"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:text="Episode Title" />
+
+        <TextView
+            android:id="@+id/tvShowPlanningEpisodeNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvShowPlanningShowTitle"
+            android:layout_alignBottom="@+id/tvShowPlanningShowTitle"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textSize="14sp"
+            android:text="00x00" />
+
+        <TextView
+            android:id="@+id/tvShowPlanningNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvShowPlanningEpisodeTitle"
+            android:layout_alignBottom="@+id/tvShowPlanningEpisodeTitle"
+            android:layout_alignRight="@+id/tvShowPlanningEpisodeNumber"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:text="00:00 AM on Network" />
+
+        
+        
+    </RelativeLayout>
+
+</LinearLayout>

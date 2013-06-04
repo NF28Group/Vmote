@@ -40,7 +40,6 @@
             android:background="@drawable/clickbuttoneffect"
             android:scaleType="center"
             android:textColor="#595959"
-            android:textSize="35dip" 
             android:layout_weight="0.10"/>
         
         <View 

@@ -42,24 +42,25 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
     	rootView = inflater.inflate(
     			R.layout.fragment_series_episode_layout, container, false);
     	
-    	TextView tvShowTitle = (TextView) rootView.findViewById(R.id.tvShowTitleEpisodeView);
-    	TextView seasonNumberTextView = (TextView) rootView.findViewById(R.id.tvShowSeasonEpisodeView);
-    	final ImageButton setAllSeenButton = (ImageButton) rootView.findViewById(R.id.tvShowEpisodesAllSeen);
-    	
-    	tvShowTitle.setText(this.tvShow.getName());
-    	seasonNumberTextView.setText("Saison " + seasonNumber);
-    	
-    	ListView episodeListView = (ListView) rootView.findViewById(R.id.tvShowEpisodeListView);
-    	
     	// LOAD DATA
     	episodeAccessObject = new EpisodeDAO(rootView.getContext());
     	loadData();
     	
+    	// Get objects from views
+    	TextView tvShowTitle = (TextView) rootView.findViewById(R.id.tvShowTitleEpisodeView);
+    	TextView seasonNumberTextView = (TextView) rootView.findViewById(R.id.tvShowSeasonEpisodeView);
+    	final ImageButton setAllSeenButton = (ImageButton) rootView.findViewById(R.id.tvShowEpisodesAllSeen);
     	
+    	// List View configuration
+    	ListView episodeListView = (ListView) rootView.findViewById(R.id.tvShowEpisodeListView);
     	final TvShowEpisodeAdapter adapter = new TvShowEpisodeAdapter(rootView.getContext(), R.layout.tvseries_episode_list_cell, episodeList);
     	episodeListView.setAdapter(adapter);
+
+    	// Configure elements
+    	tvShowTitle.setText(this.tvShow.getName());
+    	seasonNumberTextView.setText("Saison " + seasonNumber);
     	
-    	//Button
+    	//Buttons
     	if(episodeAccessObject.isSeasonSeenWithIdAndSeason(tvShow.getId(), seasonNumber))
     		setAllSeenButton.setImageResource(R.drawable.checkmarkgrey);
 		else
@@ -69,15 +70,14 @@ public class SeriesEpisodeFragment extends AbstractSeriesFragment {
 			@Override
 			public void onClick(View v) {
 				if(episodeAccessObject.isSeasonSeenWithIdAndSeason(tvShow.getId(), seasonNumber)){
-					System.out.println("set all unseen");
 					episodeAccessObject.setAllEpisodesSeenInSeasonWithId(false, seasonNumber, tvShow.getId());
 					setAllSeenButton.setImageResource(R.drawable.uncheckmarkgrey);
 				}
 				else{
-					System.out.println("set all seen");
 					episodeAccessObject.setAllEpisodesSeenInSeasonWithId(true, seasonNumber, tvShow.getId());
 					setAllSeenButton.setImageResource(R.drawable.checkmarkgrey);
 				}
+				//Update listView
 				loadData();
 				adapter.clear();
 				adapter.addAll(episodeList);

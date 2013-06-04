@@ -40,6 +40,7 @@ public class TvShowListAdapter extends ArrayAdapter<TvShow> {
 		TextView tvShowName = (TextView) rowView.findViewById(R.id.tvShowName);
 		TextView tvShowRemain = (TextView) rowView.findViewById(R.id.tvShowText);
 		ImageView tvShowPosterView = (ImageView) rowView.findViewById(R.id.tvShowPoster);
+		tvShowPosterView.setImageBitmap(null);
 		
 		TvShow currentTvShow = list.get(position);
 		System.out.println("TVSHow : " + currentTvShow.getName());

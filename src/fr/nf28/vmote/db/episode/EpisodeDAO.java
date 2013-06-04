@@ -210,4 +210,26 @@ public class EpisodeDAO extends DAOBase {
 			update(episode);
 		}
 	}
+	
+	public List<Episode> selectPlanningEpisode(){
+		Cursor c = mDb.rawQuery(
+				"SELECT * FROM " + EPISODE_TABLE_NAME + 
+				" WHERE " + EPISODE_FIRSTAIRED + " > date('now') AND " +
+				EPISODE_FIRSTAIRED + " <= date('now', '+7 day')", new String[]{});
+		return toEpisodes(c);
+	}
+	
+	public List<String> selectPlanningDate(){
+		List<String> planningArray = new ArrayList<String>();
+		Cursor c = mDb.rawQuery(
+				"SELECT " + EPISODE_FIRSTAIRED + " FROM " + EPISODE_TABLE_NAME + 
+				" WHERE " + EPISODE_FIRSTAIRED + " > date('now') AND " +
+				EPISODE_FIRSTAIRED + " <= date('now', '+7 day')", new String[]{});
+		
+		while (c.moveToNext()) {
+			planningArray.add(c.getString(c.getColumnIndex(EPISODE_FIRSTAIRED)));
+		}
+		
+		return planningArray;
+	}
 }

@@ -75,7 +75,7 @@
             android:paddingLeft="10dip"
             android:paddingBottom="10dip"
        		android:background="#EAEAEA"
-            android:text="Seasons list" />
+            android:text="Liste des saisons" />
     <View
             android:layout_width="fill_parent"
             android:layout_height="0.2dp"
