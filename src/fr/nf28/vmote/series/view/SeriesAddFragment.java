@@ -9,11 +9,13 @@ import fr.nf28.vmote.series.model.SeriesModel;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
@@ -25,6 +27,7 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 	private SeriesModel model;
 
 	private SearchView searchInput;
+	private ProgressBar progress;
 	private ListView listResult;
 
 	public SeriesAddFragment(){}
@@ -45,6 +48,7 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 		//searchInput = (EditText) rootView.findViewById(R.id.search_input);
 		listResult = (ListView) rootView.findViewById(R.id.list_result);
 		searchInput = (SearchView) rootView.findViewById(R.id.searchTvshowView);
+		progress = (ProgressBar) rootView.findViewById(R.id.progressBar);
 
 		searchInput.setOnQueryTextListener(new OnQueryTextListener() {
 			@Override
@@ -57,6 +61,7 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 			public boolean onQueryTextSubmit(String query) {
 				String searchName = searchInput.getQuery().toString();
 				model.searchSeries(searchName);
+				
 				InputMethodManager imm = (InputMethodManager)that.getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
 				return true;
@@ -66,11 +71,22 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				if(evt.getPropertyName().equals("listAdapter")){
+				String event = evt.getPropertyName();
+				if(event.equals("listAdapter")){
 					listResult.setAdapter((TvShowSearchAdapter) evt.getNewValue());
+				}
+				else if(event.equals("startProgressBar")){
+					Log.d("ProgressBar", "strart");
+					progress.setVisibility(ProgressBar.VISIBLE);
+				}
+				else if(event.equals("stopProgressBar")){
+					Log.d("ProgressBar", "stop");
+					progress.setVisibility(ProgressBar.INVISIBLE);
 				}
 			}
 		});
+		
+		
 
 		return rootView;
 	}

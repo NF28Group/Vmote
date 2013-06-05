@@ -40,6 +40,7 @@ public class SeriesModel {
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
 			//Recherche asynchrone des séries et override de la méthode de callback pour mettre à jour la vue.
+			pcs.firePropertyChange("startProgressBar", null, null);
 			new SearchSeriesAsyncTask(){
 				@Override
 				protected void onPostExecute(List<SearchSeries> result) { //Callback
@@ -49,9 +50,10 @@ public class SeriesModel {
 						pcs.firePropertyChange("listAdapter", old, adapter);
 					}
 					else {
-						//TODO 
-						//Prévenir utilisateur
+						//Erreur réseau
+						Toast.makeText(cxt, "Erreur réseau", Toast.LENGTH_SHORT).show();
 					}
+					pcs.firePropertyChange("stopProgressBar", null, null);
 				}
 			}.execute(seriesName);
 		} else {
@@ -70,6 +72,7 @@ public class SeriesModel {
 		ConnectivityManager connMgr = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
+			pcs.firePropertyChange("startProgressBar", 1, 0);
 			new GetSeriesAsyncTask(){
 				@Override
 				protected void onPostExecute(List<Object> result) { //Callback
@@ -91,6 +94,11 @@ public class SeriesModel {
 						}
 						Toast.makeText(cxt, "Série ajoutée", Toast.LENGTH_SHORT).show();
 					}
+					else {
+						//Erreur réseau
+						Toast.makeText(cxt, "Erreur réseau", Toast.LENGTH_SHORT).show();
+					}
+					pcs.firePropertyChange("stopProgressBar", null, null);
 				}
 			}.execute(seriesId);
 		} else {
@@ -109,7 +117,7 @@ public class SeriesModel {
 						ImageHelper.saveBitmap(result, cxt, filepath);
 					}
 					else {
-						//TODO
+						//
 					}
 				}
 			}.execute(url);
