@@ -14,7 +14,7 @@ import fr.nf28.vmote.db.episode.EpisodeDAO;
 
 public class SeriesPlanningFragment extends AbstractSeriesFragment {
 	private View rootView;
-	private List<Episode> episodeList;
+	private List<Object> episodeList;
 	
 	public SeriesPlanningFragment(){}
 
@@ -32,7 +32,8 @@ public class SeriesPlanningFragment extends AbstractSeriesFragment {
     			R.layout.fragment_series_planning_layout, container, false);
     	
     	EpisodeDAO episodeAccessObject = new EpisodeDAO(rootView.getContext());
-    	episodeList = episodeAccessObject.selectPlanningEpisode();
+    	episodeList = episodeAccessObject.selectPlanningList();
+    	episodeAccessObject.close();
     	
     	ListView planningListView = (ListView) rootView.findViewById(R.id.tvShowPlanningListView);
     	TvShowPlanningAdapter adapter = new TvShowPlanningAdapter(rootView.getContext(), R.layout.tvseries_planning_row, episodeList);

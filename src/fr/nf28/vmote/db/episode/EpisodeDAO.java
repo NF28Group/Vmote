@@ -181,7 +181,10 @@ public class EpisodeDAO extends DAOBase {
 		Cursor c = mDb.rawQuery(
 				"SELECT *" + " FROM " + EPISODE_TABLE_NAME + 
 				" WHERE " + EPISODE_TVSHOW_ID + " = ? AND "  + EPISODE_SEEN + " = 0", new String[]{String.valueOf(tvShow_id)});
-		return c.getCount();
+		
+		int count = c.getCount();
+		c.close();
+		return count;
 	}
 	
 	public boolean isSeasonSeenWithIdAndSeason(long tvShow_id, int season){
@@ -215,21 +218,46 @@ public class EpisodeDAO extends DAOBase {
 		Cursor c = mDb.rawQuery(
 				"SELECT * FROM " + EPISODE_TABLE_NAME + 
 				" WHERE " + EPISODE_FIRSTAIRED + " > date('now') AND " +
-				EPISODE_FIRSTAIRED + " <= date('now', '+7 day')", new String[]{});
+				EPISODE_FIRSTAIRED + " <= date('now', '+7 day') ORDER BY " +
+				EPISODE_FIRSTAIRED + " ASC", new String[]{});
 		return toEpisodes(c);
 	}
 	
 	public List<String> selectPlanningDate(){
 		List<String> planningArray = new ArrayList<String>();
 		Cursor c = mDb.rawQuery(
-				"SELECT " + EPISODE_FIRSTAIRED + " FROM " + EPISODE_TABLE_NAME + 
+				"SELECT DISTINCT " + EPISODE_FIRSTAIRED + " FROM " + EPISODE_TABLE_NAME + 
 				" WHERE " + EPISODE_FIRSTAIRED + " > date('now') AND " +
-				EPISODE_FIRSTAIRED + " <= date('now', '+7 day')", new String[]{});
+				EPISODE_FIRSTAIRED + " <= date('now', '+7 day') ORDER BY " +
+				EPISODE_FIRSTAIRED + " ASC", new String[]{});
 		
 		while (c.moveToNext()) {
 			planningArray.add(c.getString(c.getColumnIndex(EPISODE_FIRSTAIRED)));
 		}
+		c.close();
 		
 		return planningArray;
+	}
+	
+	public List<Object> selectPlanningList(){
+		List<Object> planningList = new ArrayList<Object>();
+		List<Episode> episodes = this.selectPlanningEpisode();
+		List<String> dateHeaders = this.selectPlanningDate();
+		
+		for(int j = 0; j < dateHeaders.size(); j++){
+			String date = dateHeaders.get(j);
+			planningList.add(date);
+			
+			for(int i = 0; i < episodes.size(); i++){
+				Episode episode = episodes.get(i);
+				if(episode.getFirstAiredString().equals(date) ){
+					System.out.println("Date episode : " + episode.getFirstAiredString());
+					planningList.add(episode);
+				}
+			}
+			System.out.println("counter : " + j);
+		}
+		return planningList;
+		
 	}
 }

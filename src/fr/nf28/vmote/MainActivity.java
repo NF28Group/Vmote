@@ -46,7 +46,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(final Menu menu) {
 		//Used to put dark icons on light action bar
 		//boolean isLight = SampleList.THEME == R.style.Theme_Sherlock_Light;
 		
@@ -64,10 +64,12 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 					.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
 					.addToBackStack(null)
 					.commit();
+				
+				activateMenuButton(menu, 0);
 				return true;
 			}
 		})
-		.setIcon(R.drawable.abs__ic_go)
+		.setIcon(R.drawable.vmoteplay)
 		//.setActionView(R.layout.tvseries_menu)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
@@ -85,10 +87,12 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 					.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
 					.addToBackStack(null)
 					.commit();
+				
+				activateMenuButton(menu, 1);
 				return true;
 			}
 		})
-		.setIcon(R.drawable.abs__ic_search)
+		.setIcon(R.drawable.vmotehistory)
 		//.setActionView(R.layout.tvseries_menu)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW); //SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
@@ -106,13 +110,41 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 					.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
 					.addToBackStack(null)
 					.commit();
+				
+				activateMenuButton(menu, 2);
 				return true;
 			}
 		})
-		.setIcon(R.drawable.abs__ic_voice_search)
+		.setIcon(R.drawable.vmotetvshow)
 		//.setActionView(R.layout.tvseries_menu)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW); //SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-
+		activateMenuButton(menu, 0);
 		return true;
+	}
+	
+	private void activateMenuButton(Menu menu, int index){
+		switch(index){
+			case 0:
+				menu.getItem(0).setIcon(R.drawable.vmoteplayon);
+				menu.getItem(1).setIcon(R.drawable.vmotehistory);
+				menu.getItem(2).setIcon(R.drawable.vmotetvshow);
+				break;
+			
+			case 1:
+				menu.getItem(0).setIcon(R.drawable.vmoteplay);
+				menu.getItem(1).setIcon(R.drawable.vmotehistoryon);
+				menu.getItem(2).setIcon(R.drawable.vmotetvshow);
+				break;
+				
+			case 2:
+				menu.getItem(0).setIcon(R.drawable.vmoteplay);
+				menu.getItem(1).setIcon(R.drawable.vmotehistory);
+				menu.getItem(2).setIcon(R.drawable.vmotetvshowon);
+				break;
+			
+			default:
+			break;
+		}
+	
 	}
 }

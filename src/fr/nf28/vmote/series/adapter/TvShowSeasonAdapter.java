@@ -55,6 +55,7 @@ public class TvShowSeasonAdapter extends ArrayAdapter<Integer> {
 			checkImageView.setImageResource(0);
 		}
 		
+		episodeAccessObject.close();
 		return rowView;
 	}
 }
