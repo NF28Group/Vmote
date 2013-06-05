@@ -1,114 +1,118 @@
 package fr.nf28.vmote;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.history.view.HistoryVideoFragment;
 import fr.nf28.vmote.history.view.HistoryViewPagerFragment;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
 
-public class MainActivity extends SherlockFragmentActivity 
-	implements ActionBar.TabListener, OnChangePageListener {
+public class MainActivity extends SherlockFragmentActivity implements OnChangePageListener {
 	private boolean useLogo = false;
 	public boolean isConnected = false;
-    private boolean showHomeUp = false;
-    private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
-	
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_layout);
-        
-        final ActionBar ab = getSupportActionBar();
-        
-        // set defaults for logo & home up
-        ab.setDisplayHomeAsUpEnabled(showHomeUp);
-        ab.setDisplayUseLogoEnabled(useLogo);
+	private boolean showHomeUp = false;
+	private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
+	private Activity cxt;
 
-        // set up tabs nav
-        ab.addTab(ab.newTab().setText("Lecture").setTabListener(this).setTag(1));
-        ab.addTab(ab.newTab().setText("Historique").setTabListener(this).setTag(2));
-        ab.addTab(ab.newTab().setText("Series").setTabListener(this).setTag(3));
-
-        // default to tab navigation
-        showTabsNav();
-
-    }
-
-    
 	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		//Toast.makeText(this, "tab : " + tab.getText(), Toast.LENGTH_SHORT).show();
-		int sel = (Integer) tab.getTag();
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_layout);
+		cxt = this;
 		
-		AbstractFragment fragment;
-		Bundle arguments;
-		
-		switch (sel) {
-		case 1: // play
-			fragment = new ViewPagerFragment();
-			arguments = new Bundle();
-			arguments.putString(ViewPagerFragment.ARG_ITEM_ID, "pager_play_fragment");
-	        fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction()
-				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
-				.addToBackStack(null)
-				.commit();
-			
-			break;
-		case 2: // histo
-			fragment = new HistoryViewPagerFragment();
-			arguments = new Bundle();
-			arguments.putString(HistoryViewPagerFragment.ARG_ITEM_ID, "pager_history_fragment");
-	        fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction()
-				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
-				.addToBackStack(null)
-				.commit();
-			break;
-		case 3: // series
-			fragment = new SeriesHomeFragment();
-			arguments = new Bundle();
-			arguments.putString(SeriesHomeFragment.ARG_ITEM_ID, "serie_home_fragment");
-	        fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction()
-				.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
-				.addToBackStack(null)
-				.commit();
-			break;
-		default:
-			break;
-		}
+		AbstractFragment fragment = new ViewPagerFragment();
+		Bundle arguments = new Bundle();
+		arguments.putString(ViewPagerFragment.ARG_ITEM_ID, "pager_play_fragment");
+        fragment.setArguments(arguments);
+        cxt.setTitle("Lecture");
+		getSupportFragmentManager().beginTransaction()
+			.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+			.addToBackStack(null)
+			.commit();
 	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {		
-	}
-
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {		
-	}
-
-    private void showTabsNav() {
-        ActionBar ab = getSupportActionBar();
-        if (ab.getNavigationMode() != ActionBar.NAVIGATION_MODE_TABS) {
-            ab.setDisplayShowTitleEnabled(false);
-            ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        }
-    }
 
 
 	@Override
 	public void selectPage(int page) {
 		// reflechissons...
 	}
-    
+
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		//Used to put dark icons on light action bar
+		//boolean isLight = SampleList.THEME == R.style.Theme_Sherlock_Light;
+		
+		menu.add("Lecture")
+		.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				AbstractFragment fragment = new ViewPagerFragment();
+				Bundle arguments = new Bundle();
+				arguments.putString(ViewPagerFragment.ARG_ITEM_ID, "pager_play_fragment");
+		        fragment.setArguments(arguments);
+		        cxt.setTitle("Lecture");
+				getSupportFragmentManager().beginTransaction()
+					.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+					.addToBackStack(null)
+					.commit();
+				return true;
+			}
+		})
+		.setIcon(R.drawable.abs__ic_go)
+		//.setActionView(R.layout.tvseries_menu)
+		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+
+		menu.add("Historique")
+		.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				AbstractFragment fragment = new HistoryViewPagerFragment();
+				Bundle arguments = new Bundle();
+				arguments.putString(HistoryViewPagerFragment.ARG_ITEM_ID, "pager_history_fragment");
+		        fragment.setArguments(arguments);
+		        cxt.setTitle("Historique");
+				getSupportFragmentManager().beginTransaction()
+					.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+					.addToBackStack(null)
+					.commit();
+				return true;
+			}
+		})
+		.setIcon(R.drawable.abs__ic_search)
+		//.setActionView(R.layout.tvseries_menu)
+		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW); //SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+		menu.add("Series")
+		.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				AbstractFragment fragment = new SeriesHomeFragment();
+				Bundle arguments = new Bundle();
+				arguments.putString(SeriesHomeFragment.ARG_ITEM_ID, "serie_home_fragment");
+		        fragment.setArguments(arguments);
+		    	cxt.setTitle("Series");
+				getSupportFragmentManager().beginTransaction()
+					.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+					.addToBackStack(null)
+					.commit();
+				return true;
+			}
+		})
+		.setIcon(R.drawable.abs__ic_voice_search)
+		//.setActionView(R.layout.tvseries_menu)
+		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW); //SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+		return true;
+	}
 }

@@ -3,7 +3,6 @@ package fr.nf28.vmote.series.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import fr.nf28.vmote.R;
@@ -36,8 +34,7 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	rootView = inflater.inflate(
-    			R.layout.fragment_series_main_layout, container, false);
+    	rootView = inflater.inflate(R.layout.fragment_series_main_layout, container, false);
     	
     	tvShowListView = (ListView) rootView.findViewById(R.id.tvShowsListView);
     	tvShowListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
