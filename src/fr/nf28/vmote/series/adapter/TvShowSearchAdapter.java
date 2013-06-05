@@ -3,6 +3,7 @@ package fr.nf28.vmote.series.adapter;
 import java.util.List;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.db.tvshow.TvShowDAO;
 import fr.nf28.vmote.series.model.SeriesModel;
 import fr.nf28.vmote.tvdb.SearchSeries;
 
@@ -38,6 +39,15 @@ public class TvShowSearchAdapter extends ArrayAdapter<SearchSeries> {
 		Button btn = (Button) rowView.findViewById(R.id.search_button);
 		
 		final SearchSeries ss = list.get(position);
+		
+		TvShowDAO tvShowAccessObject = new TvShowDAO(context);
+		
+		if(!tvShowAccessObject.exists(ss.getSeriesId())){
+			btn.setVisibility(View.INVISIBLE);
+		}
+		else {
+			btn.setVisibility(View.VISIBLE);
+		}
 		
 		seriesName.setText(ss.getSeriesName());
 		seriesOverview.setText(ss.getOverview());

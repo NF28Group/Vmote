@@ -43,9 +43,6 @@ public class TvShowListAdapter extends ArrayAdapter<TvShow> {
 		tvShowPosterView.setImageBitmap(null);
 		
 		TvShow currentTvShow = list.get(position);
-		System.out.println("TVSHow : " + currentTvShow.getName());
-		System.out.println("TVSHowPoster : " + currentTvShow.getPosterPath());
-		
 		
 		FileInputStream fis;
 		try {
@@ -55,7 +52,7 @@ public class TvShowListAdapter extends ArrayAdapter<TvShow> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		tvShowPosterView.postInvalidate();
 		tvShowName.setText(list.get(position).getName());
 		
 	

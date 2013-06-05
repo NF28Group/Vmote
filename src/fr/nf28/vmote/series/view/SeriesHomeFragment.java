@@ -37,6 +37,7 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
     	rootView = inflater.inflate(R.layout.fragment_series_main_layout, container, false);
     	
     	tvShowListView = (ListView) rootView.findViewById(R.id.tvShowsListView);
+    	
     	tvShowListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     	
     	// Initialize List of TV Shows

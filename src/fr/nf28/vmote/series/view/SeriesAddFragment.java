@@ -49,7 +49,8 @@ public class SeriesAddFragment extends AbstractSeriesFragment {
 		listResult = (ListView) rootView.findViewById(R.id.list_result);
 		searchInput = (SearchView) rootView.findViewById(R.id.searchTvshowView);
 		progress = (ProgressBar) rootView.findViewById(R.id.progressBar);
-
+		
+	
 		searchInput.setOnQueryTextListener(new OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(String arg0) {

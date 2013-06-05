@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp" >
+    android:layout_height="90dp" 
+    android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="0dip"
@@ -13,16 +14,23 @@
             android:id="@+id/seriesName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp" >
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:textSize="16sp" 
+            android:text="TV Show">
         </TextView>
 
         <TextView
             android:id="@+id/seriesOverview"
-            android:paddingTop="10dp"
+            android:paddingTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:textSize="12sp" 
+            android:textColor="#7A7A7A"
             android:ellipsize="end"
-            android:maxLines="3">
+            android:maxLines="3"
+            android:text="Overview, this is an overview of the current tvshow. Once upon a time, there was a magic...">
         </TextView>
     </LinearLayout>
 
@@ -31,6 +39,9 @@
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="0.20"
-        android:text="Add" />
+        android:background="@drawable/clickbuttoneffect"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_blue_light"
+        android:text="ADD" />
 
 </LinearLayout>

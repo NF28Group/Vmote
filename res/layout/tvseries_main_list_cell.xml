@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ellipsize="end"
+            android:textColor="#7A7A7A"
             android:text="4 episodes left">
         </TextView>
     </LinearLayout>

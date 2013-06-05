@@ -120,7 +120,7 @@ public class TvShowDAO extends DAOBase {
 		return list;
 	}
 	
-	private boolean exists(long id){
+	public boolean exists(long id){
 		Cursor cursor = mDb.rawQuery("SELECT * FROM " + TVSHOW_TABLE_NAME + " WHERE id=?", new String[] {String.valueOf(id)});
 		boolean exists = (cursor.getCount() > 0);
 		cursor.close();
