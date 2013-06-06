@@ -1,5 +1,6 @@
 package fr.nf28.vmote.play.model;
 
+import fr.nf28.vmote.R;
 import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.classes.Media;
 import fr.nf28.vmote.play.view.PlayDetailsFragment;
@@ -8,12 +9,14 @@ import fr.nf28.vmote.play.view.PlaySubtitlesFragment;
 import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class PlayModel {
 	
 	private VLCConnection vlcConnection;
 	private boolean is_loop = false;
 	private boolean is_repeat = false;
+	private boolean is_shuffle = false;
 	
 	private PlayMainFragment mainView;
 	private PlayDetailsFragment detailsView;
@@ -75,30 +78,39 @@ public class PlayModel {
 		}
 	}
 	
-	public void commandRandom(){
+	public void commandRandom(View rv){
+    	ImageButton button_random = (ImageButton) rv.findViewById(R.id.buttonShuffle);
 		try {
-			this.vlcConnection.random();
+			this.vlcConnection.random(rv);
+			if(is_shuffle)
+				button_random.setImageResource(R.drawable.shuffle);
+			else
+				button_random.setImageResource(R.drawable.shuffle_on);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void commandRepeat(){
+	public void commandRepeat(View rv){
+    	ImageButton button_loop = (ImageButton) rv.findViewById(R.id.buttonRepeat);
 		try {
 			if(is_loop){
-				this.vlcConnection.repeat();
+				this.vlcConnection.repeat(rv);
 				is_loop = false;
 				is_repeat = true;
+		    	button_loop.setImageResource(R.drawable.loop);
 			}
 			else if(is_repeat){
-				this.vlcConnection.loop();
-				this.vlcConnection.loop();
+				this.vlcConnection.loop(rv);
+				this.vlcConnection.loop(rv);
 				is_repeat = false;
+		    	button_loop.setImageResource(R.drawable.loop);
 			}
 			else{
-				this.vlcConnection.loop();
+				this.vlcConnection.loop(rv);
 				is_loop = true;
+		    	button_loop.setImageResource(R.drawable.loop_on);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

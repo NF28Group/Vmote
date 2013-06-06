@@ -8,95 +8,22 @@
         android:id="@+id/textNameMedia"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.27"
+        android:layout_weight="0.29"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="35dp" >
-
-        <ImageButton
-            android:id="@+id/buttonStop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/buttonStop"
-            android:layout_toRightOf="@+id/buttonPlay"
-            android:src="@drawable/stop" />
-
-        <ImageButton
-            android:id="@+id/buttonPlay"
-            android:contentDescription="@string/buttonPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/buttonBackward"
-            android:src="@drawable/play" />
-
-        <ImageButton
-            android:id="@+id/buttonBackward"
-            android:contentDescription="@string/buttonBackward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/backward" />
-
-        <ImageButton
-            android:id="@+id/buttonForward"
-            android:contentDescription="@string/buttonForward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/buttonStop"
-            android:src="@drawable/forward" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="60dp" >
-
-        <ImageButton
-            android:id="@+id/buttonOpen"
-            android:contentDescription="@string/buttonOpen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/open" />
-
-        <ImageButton
-            android:id="@+id/buttonShuffle"
-            android:contentDescription="@string/buttonShuffle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/buttonRepeat"
-            android:src="@drawable/shuffle" />
-
-        <ImageButton
-            android:id="@+id/buttonRepeat"
-            android:contentDescription="@string/buttonRepeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/buttonOpen"
-            android:src="@drawable/loop" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <ImageButton
             android:id="@+id/buttonMute"
-            android:contentDescription="@string/buttonMute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:background="@null"
+            android:contentDescription="@string/buttonMute"
+            android:paddingLeft="10dp"
             android:src="@drawable/volume" />
 
         <SeekBar
@@ -106,7 +33,62 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/buttonMute"
+            android:paddingRight="30dp"
             android:progress="100" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/buttonPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/clickbuttoneffect"
+            android:contentDescription="@string/buttonPlay"
+            android:src="@drawable/play" />
+
+        <ImageButton
+            android:id="@+id/buttonBackward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/buttonPlay"
+            android:background="@drawable/clickbuttoneffect"
+            android:contentDescription="@string/buttonBackward"
+            android:src="@drawable/back" />
+
+        <ImageButton
+            android:id="@+id/buttonForward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/buttonPlay"
+            android:background="@drawable/clickbuttoneffect"
+            android:contentDescription="@string/buttonForward"
+            android:src="@drawable/next" />
+
+        <ImageButton
+            android:id="@+id/buttonShuffle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/buttonForward"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/buttonShuffle"
+            android:src="@drawable/shuffle" />
+
+        <ImageButton
+            android:id="@+id/buttonRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/buttonRepeat"
+            android:src="@drawable/loop" />
 
     </RelativeLayout>
 

@@ -11,6 +11,7 @@ import fr.nf28.vmote.play.classes.Media;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ public class VLCConnection {
 	private static Media media;
 	
 	public static final String BASE_URL =
-            "http://192.168.0.15:8080/requests/status.json";
+            "http://192.168.0.37:8080/requests/status.json";
     /* IP Milio :
  
 	public static final String BASE_URL =
@@ -109,7 +110,6 @@ public class VLCConnection {
             request.body();
             
             media = JsonReader.getCurrentMediaStatus();
-            
             if(media.getName() == "0"){
                 error.setEtat(4);
                 error.setMessage("Veuillez lancer un m�dia sur VLC !");
@@ -120,8 +120,7 @@ public class VLCConnection {
                 error.setMessage("Pas de probl�me !");
                 updateMedia(rv[0]);
     			return error;
-    		}
-    	}
+    		}    	}
 
         protected void onPostExecute(LaunchError result) {
         	System.out.println("onPostExecute result = " + result);
@@ -223,7 +222,7 @@ public class VLCConnection {
 	public void pause(View rv) {
 		Command pause_task = new Command();
 		pause_task.execute(TASK_PAUSE);
-    	updateMediaWhenTaskEnds(rv,pause_task);  	
+    	updateMediaWhenTaskEnds(rv,pause_task);
     }
     
     /* D�finition de la fonction STOP */
@@ -248,19 +247,19 @@ public class VLCConnection {
     }
     
     /* D�finition de la fonction RANDOM */
-	public void random() {
+	public void random(View rv) {
 		Command random_task = new Command();
 		random_task.execute(TASK_RANDOM); 
     }
     
     /* D�finition de la fonction LOOP */
-	public void loop() throws Exception {
+	public void loop(View rv) throws Exception {
 		Command loop_task = new Command();
 		loop_task.execute(TASK_LOOP); 
     }
     
     /* D�finition de la fonction REPEAT */
-	public void repeat() {
+	public void repeat(View rv) {
 		Command repeat_task = new Command();
 		repeat_task.execute(TASK_REPEAT); 
     }

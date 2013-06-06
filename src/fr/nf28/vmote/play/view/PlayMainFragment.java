@@ -75,7 +75,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     			R.layout.fragment_lecture_main_layout, container, false);
     	
     	ImageButton button_play = (ImageButton) rootView.findViewById(R.id.buttonPlay);
-    	ImageButton button_stop = (ImageButton) rootView.findViewById(R.id.buttonStop);
+    	//ImageButton button_stop = (ImageButton) rootView.findViewById(R.id.buttonStop);
     	ImageButton button_previous = (ImageButton) rootView.findViewById(R.id.buttonBackward);
     	ImageButton button_next = (ImageButton) rootView.findViewById(R.id.buttonForward);
     	ImageButton button_shuffle = (ImageButton) rootView.findViewById(R.id.buttonShuffle);
@@ -96,6 +96,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     			}
     		});
     	    
+    	    /*
     	    button_stop.setOnClickListener(new OnClickListener() {
     			
     			public void onClick(View v) {
@@ -103,6 +104,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     				model.commandStop(rootView);
     			}
     		});
+    		*/
     	    
     	    button_previous.setOnClickListener(new OnClickListener() {
     			
@@ -124,7 +126,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     			
     			public void onClick(View v) {
     				// TODO Auto-generated method stub
-    				model.commandRandom();
+    				model.commandRandom(v);
     			}
     		});
     	    
@@ -132,7 +134,7 @@ public class PlayMainFragment extends AbstractPlayFragment {
     			
     			public void onClick(View v) {
     				// TODO Auto-generated method stub
-    				model.commandRepeat();
+    				model.commandRepeat(v);
     			}
     		});
     	    

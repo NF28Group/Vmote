@@ -64,6 +64,28 @@ public class JsonReader {
         current_media.setName(filename.toString());
         current_media.setState(state.toString());
         current_media.setVolume(volume.toString());
+        System.out.println(current_media.toString());
+		return current_media;
+	}
+	
+	/*Y'a des erreurs, j'ai pas regardé de près mais je pense que tu
+	 * recupere des trucs qui ne sont pas accessible des fois donc ça plante :/
+	 * je pense qui faut mettre chaque get dans des try catch pour faire ca propre...
+	 * 
+	 * public static Media getCurrentMediaStatus(){
+		Media current_media = new Media();
+		JsonObject obj = getJsonObject();
+		if(obj == null) return current_media;
+		JsonElement state = obj.get("state");
+		JsonElement volume = obj.get("volume");
+		JsonObject information = (JsonObject) obj.get("information");
+		if(information == null) return current_media;
+		JsonObject category = (JsonObject) information.get("category");
+		JsonObject meta = (JsonObject) category.get("meta");
+        JsonElement filename = meta.get("filename");
+        current_media.setName(filename.toString());
+        current_media.setState(state.toString());
+        current_media.setVolume(volume.toString());
         
         //page details
         JsonElement duration = obj.get("length");
@@ -88,5 +110,5 @@ public class JsonReader {
         
         System.out.println(current_media.toString());
 		return current_media;
-	}
+	}*/
 }
