@@ -198,7 +198,12 @@ public class PlayModel {
 	
 	public void setDetailsElement() {
 		Media media = this.vlcConnection.getMedia();
-		this.detailsView.setTitle(media.getName());
+		if(media.getName()==null) {
+			this.detailsView.setTitle("");
+		}
+		else {
+			this.detailsView.setTitle(media.getName());
+		}
 		if(media.getAlbum() == null) {
 			this.detailsView.setAlbum("");
 		}

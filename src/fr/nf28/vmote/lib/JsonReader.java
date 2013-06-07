@@ -50,7 +50,7 @@ public class JsonReader {
 
 	}
 	
-	public static Media getCurrentMediaStatus(){
+	/*public static Media getCurrentMediaStatus(){
 		Media current_media = new Media();
 		JsonObject obj = getJsonObject();
 		if(obj == null) return current_media;
@@ -66,13 +66,13 @@ public class JsonReader {
         current_media.setVolume(volume.toString());
         System.out.println(current_media.toString());
 		return current_media;
-	}
+	}*/
 	
-	/*Y'a des erreurs, j'ai pas regardé de près mais je pense que tu
-	 * recupere des trucs qui ne sont pas accessible des fois donc ça plante :/
+	/*Y'a des erreurs, j'ai pas regardï¿½ de prï¿½s mais je pense que tu
+	 * recupere des trucs qui ne sont pas accessible des fois donc ï¿½a plante :/
 	 * je pense qui faut mettre chaque get dans des try catch pour faire ca propre...
-	 * 
-	 * public static Media getCurrentMediaStatus(){
+	 * */
+	 public static Media getCurrentMediaStatus(){
 		Media current_media = new Media();
 		JsonObject obj = getJsonObject();
 		if(obj == null) return current_media;
@@ -88,27 +88,71 @@ public class JsonReader {
         current_media.setVolume(volume.toString());
         
         //page details
-        JsonElement duration = obj.get("length");
-        JsonElement date = meta.get("date");
-        JsonElement artist = meta.get("artist");
-        JsonElement album = meta.get("album");
-        JsonElement history = meta.get("HISTORY");
-        JsonElement gender = meta.get("genre");
+        if(isPresent("length", obj)) {
+        	JsonElement duration = obj.get("length");
+           	current_media.setDuree(duration.toString());
+        }
+        else {
+           	current_media.setDuree("");
+        }
+        
+        if(isPresent("date", meta)) {
+            JsonElement date = meta.get("date");
+           	current_media.setDate(date.toString());
+        }
+        else {
+           	current_media.setDate("");
+        }
+        
+        if(isPresent("artist", meta)) {
+            JsonElement artist = meta.get("artist");
+           	current_media.setArtist(artist.toString());
+        }
+        else {
+           	current_media.setArtist("");
+        }
+        
+        if(isPresent("album", meta)) {
+            JsonElement album = meta.get("album");
+           	current_media.setAlbum(album.toString());
+        }
+        else {
+           	current_media.setAlbum("");
+        }
+        
+        if(isPresent("HISTORY", meta)) {
+            JsonElement history = meta.get("HISTORY");
+           	current_media.setHistory(history.toString());
+        }
+        else {
+           	current_media.setHistory("");
+        }
+        
+        if(isPresent("gender", meta)) {
+            JsonElement gender = meta.get("genre");
+           	current_media.setGender(gender.toString());
+        }
+        else {
+           	current_media.setGender("");
+        }
+        
         // change selon la langue...
         JsonElement trameLength = obj.get("");
         JsonElement trameHeight = obj.get("");
         JsonElement frameRate = obj.get("");
-        
-       	current_media.setAlbum(album.toString());
-       	current_media.setArtist(artist.toString());
-       	current_media.setDate(date.toString());
-       	current_media.setDuree(duration.toString());
-       	current_media.setGender(gender.toString());
-       	current_media.setHistory(history.toString());
-
-        
+                
         
         System.out.println(current_media.toString());
 		return current_media;
-	}*/
+	}
+	 
+	public static boolean isPresent(String element, JsonObject obj) {
+		try  {
+			obj.get(element);
+		}
+		catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
 }
