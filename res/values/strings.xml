@@ -10,6 +10,9 @@
     
     
     <!-- pages play -->
+    <string name="buttonGoToDetails">Détails</string>
+    <string name="buttonGoToPlay">Lecteur</string>
+    <string name="buttonGoToSubtitles">Param.</string>
     
     <!-- details -->
     <string name="detailsPageTitle">Informations sur la vidéo</string>

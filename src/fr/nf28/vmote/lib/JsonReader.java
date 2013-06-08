@@ -68,8 +68,7 @@ public class JsonReader {
 		return current_media;
 	}*/
 	
-	/*Y'a des erreurs, j'ai pas regard� de pr�s mais je pense que tu
-	 * recupere des trucs qui ne sont pas accessible des fois donc �a plante :/
+	/*
 	 * je pense qui faut mettre chaque get dans des try catch pour faire ca propre...
 	 * */
 	 public static Media getCurrentMediaStatus(){
@@ -144,6 +143,14 @@ public class JsonReader {
         
         System.out.println(current_media.toString());
 		return current_media;
+	}
+	 
+	// dépend de la langue de vlc...
+	public static Media addSubtitles(Media media) {
+		if(media == null) return null;
+		
+		
+		return media;
 	}
 	 
 	public static boolean isPresent(String element, JsonObject obj) {

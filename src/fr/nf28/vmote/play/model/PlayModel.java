@@ -256,4 +256,10 @@ public class PlayModel {
 			this.detailsView.setGender(media.getGender());
 		}
 	}
+	
+	public void setSubtitlesElement() {
+		Media media = this.vlcConnection.getMedia();
+		//this.subtitleVie;
+		// TODO...
+	}
 }

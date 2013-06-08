@@ -1,5 +1,7 @@
 package fr.nf28.vmote.play.view;
 
+import com.devsmart.android.ui.HorizontalListView;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
+import fr.nf28.vmote.play.classes.SubtitleListAdapter;
 import fr.nf28.vmote.play.model.PlayModel;
 
 public class PlaySubtitlesFragment extends AbstractPlayFragment {
@@ -22,6 +25,9 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 	private EditText etSubtitle;
 	private SeekBar sbAudio;
 	private SeekBar sbSubtitle;
+	
+	private HorizontalListView subtitleList;
+	private HorizontalListView audioList;
 	
 	@SuppressWarnings("unused")
 	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
@@ -77,6 +83,9 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     	sbAudio = (SeekBar) rootView.findViewById(R.id.seekBarAudio);
     	sbSubtitle = (SeekBar) rootView.findViewById(R.id.seekBarSubtitle);
     	
+    	subtitleList = (HorizontalListView) rootView.findViewById(R.id.subtitleSelectList);
+    	audioList = (HorizontalListView) rootView.findViewById(R.id.audioSelectList);
+    	
     	etAudio.setEnabled(false);
     	etSubtitle.setEnabled(false);
     	
@@ -113,6 +122,9 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
+    	
+    	// gestion des listes
+    	//TODO
     	
     	return rootView;
     }
@@ -155,5 +167,21 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 
 	public void setEtAudio(EditText etAudio) {
 		this.etAudio = etAudio;
+	}
+
+	public HorizontalListView getAudioList() {
+		return audioList;
+	}
+
+	public void setAudioList(HorizontalListView audioList) {
+		this.audioList = audioList;
+	}
+
+	public HorizontalListView getSubtitleList() {
+		return subtitleList;
+	}
+
+	public void setSubtitleList(HorizontalListView subtitleList) {
+		this.subtitleList = subtitleList;
 	}
 }

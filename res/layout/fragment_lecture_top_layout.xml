@@ -21,17 +21,17 @@
         <Button android:id="@+id/goto_first"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="1">
+            android:text="@string/buttonGoToDetails">
         </Button>
         <Button android:id="@+id/goto_second"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="2">
+            android:text="@string/buttonGoToPlay">
         </Button>
         <Button android:id="@+id/goto_last"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="3">
+            android:text="@string/buttonGoToSubtitles">
         </Button>
     </LinearLayout>
 </LinearLayout>

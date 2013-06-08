@@ -43,8 +43,6 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		// reflechissons...
 	}
 
-
-
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		//Used to put dark icons on light action bar
@@ -114,10 +112,33 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 				activateMenuButton(menu, 2);
 				return true;
 			}
+			
 		})
 		.setIcon(R.drawable.vmotetvshow)
 		//.setActionView(R.layout.tvseries_menu)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW); //SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		
+		menu.add("Parametres")
+		.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				//AbstractFragment fragment = new SeriesHomeFragment();
+				Bundle arguments = new Bundle();
+				//arguments.putString(SeriesHomeFragment.ARG_ITEM_ID, "serie_home_fragment");
+		        //fragment.setArguments(arguments);
+		    	cxt.setTitle("Parametres");
+				//getSupportFragmentManager().beginTransaction()
+					//.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+					//.addToBackStack(null)
+					//.commit();
+				
+				activateMenuButton(menu, 3);
+				return false;
+			}
+		})
+		.setIcon(R.drawable.abs__ic_menu_moreoverflow_normal_holo_dark)
+		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		
 		activateMenuButton(menu, 0);
 		return true;
 	}
