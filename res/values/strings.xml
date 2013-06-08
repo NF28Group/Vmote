@@ -45,5 +45,6 @@
     <string name="subtitlePageAudioSelect">Audio</string>
     <string name="subtitlePageSubtitleSelect">Sous-titres</string>
     <string name="subtitlePageSynchroAudio">Synchronisation audio</string>
-    <string name="subtitlePageSynchroSubtitle">Synchronisation sous-titres</string>    
+    <string name="subtitlePageSynchroSubtitle">Synchronisation sous-titres</string>  
+    <string name="subtitlePageDefaultSynchro">+ 0 ms</string>  
 </resources>
