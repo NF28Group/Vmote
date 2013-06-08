@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/settings_help_layout_desktop"
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:id="@+id/svDesk"
+        android:verticalScrollbarPosition="right"
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:layout_alignParentTop="true" >
+
+        <TextView
+            android:id="@+id/tvHelpDesk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tvHelpTextDesktop" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnHelpDeskBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/backHelpBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
+
+</RelativeLayout>

@@ -3,6 +3,55 @@
 
     <string name="app_name">Vmote</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- parameters -->
+    <string name="ipCheck">Trouver VLC</string>
+    <string name="helpVLC">Aide : VLC</string>
+    <string name="helpAndroid">Aide : android</string>
+    <string name="information">Informations</string>
+    
+    <!-- helps -->
+    <string name="backHelpBtn">OK</string>
+    <string name="tvHelpTextDesktop">
+        Pour faire fonctionner cette application avec votre logiciel VLC :
+<ul>
+<li>I. Il faut activer la fonctionnalité web de VLC :
+        <ul>
+         <li>1. ouvrez VLC</li>
+         <li>2. allez dans les préférences de VLC (CTRL + P) ou menu Outils->Préférences</li>
+         <li>3. affichez la liste complète des options du menu latéral gauche</li>
+         <li>4. sélectionnez le sous-menu interface</li>
+         <li>5. sélectionnez son sous-menu Interface Générale</li>
+         <li>6. cochez la case HTTP</li>
+         <li>7. écrivez "http" si ce n\'est pas automatique dans le champ de texte</li>
+         <li>8. sauvegardez</li>
+         </ul>
+         \n
+       </li>
+       <li>II. Il faut autoriser votre appareil android à communiquer avec VLC :
+       <ul>
+       	<li>1. allez dans le répertoire d\'installation de votre lecteur VLC</li>
+       	<li>2. ...</li>
+      </ul>
+      </li>
+      </ul>
+      Félicitation, votre lecteur VLC est configuré pour fonctionner avec\n
+        votre appareil VLC !
+    </string>
+    <string name="tvHelpTextAndroid">
+        <ul>
+        <li>Vous devez entrer l\'adresse IP de l\'ordinateur auquel vous souhaiter vous connecter.</li>
+        <li>Entrez cette adresse dans le menu "trouver VLC".</li>
+        <li>Pour connaître l\'adresse IP de votre ordinateur, ouvrez une console de commande\n
+        (sous Windows, allez dans la barre de programme et tapez "cmd", vous devrez ensuite\n
+        sélectionner le programme "cmd.exe" ou juste "cmd").</li>
+        <li>Une fois la console ouverte, tapez "ifconfig" sous Linux/OS X ou "ipconfig" sous windows\n
+        puis valider.</li>
+        <li>Votre adresse IP se trouve à la ligne intitulée "IPv4" ou "IP version 4"\n
+        C\'est une suite de chiffre de la forme suivante : X.X.X.X</li>
+        <li>Entrez cette adresse IP dans le champ indiqué et valider.</li>
+        </ul>
+    </string>
 
     <!-- pages history -->
     <string name="buttonGoToVideoHistory">Vidéo</string>

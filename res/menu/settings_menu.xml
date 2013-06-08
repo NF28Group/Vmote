@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+<item
+        android:id="@+id/enter_ip"
+        android:showAsAction="never"
+        android:title="@string/ipCheck"/>
+<item
+        android:id="@+id/help_desktop"
+        android:showAsAction="never"
+        android:title="@string/helpVLC"/>
+<item
+        android:id="@+id/help_android"
+        android:showAsAction="never"
+        android:title="@string/helpAndroid"/>
+<item
+        android:id="@+id/information"
+        android:showAsAction="never"
+        android:title="@string/information"/>
+</menu>

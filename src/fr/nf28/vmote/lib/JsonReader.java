@@ -3,12 +3,18 @@ package fr.nf28.vmote.lib;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import fr.nf28.vmote.play.classes.Media;
+import fr.nf28.vmote.play.classes.SubtitleList;
 import fr.nf28.vmote.play.model.VLCConnection;
 
 public class JsonReader {
@@ -68,9 +74,6 @@ public class JsonReader {
 		return current_media;
 	}*/
 	
-	/*
-	 * je pense qui faut mettre chaque get dans des try catch pour faire ca propre...
-	 * */
 	 public static Media getCurrentMediaStatus(){
 		Media current_media = new Media();
 		JsonObject obj = getJsonObject();
@@ -136,21 +139,35 @@ public class JsonReader {
         }
         
         // change selon la langue...
-        JsonElement trameLength = obj.get("");
-        JsonElement trameHeight = obj.get("");
-        JsonElement frameRate = obj.get("");
-                
+        // EDIT: on va faire tout en anglais, et si ça marche pas : catch qui récupère rien
+        if(isPresent("Stream \\d", meta)) {
+        	//listes des flux
+        	ArrayList<JsonElement> streamList = new ArrayList<JsonElement>();
+        	JsonArray list = meta.getAsJsonArray("Stream \\d");
+        	Toast.makeText(null, list.toString(), Toast.LENGTH_LONG).show();;
+        	
+        	//details
+        	JsonElement trameLength = obj.get("");
+            JsonElement trameHeight = obj.get("");
+            JsonElement frameRate = obj.get("");
+            
+            //subtitles
+        }
+        else { // c'est pas en anglais ou c'est absent : tout à 0
+        	//details
+        	current_media.setFrameRate("");
+        	current_media.setHauteurtrame("");
+        	current_media.setLargeurTrame("");
+        	
+        	//subtitles
+        	current_media.setSubtitleList(new SubtitleList(0));
+        	current_media.setAudioList(new SubtitleList(0));
+        }
+        
+        // FIN truc lié à la langue      
         
         System.out.println(current_media.toString());
 		return current_media;
-	}
-	 
-	// dépend de la langue de vlc...
-	public static Media addSubtitles(Media media) {
-		if(media == null) return null;
-		
-		
-		return media;
 	}
 	 
 	public static boolean isPresent(String element, JsonObject obj) {
