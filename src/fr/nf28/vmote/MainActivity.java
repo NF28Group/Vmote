@@ -1,5 +1,10 @@
 package fr.nf28.vmote;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -15,6 +20,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +66,11 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	         "</p><p>" +
 	       "II. Il faut autoriser votre appareil android à communiquer avec VLC :<br>" +
 	       	"1. allez dans le répertoire d\'installation de votre lecteur VLC<br>" +
-	       	"2. ...<br>" +
+	       	"2. allez dans le répertoire \"lua\" puis \"http\"<br>" +
+	       	"3. dans le répertorie http, se trovue un fichier nommé .hosts" +
+	       	"4. ouvrez ce fichier et ajoutez l'adresse IP de l'appareil android sur une nouvelle ligne" +
+	       	"5. l'ip de votre appareil est affichée dans l'onglet \"information\" de l'application" +
+	       	"6. sauvegarde le fichier et redémarrer vlc" +
 	      "</p>" +
 	"<p>Félicitation, votre lecteur VLC est configuré pour fonctionner avec votre appareil VLC !</p>";
 
@@ -285,11 +295,62 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		});
 	}
 	
-	private void showIPView() {
-		Toast.makeText(cxt, "IP", Toast.LENGTH_SHORT).show();				
+	private void showInfoView() {
+		View internalLayout;
+        TextView tv;
+        Button btnOk;
+		
+		//We need to get the instance of the LayoutInflater, use the context of this activity
+		LayoutInflater inflater = (LayoutInflater) MainActivity.this
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		//Inflate the view from a predefined XML layout
+		internalLayout = inflater.inflate(R.layout.settings_information,
+					(ViewGroup) findViewById(R.id.settings_info_layout));
+
+		
+        // create a 500px width and 570px height PopupWindow
+		popUp = new PopupWindow(internalLayout, 500, 570, true);
+		
+		// display the popup in the center
+        popUp.showAtLocation(internalLayout, Gravity.CENTER, 0, 0);
+
+       	tv = (TextView) internalLayout.findViewById(R.id.tvInfoIp);
+       	btnOk = (Button) internalLayout.findViewById(R.id.btnInfoBack);
+
+       	tv.setText(getLocalIpAddress());
+       	btnOk.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				popUp.dismiss();
+			}
+		});
 	}
 	
-	private void showInfoView() {
-		Toast.makeText(cxt, "Info", Toast.LENGTH_SHORT).show();
+	private void showIPView() {
+		Toast.makeText(cxt, "IP", Toast.LENGTH_SHORT).show();
+	}
+	
+	private String getLocalIpAddress()
+	{
+	    try 
+	    {
+	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();)
+	        {
+	            NetworkInterface intf = en.nextElement();
+	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();)
+	            {
+	                InetAddress inetAddress = enumIpAddr.nextElement();
+	                if (!inetAddress.isLoopbackAddress()) 
+	                {
+	                    return inetAddress.getHostAddress().toString();
+	                }
+	            }
+	        }
+	    } 
+	    catch (SocketException ex)
+	    {
+	        Log.e("IP", ex.toString());
+	    }
+	    return "";
 	}
 }

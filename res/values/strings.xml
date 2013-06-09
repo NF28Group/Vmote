@@ -9,6 +9,9 @@
     <string name="helpVLC">Aide : VLC</string>
     <string name="helpAndroid">Aide : android</string>
     <string name="information">Informations</string>
+    <string name="tvHelpInfoIp">X.X.X.X</string>
+    <string name="tvHelpInfoLabel">L\'adresse IP de votre smartphone est :</string>
+    <color name="grey_color">#DDD</color>
     
     <!-- helps -->
     <string name="backHelpBtn">OK</string>
