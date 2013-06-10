@@ -13,7 +13,6 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
-import fr.nf28.vmote.play.classes.SubtitleListAdapter;
 import fr.nf28.vmote.play.model.PlayModel;
 
 public class PlaySubtitlesFragment extends AbstractPlayFragment {
@@ -124,7 +123,7 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
         });
     	
     	// gestion des listes
-    	//TODO
+    	this.model.setSubtitlesElement();
     	
     	return rootView;
     }

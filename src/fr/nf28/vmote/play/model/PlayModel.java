@@ -1,6 +1,7 @@
 package fr.nf28.vmote.play.model;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.play.adapter.SubtitleListAdapter;
 import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.classes.Media;
 import fr.nf28.vmote.play.view.PlayDetailsFragment;
@@ -46,7 +47,6 @@ public class PlayModel {
 		try {
 			this.vlcConnection.pause(rv);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -55,7 +55,6 @@ public class PlayModel {
 		try {
 			this.vlcConnection.stop(rv);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -64,7 +63,6 @@ public class PlayModel {
 		try {
 			this.vlcConnection.next(rv);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -87,7 +85,6 @@ public class PlayModel {
 			else
 				button_random.setImageResource(R.drawable.shuffle_on);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -128,6 +125,22 @@ public class PlayModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public void commandAudioDelay(int val){
+		try {
+			this.vlcConnection.audioDelay(val);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void commandSubDelay(int val){
+		try {
+			this.vlcConnection.subDelay(val);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void updateMedia(View rv) {
 		this.vlcConnection.updateMedia(rv);
@@ -154,21 +167,22 @@ public class PlayModel {
 	public void ajustAudio(int value, EditText audio) {
 		updateText(value, audio);
 		
-		//TODO call VLC
+		// TODO probleme : j'ai des ms et il me faut des s. Command prend des int...
+		//this.commandAudioDelay(value/1000); // ms to s
 	}
 
 	public void ajustSubtitle(int value, EditText subtitle) {
 		updateText(value, subtitle);
 		
-		//TODO call VLC
+		//this.commandSubDelay(value/1000); // ms to s
 	}
 	
-	private void updateText(int v, EditText et) {
-		if(v < 0) {
-			et.setText(" " + v + " ms");
+	private void updateText(int value, EditText et) {
+		if(value < 0) {
+			et.setText(" " + value + " ms");
 		}
 		else {
-			et.setText("+ " + v + " ms");			
+			et.setText("+ " + value + " ms");			
 		}
 	}
 
@@ -257,9 +271,18 @@ public class PlayModel {
 		}
 	}
 	
+	/*
+	 * Met à jour les listes de pistes audio et sous-titres
+	 */
 	public void setSubtitlesElement() {
 		Media media = this.vlcConnection.getMedia();
-		//this.subtitleVie;
-		// TODO...
+		
+		/*
+		
+		SubtitleListAdapter subAdapter = new SubtitleListAdapter();
+		SubtitleListAdapter audioAdapter = new SubtitleListAdapter();
+		
+		this.subtitleView.getSubtitleList().setAdapter(subAdapter);
+		this.subtitleView.getAudioList().setAdapter(audioAdapter);*/
 	}
 }
