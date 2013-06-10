@@ -8,7 +8,7 @@
     <string name="ipCheck">Trouver VLC</string>
     <string name="helpVLC">Aide : VLC</string>
     <string name="helpAndroid">Aide : android</string>
-    <string name="information">Informations</string>
+    <string name="information">IP de l\'appareil</string>
     <string name="tvHelpInfoIp">X.X.X.X</string>
     <string name="tvHelpInfoLabel">L\'adresse IP de votre smartphone est :</string>
     <color name="grey_color">#DDD</color>
@@ -18,22 +18,22 @@
     <string name="tvHelpTextDesktop">
 		<![CDATA[
 			Pour faire fonctionner cette application avec votre logiciel VLC :<br/>
-			<p>I. Il faut activer la fonctionnalité web de VLC :</p>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. ouvrez VLC<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. allez dans les préférences de VLC (CTRL + P) ou menu Outils->Préférences<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. affichez la liste complète des options du menu latéral gauche<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. sélectionnez le sous-menu interface<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. sélectionnez son sous-menu Interface Générale<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. cochez la case HTTP<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. écrivez "http" si ce n\'est pas automatique dans le champ de texte<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. sauvegardez<br/>
-			<p>II. Il faut autoriser votre appareil android à communiquer avec VLC :</p>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. allez dans le répertoire d\'installation de votre lecteur VLC<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. allez dans le répertoire "lua" puis http<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. dans le répertorie http, se trouve un fichier nommé .hosts<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. ouvrez ce fichier et ajoutez l\'adresse IP de l\'appareil android sur une nouvelle ligne<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. l\'ip de votre appareil est affichée dans l\'onglet "information" de l\'application<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. sauvegarde le fichier et redémarrer vlc<br/>
+			<p><b>I.</b> Il faut activer la fonctionnalité web de VLC :</p>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Ouvrez VLC<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Allez dans les préférences de VLC (CTRL + P) ou menu Outils->Préférences<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Affichez la liste complète des options du menu latéral gauche<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Sélectionnez le sous-menu interface<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. Sélectionnez son sous-menu Interface Générale<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. Cochez la case HTTP<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. Ecrivez <i>http</i> si ce n\'est pas automatique dans le champ de texte<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. Sauvegardez<br/>
+			<p><b>II.</b> Il faut autoriser votre appareil android à communiquer avec VLC :</p>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Allez dans le répertoire d\'installation de votre lecteur VLC<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Allez dans le répertoire "lua" puis http<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Dans le répertorie http, se trouve un fichier nommé .hosts<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Ouvrez ce fichier et ajoutez l\'adresse IP de l\'appareil android sur une nouvelle ligne<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. L\'ip de votre appareil est affichée dans l\'onglet <i>"IP de l\'appareil"</i> de l\'application<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. Sauvegarder le fichier et redémarrer vlc<br/>
 			<p>Félicitation, votre lecteur VLC est configuré pour fonctionner avec<br/>
 			votre appareil VLC !</p>
         ]]>
