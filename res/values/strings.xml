@@ -10,13 +10,14 @@
     
     
     <!-- parameters -->
-    <string name="ipCheck">Trouver VLC</string>
+    <string name="ipCheck">Renseigner IP PC</string>
     <string name="helpVLC">Aide : VLC</string>
     <string name="helpAndroid">Aide : android</string>
     <string name="information">IP de l\'appareil</string>
     <string name="tvHelpInfoIp">X.X.X.X</string>
     <string name="tvHelpInfoLabel">L\'adresse IP de votre smartphone est :</string>
     <string name="tvHelpIpLabel">Veuillez renseigner l\'adresse IP de votre ordinateur :</string>
+    <string name="tvInfoIpLabel">Vous utilisez l\'IP : %IP%</string>
     <color name="grey_color">#DDD</color>
     
     <!-- helps -->

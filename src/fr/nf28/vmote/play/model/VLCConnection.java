@@ -14,6 +14,7 @@ import fr.nf28.vmote.play.classes.CheckConnection;
 import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.classes.Media;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -25,8 +26,10 @@ public class VLCConnection {
 	
 	private static Media media;
 	
-	public static final String BASE_URL =
-            "http://192.168.0.11:8080/requests/status.json";
+	public static String BASE_IP = null;
+	
+	public static String BASE_URL =
+            "http://%IP%:8080/requests/status.json";
     /* 
 IP Milio :
  
@@ -165,11 +168,11 @@ IP Nico B. :
     }
     
     /* D�finition de la CheckIpOnNetork*/
-	public void checkIpOnNetork() throws Exception {
-    	new CheckIpOnNetork().execute();
+	public void checkIpOnNetwork() throws Exception {
+    	new CheckIpOnNetwork().execute();
     }
     
-	private class CheckIpOnNetork extends AsyncTask <Void, Void, Void> {
+	private class CheckIpOnNetwork extends AsyncTask <Void, Void, Void> {
     	@Override
     	protected Void doInBackground(Void... rv) {
 
@@ -181,6 +184,11 @@ IP Nico B. :
     	        try {
     	            inetAddress = InetAddress.getByName("192.168.0." + String.valueOf(i));
     	            if(inetAddress.isReachable(10000)){
+    	            	System.out.println("Host = " + inetAddress.getHostName());
+    	            	System.out.println("Host bis = " + inetAddress.getCanonicalHostName());
+    	            	System.out.println("Host ter = " + inetAddress.getHostAddress());
+    	            	System.out.println("Host quatre = " + inetAddress.getLocalHost());
+    	            	
     	                hosts.add(inetAddress.getHostName());
     	                Log.i("IPPPPPPPPPPPP", inetAddress.getHostName());
     	            }

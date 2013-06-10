@@ -17,6 +17,7 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.actionbarsherlock.view.SubMenu;
 
 import fr.nf28.vmote.R;
+import fr.nf28.vmote.R.string;
 import fr.nf28.vmote.history.view.HistoryViewPagerFragment;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.VLCConnection;
@@ -27,9 +28,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -39,6 +42,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +55,8 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	private Activity cxt;
 	private PopupWindow popUp;
 	private VLCConnection vlcConnection;
+	protected SharedPreferences prefs;
+	protected String ipKey = "storedIP";
 
 	public MainActivity() {
 		setVlcConnection(VLCConnection.getInstance());
@@ -69,6 +75,11 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_layout);
 		cxt = this;
+		
+
+		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		String l = prefs.getString(ipKey, null); 
+		VLCConnection.BASE_IP = l;
 		
 		AbstractFragment fragment = new ViewPagerFragment();
 		Bundle arguments = new Bundle();
@@ -317,39 +328,78 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	}
 	
 	private void showIPView() {
-		View internalLayout;
-        TextView tv;
-        Button btnOk;
 		
-		//We need to get the instance of the LayoutInflater, use the context of this activity
-		LayoutInflater inflater = (LayoutInflater) MainActivity.this
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		//Inflate the view from a predefined XML layout
-		internalLayout = inflater.inflate(R.layout.settings_config_ip,
-					(ViewGroup) findViewById(R.id.settings_info_layout));
+		if(VLCConnection.BASE_IP == null){
+			View internalLayout;
+	        final EditText et;
+	        Button btnOk;
+			
+			//We need to get the instance of the LayoutInflater, use the context of this activity
+			LayoutInflater inflater = (LayoutInflater) MainActivity.this
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			//Inflate the view from a predefined XML layout
+			internalLayout = inflater.inflate(R.layout.settings_config_ip,
+						(ViewGroup) findViewById(R.id.settings_info_layout));
 
-		
-        // create a 500px width and 570px height PopupWindow
-		popUp = new PopupWindow(internalLayout, 500, 570, true);
-		
-		// display the popup in the center
-        popUp.showAtLocation(internalLayout, Gravity.CENTER, 0, 0);
+			
+	        // create a 500px width and 570px height PopupWindow
+			popUp = new PopupWindow(internalLayout, 500, 570, true);
+			
+			// display the popup in the center
+	        popUp.showAtLocation(internalLayout, Gravity.CENTER, 0, 0);
 
-       	tv = (TextView) internalLayout.findViewById(R.id.tvInfoIp);
-       	btnOk = (Button) internalLayout.findViewById(R.id.btnInfoBack);
+	       	et = (EditText) internalLayout.findViewById(R.id.fieldIp);
+	       	btnOk = (Button) internalLayout.findViewById(R.id.btnInfoBack);
+	       	
+	       	btnOk.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					System.out.println(et.getText());
+					VLCConnection.BASE_IP = String.valueOf(et.getText());
+					VLCConnection.BASE_URL = VLCConnection.BASE_URL.replace("%IP%", VLCConnection.BASE_IP);
+					
+					prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
+					popUp.dismiss();
+				}
+			});
+		}
+		else{
+			View internalLayout;
+	        final TextView tv;
+	        Button btnOk;
+			
+			//We need to get the instance of the LayoutInflater, use the context of this activity
+			LayoutInflater inflater = (LayoutInflater) MainActivity.this
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			//Inflate the view from a predefined XML layout
+			internalLayout = inflater.inflate(R.layout.settings_ip_full,
+						(ViewGroup) findViewById(R.id.settings_info_layout));
 
-       	tv.setText(getIpOnNetwork());
-       	btnOk.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				popUp.dismiss();
-			}
-		});
+			
+	        // create a 500px width and 570px height PopupWindow
+			popUp = new PopupWindow(internalLayout, 500, 570, true);
+			
+			// display the popup in the center
+	        popUp.showAtLocation(internalLayout, Gravity.CENTER, 0, 0);
+
+	       	tv = (TextView) internalLayout.findViewById(R.id.tvInfoLabel);
+	       	btnOk = (Button) internalLayout.findViewById(R.id.btnInfoBack);
+	       	
+	       	tv.setText(getString(R.string.tvInfoIpLabel).replace("%IP%", VLCConnection.BASE_IP));
+	       	
+	       	btnOk.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					popUp.dismiss();
+				}
+			});
+	       	
+		}
 	}
 	
 	private String getIpOnNetwork() {
 		try {
-			vlcConnection.checkIpOnNetork();
+			vlcConnection.checkIpOnNetwork();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
