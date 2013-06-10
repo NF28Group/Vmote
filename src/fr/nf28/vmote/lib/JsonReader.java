@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import fr.nf28.vmote.play.classes.Media;
+import fr.nf28.vmote.play.classes.Subtitle;
 import fr.nf28.vmote.play.classes.SubtitleList;
 import fr.nf28.vmote.play.model.VLCConnection;
 
@@ -139,19 +142,39 @@ public class JsonReader {
         }
         
         // change selon la langue...
-        // EDIT: on va faire tout en anglais, et si ça marche pas : catch qui récupère rien
-        if(isPresent("Stream \\d", meta)) {
+        // EDIT: on va faire tout en anglais, et si ça marche pas : else qui récupère rien
+        if(isPresent("Stream 0", meta)) {
         	//listes des flux
-        	ArrayList<JsonElement> streamList = new ArrayList<JsonElement>();
-        	JsonArray list = meta.getAsJsonArray("Stream \\d");
-        	Toast.makeText(null, list.toString(), Toast.LENGTH_LONG).show();;
+        	//ArrayList<JsonObject> streamList = JsonReader.getStreamList(category);
         	
         	//details
         	JsonElement trameLength = obj.get("");
             JsonElement trameHeight = obj.get("");
             JsonElement frameRate = obj.get("");
-            
+            /*current_media.setFrameRate(frameRate.toString());
+        	current_media.setHauteurtrame(trameHeight.toString());
+        	current_media.setLargeurTrame(trameLength.toString());
+            */
             //subtitles
+            SubtitleList audioList = new SubtitleList();
+            SubtitleList subtitleList = new SubtitleList();
+            //int size = streamList.size();
+            JsonElement currElem;
+            Subtitle currSub;
+            /*
+            for(int i=0; i<size ; i++) {
+            	if(streamList.get(i).has("type")) {
+            		currElem = streamList.get(i).get("type");
+            		currSub = new Subtitle("Piste " + i, i);
+            		if(currElem.toString().equals("Audio")) {
+            			audioList.add(currSub);
+            		}
+            		else if(currElem.toString().equals("Subtitle")) {
+            			subtitleList.add(currSub);
+            		}
+            	}
+            }*/
+
         }
         else { // c'est pas en anglais ou c'est absent : tout à 0
         	//details
@@ -160,8 +183,8 @@ public class JsonReader {
         	current_media.setLargeurTrame("");
         	
         	//subtitles
-        	current_media.setSubtitleList(new SubtitleList(0));
-        	current_media.setAudioList(new SubtitleList(0));
+        	current_media.setSubtitleList(new SubtitleList());
+        	current_media.setAudioList(new SubtitleList());
         }
         
         // FIN truc lié à la langue      
@@ -178,5 +201,22 @@ public class JsonReader {
 			return false;
 		}
 		return true;
+	}
+	
+	public static ArrayList<JsonObject> getStreamList(JsonObject parent) {
+		ArrayList<JsonObject> res = new ArrayList<JsonObject>();
+		int i = 0;
+		
+		try {
+			while(parent.has("Stream " +i)) {
+				res.add((JsonObject) parent.get("Stream " +i));
+				i++;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 }

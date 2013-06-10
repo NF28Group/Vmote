@@ -20,8 +20,9 @@ public class VLCConnection {
 	
 	private static Media media;
 	
+	// IP nico B.
 	public static final String BASE_URL =
-            "http://192.168.0.37:8080/requests/status.json";
+            "http://192.168.0.12:8080/requests/status.json";
     /* IP Milio :
  
 	public static final String BASE_URL =
@@ -47,6 +48,10 @@ public class VLCConnection {
     private static final int TASK_REPEAT = 7;
     private static final String COMMAND_VOLUME = "volume&val=%VALUE%";
     private static final int TASK_VOLUME = 8;
+    private static final String COMMAND_SUBDELAY = "subdelay&val=%VALUE%";
+    private static final int TASK_SUBDELAY = 9;
+    private static final String COMMAND_AUDIODELAY = "audiodelay&val=%VALUE%";
+    private static final int TASK_AUDIODELAY = 10;
     
 	private VLCConnection() {
 		media = new Media();
@@ -138,7 +143,7 @@ public class VLCConnection {
     		String current_media = JsonReader.getCurrentMediaStatus().getName();
     		if(current_media == "0"){
         		System.out.println("0");
-    			media.setName("Pas de m�dia ouvert");
+    			media.setName("Pas de media ouvert");
     			}
     		else{
     			media.setName(current_media);
@@ -176,7 +181,13 @@ public class VLCConnection {
     			command_to_execute = COMMAND_REPEAT;
     			break;
     		case TASK_VOLUME : 
-    			command_to_execute = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(id_command[1]));;
+    			command_to_execute = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(id_command[1]));
+    			break;
+    		case TASK_AUDIODELAY:
+    			command_to_execute = COMMAND_AUDIODELAY.replace("%VALUE%", String.valueOf(id_command[1]));
+    			break;
+    		case TASK_SUBDELAY:
+    			command_to_execute = COMMAND_SUBDELAY.replace("%VALUE%", String.valueOf(id_command[1]));
     			break;
     		default : command_to_execute = "";    			
     		}
@@ -269,7 +280,19 @@ public class VLCConnection {
 		Command volume_task = new Command();
 		volume_task.execute(TASK_VOLUME,d);
     }
+	
+	/* Definition de la fonction DELAY SUBTITLE */
+	public void subDelay(int s) {
+		Command subdelay_task = new Command();
+		subdelay_task.execute(TASK_SUBDELAY,s);
+    }
 
+	/* Definition de la fonction DELAY AUDIO */
+	public void audioDelay(int s) {
+		Command audiodelay_task = new Command();
+		audiodelay_task.execute(TASK_AUDIODELAY,s);
+    }
+	
     /* 
      * 
      * FIN FONCTIONS DE PILOTAGE DU MEDIA

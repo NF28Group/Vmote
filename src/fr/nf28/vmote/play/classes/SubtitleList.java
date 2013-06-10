@@ -1,17 +1,23 @@
 package fr.nf28.vmote.play.classes;
 
+import java.util.ArrayList;
+
 public class SubtitleList {
-	private String[] list;
+	private ArrayList<Subtitle> list;
  
-	public SubtitleList(int s) {
-		setList(new String[s]);
+	public SubtitleList() {
+		setList(new ArrayList<Subtitle>());
 	}
 
-	public String[] getList() {
+	public ArrayList<Subtitle> getList() {
 		return list;
 	}
 
-	public void setList(String[] list) {
+	public void setList(ArrayList<Subtitle> list) {
 		this.list = list;
+	}
+
+	public void add(Subtitle currSub) {
+		this.list.add(currSub);
 	}
 }
