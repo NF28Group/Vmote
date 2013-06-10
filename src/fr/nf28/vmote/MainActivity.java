@@ -1,8 +1,11 @@
 package fr.nf28.vmote;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import org.apache.http.conn.util.InetAddressUtils;
@@ -16,10 +19,14 @@ import com.actionbarsherlock.view.SubMenu;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.history.view.HistoryViewPagerFragment;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
+import fr.nf28.vmote.play.model.VLCConnection;
 import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -43,7 +50,20 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 	private Activity cxt;
 	private PopupWindow popUp;
-	
+	private VLCConnection vlcConnection;
+
+	public MainActivity() {
+		setVlcConnection(VLCConnection.getInstance());
+	}
+
+	public VLCConnection getVlcConnection() {
+		return vlcConnection;
+	}
+
+	public void setVlcConnection(VLCConnection vlcConnection) {
+		this.vlcConnection = vlcConnection;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -297,9 +317,47 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	}
 	
 	private void showIPView() {
-		Toast.makeText(cxt, "IP", Toast.LENGTH_SHORT).show();
+		View internalLayout;
+        TextView tv;
+        Button btnOk;
+		
+		//We need to get the instance of the LayoutInflater, use the context of this activity
+		LayoutInflater inflater = (LayoutInflater) MainActivity.this
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		//Inflate the view from a predefined XML layout
+		internalLayout = inflater.inflate(R.layout.settings_config_ip,
+					(ViewGroup) findViewById(R.id.settings_info_layout));
+
+		
+        // create a 500px width and 570px height PopupWindow
+		popUp = new PopupWindow(internalLayout, 500, 570, true);
+		
+		// display the popup in the center
+        popUp.showAtLocation(internalLayout, Gravity.CENTER, 0, 0);
+
+       	tv = (TextView) internalLayout.findViewById(R.id.tvInfoIp);
+       	btnOk = (Button) internalLayout.findViewById(R.id.btnInfoBack);
+
+       	tv.setText(getIpOnNetwork());
+       	btnOk.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				popUp.dismiss();
+			}
+		});
 	}
 	
+	private String getIpOnNetwork() {
+		try {
+			vlcConnection.checkIpOnNetork();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "caca";
+	}
+
+
 	private String getLocalIpAddress() {
 		WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 		   WifiInfo wifiInfo = wifiManager.getConnectionInfo();

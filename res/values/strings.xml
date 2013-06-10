@@ -16,6 +16,7 @@
     <string name="information">IP de l\'appareil</string>
     <string name="tvHelpInfoIp">X.X.X.X</string>
     <string name="tvHelpInfoLabel">L\'adresse IP de votre smartphone est :</string>
+    <string name="tvHelpIpLabel">Veuillez renseigner l\'adresse IP de votre ordinateur :</string>
     <color name="grey_color">#DDD</color>
     
     <!-- helps -->
