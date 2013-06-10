@@ -4,6 +4,11 @@
     <string name="app_name">Vmote</string>
     <string name="action_settings">Settings</string>
     
+    <!--  erors  -->
+    <string name="noWifi">Veuillez vous connecter à un reseau Wi-Fi !</string>
+
+    
+    
     <!-- parameters -->
     <string name="ipCheck">Trouver VLC</string>
     <string name="helpVLC">Aide : VLC</string>

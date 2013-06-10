@@ -20,6 +20,8 @@ import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
 import android.app.Activity;
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.format.Formatter;
@@ -299,26 +301,17 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	}
 	
 	private String getLocalIpAddress() {
-	    try {
-	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); 
-	        		en.hasMoreElements();)
-	        {
-	            NetworkInterface intf = en.nextElement();
-	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); 
-	            		enumIpAddr.hasMoreElements();)
-	            {
-	                InetAddress inetAddress = enumIpAddr.nextElement();
-	                if (!inetAddress.isLoopbackAddress()
-	                		&& InetAddressUtils.isIPv4Address(inetAddress.getHostAddress())) 
-	                {
-	                    return inetAddress.getHostAddress().toString();
-	                }
-	            }
-	        }
-	    }
-	    catch (SocketException ex) {
-	        Log.e("IP", ex.toString());
-	    }
-	    return "";
+		WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+		   WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+		   int ip = wifiInfo.getIpAddress();
+
+		   String ipString = String.format(
+		   "%d.%d.%d.%d",
+		   (ip & 0xff),
+		   (ip >> 8 & 0xff),
+		   (ip >> 16 & 0xff),
+		   (ip >> 24 & 0xff));
+		   
+		   return ipString;
 	}
 }

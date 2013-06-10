@@ -19,7 +19,6 @@ public class VLCConnection {
 	
 	private static Media media;
 	
-	// IP nico B.
 	public static final String BASE_URL =
             "http://192.168.0.11:8080/requests/status.json";
     /* 
@@ -27,7 +26,8 @@ IP Milio :
  
 	public static final String BASE_URL =
             "http://192.168.0.10:8080/requests/status.json";
-IP nico B. :
+            
+IP Nico B. :
  
 	public static final String BASE_URL =
             "http://192.168.0.12:8080/requests/status.json";
