@@ -80,6 +80,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		String l = prefs.getString(ipKey, null); 
 		VLCConnection.BASE_IP = l;
+		VLCConnection.BASE_URL = VLCConnection.BASE_URL.replace("%IP%", VLCConnection.BASE_IP);
 		
 		AbstractFragment fragment = new ViewPagerFragment();
 		Bundle arguments = new Bundle();
