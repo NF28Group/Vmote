@@ -5,6 +5,8 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import org.apache.http.conn.util.InetAddressUtils;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -20,6 +22,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -295,25 +298,25 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		Toast.makeText(cxt, "IP", Toast.LENGTH_SHORT).show();
 	}
 	
-	private String getLocalIpAddress()
-	{
-	    try 
-	    {
-	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();)
+	private String getLocalIpAddress() {
+	    try {
+	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); 
+	        		en.hasMoreElements();)
 	        {
 	            NetworkInterface intf = en.nextElement();
-	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();)
+	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); 
+	            		enumIpAddr.hasMoreElements();)
 	            {
 	                InetAddress inetAddress = enumIpAddr.nextElement();
-	                if (!inetAddress.isLoopbackAddress()) 
+	                if (!inetAddress.isLoopbackAddress()
+	                		&& InetAddressUtils.isIPv4Address(inetAddress.getHostAddress())) 
 	                {
 	                    return inetAddress.getHostAddress().toString();
 	                }
 	            }
 	        }
-	    } 
-	    catch (SocketException ex)
-	    {
+	    }
+	    catch (SocketException ex) {
 	        Log.e("IP", ex.toString());
 	    }
 	    return "";
