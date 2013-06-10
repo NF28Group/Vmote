@@ -157,6 +157,7 @@ public class VLCConnection {
 	private class Command extends AsyncTask <Integer, Integer, Boolean> {
     	protected Boolean doInBackground(Integer... id_command) {
     		String command_to_execute;
+    		double d;
     		
     		switch(id_command[0]){
     		case TASK_PAUSE : 
@@ -184,10 +185,12 @@ public class VLCConnection {
     			command_to_execute = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(id_command[1]));
     			break;
     		case TASK_AUDIODELAY:
-    			command_to_execute = COMMAND_AUDIODELAY.replace("%VALUE%", String.valueOf(id_command[1]));
+    			d = id_command[1]/1000;
+    			command_to_execute = COMMAND_AUDIODELAY.replace("%VALUE%", String.valueOf(d));
     			break;
     		case TASK_SUBDELAY:
-    			command_to_execute = COMMAND_SUBDELAY.replace("%VALUE%", String.valueOf(id_command[1]));
+    			d = id_command[1]/1000;
+    			command_to_execute = COMMAND_SUBDELAY.replace("%VALUE%", String.valueOf(d));
     			break;
     		default : command_to_execute = "";    			
     		}

@@ -167,14 +167,13 @@ public class PlayModel {
 	public void ajustAudio(int value, EditText audio) {
 		updateText(value, audio);
 		
-		// TODO probleme : j'ai des ms et il me faut des s. Command prend des int...
-		//this.commandAudioDelay(value/1000); // ms to s
+		this.commandAudioDelay(value);
 	}
 
 	public void ajustSubtitle(int value, EditText subtitle) {
 		updateText(value, subtitle);
 		
-		//this.commandSubDelay(value/1000); // ms to s
+		this.commandSubDelay(value);
 	}
 	
 	private void updateText(int value, EditText et) {
@@ -277,12 +276,10 @@ public class PlayModel {
 	public void setSubtitlesElement() {
 		Media media = this.vlcConnection.getMedia();
 		
-		/*
-		
-		SubtitleListAdapter subAdapter = new SubtitleListAdapter();
-		SubtitleListAdapter audioAdapter = new SubtitleListAdapter();
+		SubtitleListAdapter subAdapter = new SubtitleListAdapter(media.getSubtitleList());
+		SubtitleListAdapter audioAdapter = new SubtitleListAdapter(media.getAudioList());
 		
 		this.subtitleView.getSubtitleList().setAdapter(subAdapter);
-		this.subtitleView.getAudioList().setAdapter(audioAdapter);*/
+		this.subtitleView.getAudioList().setAdapter(audioAdapter);
 	}
 }

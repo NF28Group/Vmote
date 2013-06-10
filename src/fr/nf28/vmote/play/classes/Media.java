@@ -24,7 +24,8 @@ public class Media {
 	private String subtitleEcart;
 	
 	public Media(){
-		
+		subtitleList = new SubtitleList();
+		audioList = new SubtitleList();
 	}
 
 	public String getName() {
