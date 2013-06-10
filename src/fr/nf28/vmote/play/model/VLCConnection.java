@@ -11,7 +11,6 @@ import fr.nf28.vmote.play.classes.Media;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -22,11 +21,16 @@ public class VLCConnection {
 	
 	// IP nico B.
 	public static final String BASE_URL =
-            "http://192.168.0.12:8080/requests/status.json";
-    /* IP Milio :
+            "http://192.168.0.11:8080/requests/status.json";
+    /* 
+IP Milio :
  
 	public static final String BASE_URL =
             "http://192.168.0.10:8080/requests/status.json";
+IP nico B. :
+ 
+	public static final String BASE_URL =
+            "http://192.168.0.12:8080/requests/status.json";
     */
 
     private static final String PARAM_COMMAND = "command";
@@ -185,12 +189,12 @@ public class VLCConnection {
     			command_to_execute = COMMAND_VOLUME.replace("%VALUE%", String.valueOf(id_command[1]));
     			break;
     		case TASK_AUDIODELAY:
-    			d = id_command[1]/1000;
-    			command_to_execute = COMMAND_AUDIODELAY.replace("%VALUE%", String.valueOf(d));
+    			d = id_command[1];
+    			command_to_execute = COMMAND_AUDIODELAY.replace("%VALUE%", String.valueOf(d/1000));
     			break;
     		case TASK_SUBDELAY:
-    			d = id_command[1]/1000;
-    			command_to_execute = COMMAND_SUBDELAY.replace("%VALUE%", String.valueOf(d));
+    			d = id_command[1];
+    			command_to_execute = COMMAND_SUBDELAY.replace("%VALUE%", String.valueOf(d/1000));
     			break;
     		default : command_to_execute = "";    			
     		}

@@ -164,19 +164,15 @@ public class PlayModel {
 	/*
 	 * Methods for details and subtitle views
 	 */
-	public void ajustAudio(int value, EditText audio) {
-		updateText(value, audio);
-		
+	public void ajustAudio(int value) {		
 		this.commandAudioDelay(value);
 	}
 
-	public void ajustSubtitle(int value, EditText subtitle) {
-		updateText(value, subtitle);
-		
+	public void ajustSubtitle(int value) {
 		this.commandSubDelay(value);
 	}
 	
-	private void updateText(int value, EditText et) {
+	public void updateText(int value, EditText et) {
 		if(value < 0) {
 			et.setText(" " + value + " ms");
 		}

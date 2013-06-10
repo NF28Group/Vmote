@@ -94,15 +94,16 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     		int value = 0;
  
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-            	value = progress -3000; // pas de valeurs négatives...
-            	model.ajustSubtitle(value, etAudio);
+            	value = progress - 3000; // pas de valeurs négatives...
+            	model.updateText(value, etAudio);
             }
  
             public void onStartTrackingTouch(SeekBar seekBar) {
-            	model.ajustSubtitle(value, etAudio);
+            	model.updateText(value, etAudio);
             }
  
             public void onStopTrackingTouch(SeekBar seekBar) {
+            	model.ajustAudio(value);
             }
         });
     	
@@ -110,15 +111,16 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     		int value = 0;
  
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                value = progress -3000; // pas de valeurs négatives...
-            	model.ajustSubtitle(value, etSubtitle);
+                value = progress - 3000; // pas de valeurs négatives...
+            	model.updateText(value, etSubtitle);
             }
  
             public void onStartTrackingTouch(SeekBar seekBar) {
-            	model.ajustSubtitle(value, etSubtitle);
+            	model.updateText(value, etSubtitle);
             }
  
             public void onStopTrackingTouch(SeekBar seekBar) {
+            	model.ajustSubtitle(value);
             }
         });
     	
