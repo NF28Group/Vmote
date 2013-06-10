@@ -29,9 +29,13 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. sauvegardez<br/>
 			<p>II. Il faut autoriser votre appareil android à communiquer avec VLC :</p>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. allez dans le répertoire d\'installation de votre lecteur VLC<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. ...<br/>
-			Félicitation, votre lecteur VLC est configuré pour fonctionner avec<br/>
-			votre appareil VLC !
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. allez dans le répertoire "lua" puis http<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. dans le répertorie http, se trouve un fichier nommé .hosts<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. ouvrez ce fichier et ajoutez l\'adresse IP de l\'appareil android sur une nouvelle ligne<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. l\'ip de votre appareil est affichée dans l\'onglet "information" de l\'application<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. sauvegarde le fichier et redémarrer vlc<br/>
+			<p>Félicitation, votre lecteur VLC est configuré pour fonctionner avec<br/>
+			votre appareil VLC !</p>
         ]]>
     </string>
     
