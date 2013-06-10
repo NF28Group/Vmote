@@ -16,44 +16,38 @@
     <!-- helps -->
     <string name="backHelpBtn">OK</string>
     <string name="tvHelpTextDesktop">
-        Pour faire fonctionner cette application avec votre logiciel VLC :
-<ul>
-<li>I. Il faut activer la fonctionnalité web de VLC :
-        <ul>
-         <li>1. ouvrez VLC</li>
-         <li>2. allez dans les préférences de VLC (CTRL + P) ou menu Outils->Préférences</li>
-         <li>3. affichez la liste complète des options du menu latéral gauche</li>
-         <li>4. sélectionnez le sous-menu interface</li>
-         <li>5. sélectionnez son sous-menu Interface Générale</li>
-         <li>6. cochez la case HTTP</li>
-         <li>7. écrivez "http" si ce n\'est pas automatique dans le champ de texte</li>
-         <li>8. sauvegardez</li>
-         </ul>
-         \n
-       </li>
-       <li>II. Il faut autoriser votre appareil android à communiquer avec VLC :
-       <ul>
-       	<li>1. allez dans le répertoire d\'installation de votre lecteur VLC</li>
-       	<li>2. ...</li>
-      </ul>
-      </li>
-      </ul>
-      Félicitation, votre lecteur VLC est configuré pour fonctionner avec\n
-        votre appareil VLC !
+		<![CDATA[
+			Pour faire fonctionner cette application avec votre logiciel VLC :<br/>
+			<p>I. Il faut activer la fonctionnalité web de VLC :</p>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. ouvrez VLC<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. allez dans les préférences de VLC (CTRL + P) ou menu Outils->Préférences<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. affichez la liste complète des options du menu latéral gauche<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. sélectionnez le sous-menu interface<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. sélectionnez son sous-menu Interface Générale<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. cochez la case HTTP<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. écrivez "http" si ce n\'est pas automatique dans le champ de texte<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. sauvegardez<br/>
+			<p>II. Il faut autoriser votre appareil android à communiquer avec VLC :</p>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. allez dans le répertoire d\'installation de votre lecteur VLC<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. ...<br/>
+			Félicitation, votre lecteur VLC est configuré pour fonctionner avec<br/>
+			votre appareil VLC !
+        ]]>
     </string>
+    
     <string name="tvHelpTextAndroid">
-        <ul>
-        <li>Vous devez entrer l\'adresse IP de l\'ordinateur auquel vous souhaiter vous connecter.</li>
-        <li>Entrez cette adresse dans le menu "trouver VLC".</li>
-        <li>Pour connaître l\'adresse IP de votre ordinateur, ouvrez une console de commande\n
+		<![CDATA[
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Vous devez entrer l\'adresse IP de l\'ordinateur auquel vous souhaiter vous connecter.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Entrez cette adresse dans le menu "trouver VLC".</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Pour connaître l\'adresse IP de votre ordinateur, ouvrez une console de commande\n
         (sous Windows, allez dans la barre de programme et tapez "cmd", vous devrez ensuite\n
-        sélectionner le programme "cmd.exe" ou juste "cmd").</li>
-        <li>Une fois la console ouverte, tapez "ifconfig" sous Linux/OS X ou "ipconfig" sous windows\n
-        puis valider.</li>
-        <li>Votre adresse IP se trouve à la ligne intitulée "IPv4" ou "IP version 4"\n
-        C\'est une suite de chiffre de la forme suivante : X.X.X.X</li>
-        <li>Entrez cette adresse IP dans le champ indiqué et valider.</li>
-        </ul>
+        sélectionner le programme "cmd.exe" ou juste "cmd").</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Une fois la console ouverte, tapez "ifconfig" sous Linux/OS X ou "ipconfig" sous windows\n
+        puis valider.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Votre adresse IP se trouve à la ligne intitulée "IPv4" ou "IP version 4"\n
+        C\'est une suite de chiffre de la forme suivante : X.X.X.X</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Entrez cette adresse IP dans le champ indiqué et valider.</p>
+        ]]>
     </string>
 
     <!-- pages history -->

@@ -39,41 +39,6 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	private Activity cxt;
 	private PopupWindow popUp;
 	
-	private final String androidHelp =
-    "<p>Vous devez entrer l\'adresse IP de l\'ordinateur auquel vous souhaiter vous connecter." +
-    "Entrez cette adresse dans le menu \"trouver VLC\".</p>" +
-    "<p>Pour connaître l\'adresse IP de votre ordinateur, ouvrez une console de commande" +
-    "(sous Windows, allez dans la barre de programme et tapez \"cmd\", vous devrez ensuite\n" +
-    "sélectionner le programme \"cmd.exe\" ou juste \"cmd_\").</p>" +
-    "<p>Une fois la console ouverte, tapez \"ifconfig\" sous Linux/OS X ou \"ipconfig\" sous windows" +
-    "puis valider.</p>" +
-    "<p>Votre adresse IP se trouve à la ligne intitulée \"IPv4\"</p>" +
-    "<p>C\'est une suite de chiffre de la forme suivante : X.X.X.X</p>" +
-    "<p>Entrez cette adresse IP dans le champ indiqué et valider.</p>"
-			;
-	
-	private final String desktopHelp = 
-"<p>Pour faire fonctionner cette application avec votre logiciel VLC :</p>" +
-		"<p>I. Il faut activer la fonctionnalité web de VLC :<br>" +
-	         "1. ouvrez VLC<br>" +
-	         "2. allez dans les préférences de VLC (CTRL + P) ou menu Outils->Préférences<br>" +
-	         "3. affichez la liste complète des options du menu latéral gauche<br>" +
-	         "4. sélectionnez le sous-menu interface<br>" +
-	         "5. sélectionnez son sous-menu Interface Générale<br>" +
-	         "6. cochez la case HTTP<br>" +
-	         "7. écrivez \"http\" si ce n\'est pas automatique dans le champ de texte<br>" +
-	         "8. sauvegardez<br>" +
-	         "</p><p>" +
-	       "II. Il faut autoriser votre appareil android à communiquer avec VLC :<br>" +
-	       	"1. allez dans le répertoire d\'installation de votre lecteur VLC<br>" +
-	       	"2. allez dans le répertoire \"lua\" puis \"http\"<br>" +
-	       	"3. dans le répertorie http, se trovue un fichier nommé .hosts" +
-	       	"4. ouvrez ce fichier et ajoutez l'adresse IP de l'appareil android sur une nouvelle ligne" +
-	       	"5. l'ip de votre appareil est affichée dans l'onglet \"information\" de l'application" +
-	       	"6. sauvegarde le fichier et redémarrer vlc" +
-	      "</p>" +
-	"<p>Félicitation, votre lecteur VLC est configuré pour fonctionner avec votre appareil VLC !</p>";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -269,8 +234,8 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 					(ViewGroup) findViewById(R.id.settings_help_layout_android));
 		}
 		
-        // create a 500px width and 570px height PopupWindow
-		popUp = new PopupWindow(internalLayout, 500, 570, true);
+        // create a 500px width and 600px height PopupWindow
+		popUp = new PopupWindow(internalLayout, 500, 600, true);
 		
 		// display the popup in the center
         popUp.showAtLocation(internalLayout, Gravity.CENTER, 0, 0);
@@ -278,13 +243,13 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
         if (isDesktop) {
         	tv = (TextView) internalLayout.findViewById(R.id.tvHelpDesk);
         	btnOk = (Button) internalLayout.findViewById(R.id.btnHelpDeskBack);
-			tv.setText(Html.fromHtml(desktopHelp));
+			tv.setText(Html.fromHtml(getString(R.string.tvHelpTextDesktop)));
 		}
         else {
 			tv = (TextView) internalLayout.findViewById(R.id.tvHelpAnd);
         	btnOk = (Button) internalLayout.findViewById(R.id.btnHelpAndroidBack);
 
-			tv.setText(Html.fromHtml(androidHelp));
+			tv.setText(Html.fromHtml(getString(R.string.tvHelpTextAndroid)));
         }
         
         btnOk.setOnClickListener(new OnClickListener() {

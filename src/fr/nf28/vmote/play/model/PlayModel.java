@@ -96,7 +96,7 @@ public class PlayModel {
 				this.vlcConnection.repeat(rv);
 				is_loop = false;
 				is_repeat = true;
-		    	button_loop.setImageResource(R.drawable.loop);
+		    	button_loop.setImageResource(R.drawable.repeat);
 			}
 			else if(is_repeat){
 				this.vlcConnection.loop(rv);
