@@ -87,9 +87,17 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
     	gender = (TextView) rootView.findViewById(R.id.detailsPageGender);
     	history = (TextView) rootView.findViewById(R.id.detailsPageHistory);
 
-    	this.model.setDetailsElement();
+    	// bad here
+    	//this.model.setDetailsElement();
     	
     	return rootView;
+    }
+    
+    @Override
+    public void onStart() {
+    	super.onStart();
+    	
+    	this.model.setDetailsElement();
     }
 
 	public PlayModel getModel() {

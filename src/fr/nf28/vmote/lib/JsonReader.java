@@ -145,20 +145,12 @@ public class JsonReader {
         // EDIT: on va faire tout en anglais, et si ça marche pas : else qui récupère rien
         if(isPresent("Stream 0", meta)) {
         	//listes des flux
-        	//ArrayList<JsonObject> streamList = JsonReader.getStreamList(category);
-        	
-        	//details
-        	JsonElement trameLength = obj.get("");
-            JsonElement trameHeight = obj.get("");
-            JsonElement frameRate = obj.get("");
-            /*current_media.setFrameRate(frameRate.toString());
-        	current_media.setHauteurtrame(trameHeight.toString());
-        	current_media.setLargeurTrame(trameLength.toString());
-            */
+        	ArrayList<JsonObject> streamList = JsonReader.getStreamList(category);
+            
             //subtitles
             SubtitleList audioList = new SubtitleList();
             SubtitleList subtitleList = new SubtitleList();
-            //int size = streamList.size();
+            int size = streamList.size();
             JsonElement currElem;
             Subtitle currSub;
             /*
@@ -174,6 +166,15 @@ public class JsonReader {
             		}
             	}
             }*/
+            
+          //details
+        	JsonElement trameLength = obj.get("");
+            JsonElement trameHeight = obj.get("");
+            JsonElement frameRate = obj.get("");
+            /*current_media.setFrameRate(frameRate.toString());
+        	current_media.setHauteurtrame(trameHeight.toString());
+        	current_media.setLargeurTrame(trameLength.toString());
+            */
 
         }
         else { // c'est pas en anglais ou c'est absent : tout à 0

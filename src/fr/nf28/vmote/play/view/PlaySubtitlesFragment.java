@@ -123,9 +123,16 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
         });
     	
     	// gestion des listes
-    	this.model.setSubtitlesElement();
+    	//this.model.setSubtitlesElement();
     	
     	return rootView;
+    }
+    
+    @Override
+    public void onStart() {
+    	super.onStart();
+    	
+    	this.model.setSubtitlesElement();
     }
 
 	public PlayModel getModel() {
