@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:clickable="true"
-    android:orientation="vertical" >
+    android:orientation="vertical">
     
     <ListView
         android:id="@+id/tvShowsListView"
@@ -12,10 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvShowButtonBackground"
         android:layout_alignParentTop="true"
-        android:background="#F5F5F5"
+        android:listSelector="@drawable/listviewselector"
         android:choiceMode="singleChoice">
 
 	</ListView>
+	
+	<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C6C6C6" 
+        android:layout_below="@+id/tvShowsListView"/>
 	
      <View 
 	        android:layout_width="match_parent"

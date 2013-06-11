@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#DDDDDD" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -90,10 +91,9 @@
       android:background="#F5F5F5">
 	</ListView>
 	
-    <View
-            android:layout_width="fill_parent"
-            android:layout_height="0.2dp"
-            android:visibility="visible"
-            android:background="@android:color/darker_gray"/>
+   <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C6C6C6" />
 
 </LinearLayout>

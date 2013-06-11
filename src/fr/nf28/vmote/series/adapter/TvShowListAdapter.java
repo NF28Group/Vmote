@@ -10,6 +10,7 @@ import fr.nf28.vmote.db.tvshow.TvShow;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,10 +61,13 @@ public class TvShowListAdapter extends ArrayAdapter<TvShow> {
 		EpisodeDAO episodeAccessObject = new EpisodeDAO(getContext());
 		int remainingEpisodes = episodeAccessObject.getEpisodesUnseenWithId(currentTvShow.getId());
 		
-		if(remainingEpisodes > 0)
+		if(remainingEpisodes > 0){
 			tvShowRemain.setText(remainingEpisodes + " episodes à voir");
-		else
+			rowView.setBackgroundColor(Color.WHITE);
+		}
+		else{
 			tvShowRemain.setText("Serie à jour");
+		}
 		
 		episodeAccessObject.close();
 		
