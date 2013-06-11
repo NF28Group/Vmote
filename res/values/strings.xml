@@ -18,10 +18,12 @@
     <string name="tvHelpInfoLabel">L\'adresse IP de votre smartphone est :</string>
     <string name="tvHelpIpLabel">Veuillez renseigner l\'adresse IP de votre ordinateur :</string>
     <string name="tvInfoIpLabel">Vous utilisez l\'IP : %IP%</string>
+    <string name="tvNewIpLabel">Si vous souhaiter la modifier\nrenseigné la nouvelle IP ci-dessous :</string>
     <color name="grey_color">#DDD</color>
     
     <!-- helps -->
-    <string name="backHelpBtn">OK</string>
+    <string name="backHelpBtn">Fermer</string>
+    <string name="backSubmitBtn">Modifier</string>
     <string name="tvHelpTextDesktop">
 		<![CDATA[
 			Pour faire fonctionner cette application avec votre logiciel VLC :<br/>

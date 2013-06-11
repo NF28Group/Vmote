@@ -21,6 +21,7 @@ import fr.nf28.vmote.R.string;
 import fr.nf28.vmote.history.view.HistoryViewPagerFragment;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.VLCConnection;
+import fr.nf28.vmote.play.view.PlayMainFragment;
 import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
 import android.app.Activity;
@@ -367,7 +368,8 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		else{
 			View internalLayout;
 	        final TextView tv;
-	        Button btnOk;
+	        final EditText et;
+	        Button btnOk, btnNew;
 			
 			//We need to get the instance of the LayoutInflater, use the context of this activity
 			LayoutInflater inflater = (LayoutInflater) MainActivity.this
@@ -385,12 +387,26 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 
 	       	tv = (TextView) internalLayout.findViewById(R.id.tvInfoLabel);
 	       	btnOk = (Button) internalLayout.findViewById(R.id.btnInfoBack);
+	       	btnNew = (Button) internalLayout.findViewById(R.id.btnNewIp);
+	       	et = (EditText) internalLayout.findViewById(R.id.fieldNewIp);
 	       	
 	       	tv.setText(getString(R.string.tvInfoIpLabel).replace("%IP%", VLCConnection.BASE_IP));
 	       	
 	       	btnOk.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					popUp.dismiss();
+				}
+			});
+	       	
+	       	btnNew.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					System.out.println(et.getText());
+					VLCConnection.BASE_IP = String.valueOf(et.getText());
+					VLCConnection.BASE_URL = VLCConnection.BASE_URL.replace("%IP%", VLCConnection.BASE_IP);
+					
+					prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
 					popUp.dismiss();
 				}
 			});

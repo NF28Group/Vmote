@@ -23,4 +23,32 @@
         android:layout_centerVertical="true"
         android:gravity="center" />
 
+    <EditText
+        android:id="@+id/fieldNewIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvInfoLabel"
+        android:layout_marginTop="50dp"
+        android:layout_toLeftOf="@+id/btnNewIp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/tvNewLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnNewIp"
+        android:layout_alignParentLeft="true"
+        android:text="@string/tvNewIpLabel" />
+
+    <Button
+        android:id="@+id/btnNewIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/fieldNewIp"
+        android:text="@string/backSubmitBtn" />
+
 </RelativeLayout>
