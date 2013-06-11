@@ -29,7 +29,7 @@ public class VLCConnection {
 	public static String BASE_IP = null;
 	
 	public static String BASE_URL =
-            "http://%IP%:8080/requests/status.json";
+            "http://"+BASE_IP+":8080/requests/status.json";
     /* 
 IP Milio :
  
@@ -116,6 +116,7 @@ IP Nico B. :
         	LaunchError error = new LaunchError();
     		HttpRequest request = HttpRequest.get(BASE_URL, true,
                     PARAM_COMMAND, "test").readTimeout(2000).connectTimeout(2000);
+    		System.out.println("On utilise l'adresse : " + BASE_URL);
             try {
     			validateResponse(request);
     		} 
@@ -183,12 +184,7 @@ IP Nico B. :
     	        Log.i("IPPPPPPPPPPPPPPPPPPPPPPPPPPPPP", "Trying: " + "192.168.0." + String.valueOf(i));
     	        try {
     	            inetAddress = InetAddress.getByName("192.168.0." + String.valueOf(i));
-    	            if(inetAddress.isReachable(10000)){
-    	            	System.out.println("Host = " + inetAddress.getHostName());
-    	            	System.out.println("Host bis = " + inetAddress.getCanonicalHostName());
-    	            	System.out.println("Host ter = " + inetAddress.getHostAddress());
-    	            	System.out.println("Host quatre = " + inetAddress.getLocalHost());
-    	            	
+    	            if(inetAddress.isReachable(10000)){    	            	
     	                hosts.add(inetAddress.getHostName());
     	                Log.i("IPPPPPPPPPPPP", inetAddress.getHostName());
     	            }
@@ -370,8 +366,6 @@ IP Nico B. :
 	public void updateMediaWhenTaskEnds(View rv, Command task) {		
 		while(true){
 			try {
-				System.out.println("updateMediaWhenTaskEnds get = " +task.get());
-				System.out.println("updateMediaWhenTaskEnds getStatus = " +task.getStatus());
 				if(task.get()){
 					updateMedia(rv);
 					break;

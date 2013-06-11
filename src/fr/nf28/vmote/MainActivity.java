@@ -79,9 +79,10 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		
 
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		String l = prefs.getString(ipKey, null); 
-		VLCConnection.BASE_IP = l;
-		VLCConnection.BASE_URL = VLCConnection.BASE_URL.replace("%IP%", VLCConnection.BASE_IP);
+		String ip = prefs.getString(ipKey, null); 
+		VLCConnection.BASE_IP = ip;
+		System.out.println("VLCConnection.BASE_IP = " + VLCConnection.BASE_IP);
+		VLCConnection.BASE_URL = "http://"+VLCConnection.BASE_IP+":8080/requests/status.json";
 		
 		AbstractFragment fragment = new ViewPagerFragment();
 		Bundle arguments = new Bundle();
@@ -358,7 +359,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 				public void onClick(View v) {
 					System.out.println(et.getText());
 					VLCConnection.BASE_IP = String.valueOf(et.getText());
-					VLCConnection.BASE_URL = VLCConnection.BASE_URL.replace("%IP%", VLCConnection.BASE_IP);
+					VLCConnection.BASE_URL = "http://"+VLCConnection.BASE_IP+":8080/requests/status.json";
 					
 					prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
 					popUp.dismiss();
@@ -402,10 +403,11 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	       	btnNew.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					System.out.println(et.getText());
 					VLCConnection.BASE_IP = String.valueOf(et.getText());
-					VLCConnection.BASE_URL = VLCConnection.BASE_URL.replace("%IP%", VLCConnection.BASE_IP);
-					
+					VLCConnection.BASE_URL = "http://"+VLCConnection.BASE_IP+":8080/requests/status.json";
+					System.out.println("NEW IP = " + et.getText());
+					System.out.println("NEW BASE_IP = " + VLCConnection.BASE_IP);
+					System.out.println("NEW BASE_URL = " + VLCConnection.BASE_URL);
 					prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
 					popUp.dismiss();
 				}
