@@ -19,7 +19,7 @@ import android.util.Log;
 public class GetSeriesAsyncTask extends AsyncTask<Long, Void, List<Object>> {
 	private final static String API_KEY = "4F4FD3B2346328EE";
 	private final static String URL_SEARCH_TVSHOW = "http://thetvdb.com/api/" + API_KEY + "/series/";
-	private final static String language = "fr";
+	private final static String language = "en";
 	//http://thetvdb.com/api/4F4FD3B2346328EE/series/81189/all/fr.zip 
 
 	@Override
