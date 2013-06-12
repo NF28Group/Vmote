@@ -16,11 +16,13 @@ import fr.nf28.vmote.R;
 import fr.nf28.vmote.db.tvshow.TvShow;
 import fr.nf28.vmote.db.tvshow.TvShowDAO;
 import fr.nf28.vmote.series.adapter.TvShowListAdapter;
+import fr.nf28.vmote.series.model.SeriesModel;
 
 
 public class SeriesHomeFragment extends AbstractSeriesFragment {
 	public static final String ARG_ITEM_ID = "serie_home_fragment";
-
+	private SeriesModel model;
+	
 	private View rootView;
 	private ListView tvShowListView;
 	private List<TvShow> seriesList;
@@ -30,6 +32,9 @@ public class SeriesHomeFragment extends AbstractSeriesFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		model = new SeriesModel(getActivity());
+		
+		model.updateAllSeries();
 	}
 	
 	@Override

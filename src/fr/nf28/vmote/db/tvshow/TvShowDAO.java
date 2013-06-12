@@ -91,7 +91,11 @@ public class TvShowDAO extends DAOBase {
 	public TvShow select(long id) {
 		Cursor c = mDb.rawQuery("SELECT * FROM " + TVSHOW_TABLE_NAME + " WHERE " + TVSHOW_KEY + " = ?", new String[]{String.valueOf(id)});
 		
-		return toTvShows(c).get(0);
+		List<TvShow> series = toTvShows(c);
+		if(series.size() > 0)
+			return series.get(0);
+		else
+			return null;
 	}
 	
 

@@ -2,6 +2,7 @@ package fr.nf28.vmote.series.model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.nf28.vmote.db.episode.Episode;
@@ -62,13 +63,13 @@ public class SeriesModel {
 	}
 	
 	public void getSeries(SearchSeries ss){
-		getSeries(ss.getSeriesId());
+		getSeries(ss.getSeriesId(), false);
 	}
 	/**
 	 * Get a new tvshow or refresh one
 	 * @param seriesName
 	 */
-	public void getSeries(long seriesId){
+	private void getSeries(long seriesId, final boolean update){
 		ConnectivityManager connMgr = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
@@ -77,22 +78,30 @@ public class SeriesModel {
 				@Override
 				protected void onPostExecute(List<Object> result) { //Callback
 					if(result != null){
+						TvShow ts = null;
 						//Add series to 
 						TvShowDAO tsDao = new TvShowDAO(cxt);
 						EpisodeDAO epDao = new EpisodeDAO(cxt);
 						for(Object o : result){
 							if(o instanceof TvShow){
-								TvShow ts = (TvShow) o;
-								String imagePath = "img-" + ts.getId();
-								dllAndSaveImage(ts.getPosterUrl(), imagePath);
-								ts.setPosterPath(imagePath);
-								tsDao.insert(ts);
+								ts = (TvShow) o;
+								if(tsDao.select(ts.getId()) == null){
+									String imagePath = "img-" + ts.getId();
+									ts.setPosterPath(imagePath);
+									dllAndSaveImage(ts.getPosterUrl(), imagePath);
+									tsDao.insert(ts);
+								}
 							}
 							else if(o instanceof Episode){
-								epDao.insert((Episode) o);
+								Episode ep = (Episode) o;
+								if(epDao.select(ep.getId()) == null){
+									epDao.insert(ep);
+								}
 							}
 						}
-						Toast.makeText(cxt, "Série ajoutée", Toast.LENGTH_SHORT).show();
+						if(!update && ts != null){
+							Toast.makeText(cxt, ts.getName() + " ajouté", Toast.LENGTH_SHORT).show();
+						}
 					}
 					else {
 						//Erreur réseau
@@ -123,6 +132,16 @@ public class SeriesModel {
 			}.execute(url);
 		} else {
 			Toast.makeText(cxt, "No network connection available.", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	public void updateAllSeries(){
+		TvShowDAO tvShowDao = new TvShowDAO(cxt);
+		List<TvShow> seriesList = new ArrayList<TvShow>();
+		seriesList = tvShowDao.selectAll();
+		
+		for(TvShow s : seriesList){
+			getSeries(s.getId(), true);
 		}
 	}
 	

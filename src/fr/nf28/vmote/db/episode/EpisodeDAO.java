@@ -93,7 +93,11 @@ public class EpisodeDAO extends DAOBase {
 				"SELECT * FROM " + EPISODE_TABLE_NAME + 
 				" WHERE " + EPISODE_KEY + " = ?", new String[]{String.valueOf(id)});
 		
-		return toEpisodes(c).get(0);
+		List<Episode> episodes = toEpisodes(c);
+		if(episodes.size() > 0)
+			return episodes.get(0);
+		else
+			return null;
 	}
 	
 	/**
