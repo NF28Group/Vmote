@@ -5,19 +5,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-
-import android.util.Log;
-import android.widget.Toast;
-
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import fr.nf28.vmote.play.classes.Media;
-import fr.nf28.vmote.play.classes.Subtitle;
-import fr.nf28.vmote.play.classes.SubtitleList;
 import fr.nf28.vmote.play.model.VLCConnection;
 
 public class JsonReader {

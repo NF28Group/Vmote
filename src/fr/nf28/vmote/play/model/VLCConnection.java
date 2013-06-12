@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
 import fr.nf28.vmote.R;
@@ -14,7 +13,6 @@ import fr.nf28.vmote.play.classes.CheckConnection;
 import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.classes.Media;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -43,7 +41,6 @@ IP Nico B. :
     */
 
     private static final String PARAM_COMMAND = "command";
-    //private static final String PARAM_INPUT = "input";
 
     private static final String COMMAND_PAUSE = "pl_pause";
     private static final int TASK_PAUSE = 1;
@@ -104,7 +101,7 @@ IP Nico B. :
     	else{
     		/* Le Wi-Fi n'est pas connecte*/
     		error.setEtat(2);
-    		error.setMessage("Veuillez vous connecter a un reseau Wi-Fi !");
+    		error.setMessage(c.getString(R.string.noWifi));
     		return error;
     	}
     	return error;

@@ -1,6 +1,5 @@
 package fr.nf28.vmote.series.adapter;
 
-import java.io.ObjectStreamClass;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

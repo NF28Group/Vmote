@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.series.adapter.TvShowPlanningAdapter;
-import fr.nf28.vmote.db.episode.Episode;
 import fr.nf28.vmote.db.episode.EpisodeDAO;
 
 public class SeriesPlanningFragment extends AbstractSeriesFragment {

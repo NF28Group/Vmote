@@ -1,15 +1,5 @@
 package fr.nf28.vmote;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-
-import org.apache.http.conn.util.InetAddressUtils;
-
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -17,26 +7,20 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.actionbarsherlock.view.SubMenu;
 
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.R.string;
 import fr.nf28.vmote.history.view.HistoryViewPagerFragment;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
 import fr.nf28.vmote.play.model.VLCConnection;
-import fr.nf28.vmote.play.view.PlayMainFragment;
 import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
-import android.text.format.Formatter;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,12 +30,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends SherlockFragmentActivity implements OnChangePageListener {
-	private boolean useLogo = false;
+	//private boolean useLogo = false;
 	public boolean isConnected = false;
-	private boolean showHomeUp = false;
+	//private boolean showHomeUp = false;
 	private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 	private Activity cxt;
 	private PopupWindow popUp;
@@ -416,17 +399,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		}
 	}
 	
-	private String getIpOnNetwork() {
-		try {
-			vlcConnection.checkIpOnNetwork();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "caca";
-	}
-
-
+	@SuppressLint("DefaultLocale")
 	private String getLocalIpAddress() {
 		WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 		   WifiInfo wifiInfo = wifiManager.getConnectionInfo();

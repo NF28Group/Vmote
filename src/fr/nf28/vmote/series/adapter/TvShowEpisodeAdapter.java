@@ -6,12 +6,10 @@ import fr.nf28.vmote.R;
 import fr.nf28.vmote.db.episode.Episode;
 import fr.nf28.vmote.db.episode.EpisodeDAO;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 

@@ -30,6 +30,7 @@
         android:layout_below="@+id/tvInfoLabel"
         android:layout_marginTop="50dp"
         android:layout_toLeftOf="@+id/btnNewIp"
+        android:inputType="text"
         android:ems="10" >
 
         <requestFocus />

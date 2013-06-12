@@ -6,6 +6,7 @@
     
     <!--  erors  -->
     <string name="noWifi">Veuillez vous connecter à un reseau Wi-Fi !</string>
+    <string name="noVLC">Veuillez lancer VLC !</string>
 
     
     
