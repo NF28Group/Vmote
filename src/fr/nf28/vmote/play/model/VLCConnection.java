@@ -245,11 +245,11 @@ IP Nico B. :
     		}
     		
 	    	HttpRequest request = HttpRequest.get(BASE_URL, true,
-	                PARAM_COMMAND, command_to_execute);
+	                PARAM_COMMAND, command_to_execute).readTimeout(2000).connectTimeout(2000);
 	        try {
 				validateResponse(request);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				System.out.println("Time out");
 				e.printStackTrace();
 	    		return false;
 			}
