@@ -9,7 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="0.29"
+	    android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <ImageView
+        android:id="@+id/mediaImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:contentDescription="@string/imageMediaInfo"
+        android:src="@drawable/video" />
 
     <RelativeLayout
         android:layout_width="wrap_content"

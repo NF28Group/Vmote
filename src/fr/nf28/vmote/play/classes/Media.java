@@ -1,10 +1,17 @@
 package fr.nf28.vmote.play.classes;
 
+import java.util.Arrays;
+
 public class Media {
 
-	private String Name;
-	private String State;
-	private String Volume;
+	private String[] movieExtension =  {".mp4",".mkv",".avi"};
+	private boolean isMovie = false;
+	private String name;
+	private String state;
+	private String volume;
+	private String loop;
+	private String repeat;
+	private String random;
 	
 	//details
 	private String duree;
@@ -29,43 +36,56 @@ public class Media {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		this.Name = manageName(name);
+		this.name = manageName(name);
+		this.isMovie = manageAudioOrMovie(name);
 	}
-	
+		
 	private String manageName(String n){
 		String final_name = n;
 		final_name = final_name.replace("\"", ""); // enlever les quotes
 
 		int i = final_name.lastIndexOf('.');
-		if (i > 0) {
+		if (i > 0)	
 			final_name = final_name.substring(0,i); // enlever l'extension
-		}
+		
 		return final_name;
+	}	
+		
+	private boolean manageAudioOrMovie(String n){
+		String final_name = n;
+		final_name = final_name.replace("\"", ""); // enlever les quotes
+		Arrays.sort(movieExtension);
+
+		int i = final_name.lastIndexOf('.');
+		if (i > 0)
+			return (Arrays.binarySearch(movieExtension, final_name.substring(i)) >= 0);
+		
+		return false;
 	}
 	
 	@Override
 	public String toString() {
-		return "call function toString LaunchError Message = "+this.Name +" Etat = "+ this.State +" Volume = "+ this.Volume;
+		return "call function toString LaunchError Message = "+this.name +" Etat = "+ this.state +" Volume = "+ this.volume +" isMovie = " + this.isMovie;
 	}
 
 	public String getState() {
-		return State;
+		return state;
 	}
 
 	public void setState(String state) {
-		this.State = state;
+		this.state = state;
 	}
 
 	public int getVolume() {
-		return (int) (Integer.parseInt(Volume)/(2.56*2));
+		return (int) (Integer.parseInt(volume)/(2.56*2));
 	}
 
-	public void setVolume(String volume) {
-		Volume = volume;
+	public void setVolume(String v) {
+		volume = v;
 	}
 
 	public String getDuree() {
@@ -170,5 +190,37 @@ public class Media {
 
 	public void setSubtitleEcart(String subtitleEcart) {
 		this.subtitleEcart = subtitleEcart;
+	}
+
+	public boolean isMovie() {
+		return isMovie;
+	}
+
+	public void setMovie(boolean isAudio) {
+		this.isMovie = isAudio;
+	}
+
+	public String getLoop() {
+		return loop;
+	}
+
+	public void setLoop(String loop) {
+		this.loop = loop;
+	}
+
+	public String getRepeat() {
+		return repeat;
+	}
+
+	public void setRepeat(String repeat) {
+		this.repeat = repeat;
+	}
+
+	public String getRandom() {
+		return random;
+	}
+
+	public void setRandom(String random) {
+		this.random = random;
 	}
 }

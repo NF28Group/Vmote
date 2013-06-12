@@ -42,10 +42,17 @@ public class PlayMainFragment extends AbstractPlayFragment {
 		}	
 
 	};
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		System.out.println("appelle onResume");
+	};
 	
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+		System.out.println("appelle onAttach");
         
 
         try {
@@ -84,7 +91,8 @@ public class PlayMainFragment extends AbstractPlayFragment {
     	LaunchError launchError = model.launchCheck(getActivity(),rootView);
     	
     	if (launchError.getEtat() == 1) {
-			//model.checkMedia(rootView);
+    		
+    		model.initializeBoolean();
         	
     	    button_play.setOnClickListener(new OnClickListener() {
     			

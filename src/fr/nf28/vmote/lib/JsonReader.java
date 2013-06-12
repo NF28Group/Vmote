@@ -10,6 +10,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import fr.nf28.vmote.play.classes.Media;
+import fr.nf28.vmote.play.classes.Subtitle;
+import fr.nf28.vmote.play.classes.SubtitleList;
 import fr.nf28.vmote.play.model.VLCConnection;
 
 public class JsonReader {
@@ -51,12 +53,17 @@ public class JsonReader {
 
 	}
 	
-	/*public static Media getCurrentMediaStatus(){
+	 public static Media getCurrentMediaStatus(){
 		Media current_media = new Media();
+		String tmp;
+		
 		JsonObject obj = getJsonObject();
 		if(obj == null) return current_media;
 		JsonElement state = obj.get("state");
 		JsonElement volume = obj.get("volume");
+		JsonElement loop = obj.get("loop");
+		JsonElement repeat = obj.get("repeat");
+		JsonElement random = obj.get("random");
 		JsonObject information = (JsonObject) obj.get("information");
 		if(information == null) return current_media;
 		JsonObject category = (JsonObject) information.get("category");
@@ -65,37 +72,56 @@ public class JsonReader {
         current_media.setName(filename.toString());
         current_media.setState(state.toString());
         current_media.setVolume(volume.toString());
-        System.out.println(current_media.toString());
-		return current_media;
-	}*/
-	
-	 public static Media getCurrentMediaStatus(){
-		Media current_media = new Media();
-		JsonObject obj = getJsonObject();
-		if(obj == null) return current_media;
-		JsonElement state = obj.get("state");
-		JsonElement volume = obj.get("volume");
-		JsonObject information = (JsonObject) obj.get("information");
-		if(information == null) return current_media;
-		JsonObject category = (JsonObject) information.get("category");
-		JsonObject meta = (JsonObject) category.get("meta");
-        JsonElement filename = meta.get("filename");
-        current_media.setName(filename.toString());
-        current_media.setState(state.toString());
-        current_media.setVolume(volume.toString());     
+        current_media.setRepeat(repeat.toString());
+        current_media.setLoop(loop.toString());
+        current_media.setRandom(random.toString());
+
+        tmp = (obj.get("length") == null)?"":obj.get("length").toString();
+        current_media.setDuree(tmp);
+        
+        tmp = (meta.get("date") == null)?"":meta.get("date").toString().replace("\"", "");
+        current_media.setDate(tmp);
+        
+        tmp = (meta.get("artist") == null)?"":meta.get("artist").toString().replace("\"", "");
+        current_media.setArtist(tmp);
+        
+        tmp = (meta.get("album") == null)?"":meta.get("album").toString().replace("\"", "");
+        current_media.setAlbum(tmp);
+        
+        tmp = (meta.get("HISTORY") == null)?"":meta.get("HISTORY").toString();
+        current_media.setHistory(tmp);
+        
+        tmp = (meta.get("genre") == null)?"":meta.get("genre").toString().replace("\"", "");
+        current_media.setGender(tmp);
+        
+        ArrayList<JsonObject> streamList = JsonReader.getStreamList(category);
+        SubtitleList audioList = new SubtitleList();
+        SubtitleList subtitleList = new SubtitleList();
+        int size = streamList.size();
+        JsonElement currElem;
+        Subtitle currSub;
+        for(int i=0; i<size ; i++) {
+    		currElem = streamList.get(i).get("Type");
+    		currSub = new Subtitle("Piste " + i, i);
+    		if(currElem.toString().replace("\"", "").equals("Audio")) {
+    			audioList.add(currSub);
+    		}
+    		else if(currElem.toString().replace("\"", "").equals("Subtitle")) {
+    			subtitleList.add(currSub);
+    		}
+        }
+
+        
+
+    	/*JsonElement trameLength = obj.get("");
+        JsonElement trameHeight = obj.get("");
+        JsonElement frameRate = obj.get("");
+        current_media.setFrameRate(frameRate.toString());
+    	current_media.setHauteurtrame(trameHeight.toString());
+    	current_media.setLargeurTrame(trameLength.toString());*/
         
         System.out.println(current_media.toString());
 		return current_media;
-	}
-	 
-	public static boolean isPresent(String element, JsonObject obj) {
-		try  {
-			obj.get(element);
-		}
-		catch(Exception e) {
-			return false;
-		}
-		return true;
 	}
 	
 	public static ArrayList<JsonObject> getStreamList(JsonObject parent) {

@@ -1,5 +1,8 @@
 package fr.nf28.vmote;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -9,6 +12,7 @@ import com.actionbarsherlock.view.SubMenu;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.history.view.HistoryViewPagerFragment;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
+import fr.nf28.vmote.play.model.PlayModel;
 import fr.nf28.vmote.play.model.VLCConnection;
 import fr.nf28.vmote.play.view.ViewPagerFragment;
 import fr.nf28.vmote.series.view.SeriesHomeFragment;
@@ -30,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends SherlockFragmentActivity implements OnChangePageListener {
 	//private boolean useLogo = false;
@@ -40,7 +45,13 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	private PopupWindow popUp;
 	private VLCConnection vlcConnection;
 	protected SharedPreferences prefs;
+	private PlayModel model;
 	protected String ipKey = "storedIP";
+	private static final String PATTERN = 
+	        "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+	        "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+	        "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+	        "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
 	public MainActivity() {
 		setVlcConnection(VLCConnection.getInstance());
@@ -59,7 +70,6 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_layout);
 		cxt = this;
-		
 
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		String ip = prefs.getString(ipKey, null); 
@@ -340,12 +350,26 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	       	btnOk.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					System.out.println(et.getText());
-					VLCConnection.BASE_IP = String.valueOf(et.getText());
-					VLCConnection.BASE_URL = "http://"+VLCConnection.BASE_IP+":8080/requests/status.json";
-					
-					prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
-					popUp.dismiss();
+
+					String ip_tmp = String.valueOf(et.getText());
+					if(validate(ip_tmp)){
+						VLCConnection.BASE_IP = ip_tmp;
+						VLCConnection.BASE_URL = "http://"+VLCConnection.BASE_IP+":8080/requests/status.json";
+						prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
+						popUp.dismiss();
+						
+						AbstractFragment fragment = new ViewPagerFragment();
+						Bundle arguments = new Bundle();
+						arguments.putString(ViewPagerFragment.ARG_ITEM_ID, "pager_play_fragment");
+				        fragment.setArguments(arguments);
+				        cxt.setTitle("Lecture");
+						getSupportFragmentManager().beginTransaction()
+							.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+							.addToBackStack(null)
+							.commit();
+					}
+					else
+						makeToast(getString(R.string.wrongIP));
 				}
 			});
 		}
@@ -386,17 +410,36 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 	       	btnNew.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					VLCConnection.BASE_IP = String.valueOf(et.getText());
-					VLCConnection.BASE_URL = "http://"+VLCConnection.BASE_IP+":8080/requests/status.json";
-					System.out.println("NEW IP = " + et.getText());
-					System.out.println("NEW BASE_IP = " + VLCConnection.BASE_IP);
-					System.out.println("NEW BASE_URL = " + VLCConnection.BASE_URL);
-					prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
-					popUp.dismiss();
+					String ip_tmp = String.valueOf(et.getText());
+					if(validate(ip_tmp)){
+						VLCConnection.BASE_IP = ip_tmp;
+						VLCConnection.BASE_URL = "http://"+VLCConnection.BASE_IP+":8080/requests/status.json";
+						prefs.edit().putString(ipKey, VLCConnection.BASE_IP).commit();
+						popUp.dismiss();
+						
+						AbstractFragment fragment = new ViewPagerFragment();
+						Bundle arguments = new Bundle();
+						arguments.putString(ViewPagerFragment.ARG_ITEM_ID, "pager_play_fragment");
+				        fragment.setArguments(arguments);
+				        cxt.setTitle("Lecture");
+						getSupportFragmentManager().beginTransaction()
+							.replace(R.id.applicationview_detail_container, fragment, TAG_FRAGMENT)
+							.addToBackStack(null)
+							.commit();
+						
+					}
+					else
+						makeToast(getString(R.string.wrongIP));
 				}
 			});
 	       	
 		}
+	}
+
+
+	private void makeToast(String string) {
+		Toast.makeText(this, string , Toast.LENGTH_LONG).show();
+		
 	}
 	
 	@SuppressLint("DefaultLocale")
@@ -413,5 +456,20 @@ public class MainActivity extends SherlockFragmentActivity implements OnChangePa
 		   (ip >> 24 & 0xff));
 		   
 		   return ipString;
+	}
+
+	public static boolean validate(final String ip){          
+
+	      Pattern pattern = Pattern.compile(PATTERN);
+	      Matcher matcher = pattern.matcher(ip);
+	      return matcher.matches();             
+	}
+
+	public PlayModel getModel() {
+		return model;
+	}
+
+	public void setModel(PlayModel model) {
+		this.model = model;
 	}
 }

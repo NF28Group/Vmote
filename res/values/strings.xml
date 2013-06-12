@@ -5,7 +5,8 @@
     <string name="action_settings">Settings</string>
     
     <!--  erors  -->
-    <string name="noWifi">Veuillez vous connecter à un reseau Wi-Fi !</string>
+    <string name="wrongIP">Veuillez insérer une IP correcte</string>
+    <string name="noWifi">Veuillez vous connecter à un réseau Wi-Fi !</string>
     <string name="noVLC">Veuillez lancer VLC !</string>
 
     
@@ -70,6 +71,7 @@
     
     
     <!-- pages play -->
+    <string name="imageMediaInfo">Image du média</string>
     <string name="buttonGoToDetails">Détails</string>
     <string name="buttonGoToPlay">Lecteur</string>
     <string name="buttonGoToSubtitles">Param.</string>

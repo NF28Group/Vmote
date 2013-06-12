@@ -16,6 +16,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -255,7 +257,7 @@ IP Nico B. :
 		        request.body();
 				Thread.sleep(1000);
 				System.out.println(JsonReader.getCurrentMediaStatus());
-				media.setName((JsonReader.getCurrentMediaStatus().getName() == "0")?"Stop":JsonReader.getCurrentMediaStatus().getName());
+				media = JsonReader.getCurrentMediaStatus();
 			} catch (InterruptedException e) {
 				System.out.println("Erreur doInBackground dans class Command");
 				e.printStackTrace();
@@ -316,7 +318,7 @@ IP Nico B. :
     /* D�finition de la fonction LOOP */
 	public void loop(View rv) throws Exception {
 		Command loop_task = new Command();
-		loop_task.execute(TASK_LOOP); 
+		loop_task.execute(TASK_LOOP);
     }
     
     /* D�finition de la fonction REPEAT */
@@ -358,8 +360,10 @@ IP Nico B. :
 	public void updateMedia(View rv) {
 		upateNameMedia((TextView) rv.findViewById(R.id.textNameMedia));
 		updateVolumeMedia((SeekBar) rv.findViewById(R.id.seekBarPlaySound));
+		updateStateMedia((ImageButton) rv.findViewById(R.id.buttonPlay),(ImageButton) rv.findViewById(R.id.buttonRepeat),(ImageButton) rv.findViewById(R.id.buttonShuffle));
+		updateImageMedia((ImageView) rv.findViewById(R.id.mediaImage));
     }
-	
+
 	public void updateMediaWhenTaskEnds(View rv, Command task) {		
 		while(true){
 			try {
@@ -376,6 +380,14 @@ IP Nico B. :
 			}
 		}
     }
+
+	
+	private void updateImageMedia(ImageView img) {
+		if(media.isMovie())
+			img.setImageResource(R.drawable.video);
+		else
+			img.setImageResource(R.drawable.music);
+	}
 	
 	private void upateNameMedia(TextView tv){
     	tv.setText(media.getName());
@@ -383,6 +395,25 @@ IP Nico B. :
 	
 	private void updateVolumeMedia(SeekBar sb){
 		sb.setProgress(media.getVolume());
+	}
+	
+	private void updateStateMedia(ImageButton btn_play, ImageButton btn_repeat, ImageButton btn_suffle){
+		if(media.getState().replace("\"", "").equals("playing"))
+			btn_play.setImageResource(R.drawable.pause);
+		else
+			btn_play.setImageResource(R.drawable.play);
+		
+		if(media.getLoop().equals("true"))
+			btn_repeat.setImageResource(R.drawable.loop_on);
+		else if(media.getRepeat().equals("true"))
+			btn_repeat.setImageResource(R.drawable.repeat);
+		else
+			btn_repeat.setImageResource(R.drawable.loop);
+			
+		if(media.getRandom().equals("true"))
+			btn_suffle.setImageResource(R.drawable.shuffle_on);
+		else if(media.getRandom().equals("false"))
+			btn_suffle.setImageResource(R.drawable.shuffle);
 	}
 
     /* 
