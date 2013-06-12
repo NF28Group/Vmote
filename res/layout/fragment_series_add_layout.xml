@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-  
-    <SearchView
-        android:id="@+id/searchTvshowView"
-        android:voiceSearchMode="showVoiceSearchButton|launchRecognizer" 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingRight="10dp"
-        android:iconifiedByDefault="false"
-        android:background="#EAEAEA"
-        android:queryHint="Rechercher une série"/>
-    
-     <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:indeterminateOnly="true" 
-        android:visibility="invisible"
-        android:background="#EAEAEA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-     
-     <View 
-        android:layout_width="match_parent"
-       	android:layout_height="1dp"
-       	android:background="@android:color/darker_gray"/>
-     
-    
+    android:orientation="vertical" 
+    android:background="#DDDDDD">
+
+        <SearchView
+            android:id="@+id/searchTvshowView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EAEAEA"
+            android:layout_alignParentTop="true"
+            android:iconifiedByDefault="false"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:queryHint="Rechercher une série"
+            android:voiceSearchMode="showVoiceSearchButton|launchRecognizer" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:layout_alignBottom="@+id/searchTvshowView"
+            android:background="@android:color/darker_gray" />
+
     <ListView
         android:id="@+id/list_result"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    
-    <View 
-        android:layout_width="match_parent"
-       	android:layout_height="0.5dp"
-       	android:background="#C6C6C6"/>
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/searchTvshowView"
+        />
 
-</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C6C6C6" 
+        android:layout_below="@+id/list_result"/>
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchTvshowView">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:indeterminateOnly="true"
+            android:minHeight="10dp"
+            android:visibility="invisible"
+            android:layout_marginBottom="0dp"
+			android:layout_marginTop="-6dp" />
+        
+    </FrameLayout>
+
+</RelativeLayout>

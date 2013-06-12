@@ -67,7 +67,7 @@ public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
 			checkButton.setImageResource(R.drawable.checkmark);
 		}
 		else {
-			checkButton.setImageResource(0);
+			checkButton.setImageResource(R.drawable.precheckmark);
 		}
 	}
 }

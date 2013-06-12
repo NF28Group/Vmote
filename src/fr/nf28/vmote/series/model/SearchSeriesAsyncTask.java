@@ -22,6 +22,7 @@ import android.util.Log;
 //Implementation of AsyncTask used to download XML feed from stackoverflow.com.
 public class SearchSeriesAsyncTask extends AsyncTask<String, Void, List<SearchSeries>> {
 	private final static String URL_SEARCH_TVSHOW = "http://thetvdb.com/api/GetSeries.php?";
+	private final static String language = "en";
 
 	@Override
 	protected List<SearchSeries> doInBackground(String... urls) {
@@ -30,7 +31,7 @@ public class SearchSeriesAsyncTask extends AsyncTask<String, Void, List<SearchSe
 
 			List<NameValuePair> params = new LinkedList<NameValuePair>();
 			params.add(new BasicNameValuePair("seriesname", searchName));
-			params.add(new BasicNameValuePair("language", "fr"));
+			params.add(new BasicNameValuePair("language", language));
 			String paramString = URLEncodedUtils.format(params, "utf-8");
 			String url = URL_SEARCH_TVSHOW + paramString;
 

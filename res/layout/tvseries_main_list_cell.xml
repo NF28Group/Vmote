@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="110dip"
     android:orientation="horizontal" 
-    android:background="@drawable/listviewselector"
+    
     android:clipChildren="true">
 
     <ImageView
@@ -18,16 +18,18 @@
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="0.75"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvShowName"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp" 
-            android:text="TV Show name">
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="TV Show name"
+            android:textSize="18sp"
+            android:textStyle="bold" >
+
         </TextView>
 
         <TextView

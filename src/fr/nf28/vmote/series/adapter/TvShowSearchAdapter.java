@@ -42,10 +42,10 @@ public class TvShowSearchAdapter extends ArrayAdapter<SearchSeries> {
 		TvShowDAO tvShowAccessObject = new TvShowDAO(context);
 		
 		if(!tvShowAccessObject.exists(ss.getSeriesId())){
-			btn.setVisibility(View.INVISIBLE);
+			btn.setVisibility(View.VISIBLE);
 		}
 		else {
-			btn.setVisibility(View.VISIBLE);
+			btn.setVisibility(View.INVISIBLE);
 		}
 		
 		seriesName.setText(ss.getSeriesName());
@@ -58,6 +58,7 @@ public class TvShowSearchAdapter extends ArrayAdapter<SearchSeries> {
 			}
 		});
 
+		tvShowAccessObject.close();
 		return rowView;
 	}
 } 
