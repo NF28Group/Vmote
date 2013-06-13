@@ -1,41 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:orientation="vertical"
      >
 
-    <TableRow
-	    android:layout_width="fill_parent"
-	    android:layout_marginTop="5dp" 
-	    android:layout_gravity="center"
-	    android:layout_marginLeft="5dp"
-	    android:layout_marginBottom="10dp"
+	<TextView
+	    android:id="@+id/detailsPageTitle"
+	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    >
+	    android:layout_gravity="center"
+	    android:textAlignment="center"
+	    android:paddingTop="10dp"
+	    android:paddingBottom="20dp"
+       	android:textSize="16sp"
+       	android:textStyle="bold"
+	    android:text="@string/detailsPageTitle"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-		<TextView
-		    android:id="@+id/detailsPageTitle"
-		    android:layout_width="wrap_content"
-		    android:layout_height="match_parent"
-		    android:layout_gravity="center"
-		    android:text="@string/detailsPageTitle"
-		    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-	</TableRow>
-	<TableRow 
+	<RelativeLayout
 	    android:layout_width="fill_parent"
 	    android:layout_marginLeft="4dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="10dp"
 	    android:layout_marginBottom="10dp">
 	    <TextView
-	        android:layout_width="fill_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:textStyle="bold"
+	        android:paddingLeft="10dp"
+	        android:layout_alignParentLeft="true"
 	        android:id="@+id/detailsPageElementTitle"
 	        android:text="@string/detailsTitleDefault" 
 	        />
-	</TableRow>
+
+	    <TextView
+	        android:id="@+id/detailsPageElementTitleSet"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_toRightOf="@+id/detailsPageElementTitle"
+	        android:paddingLeft="5dp"
+	        android:text=""
+	        android:textColor="@android:color/holo_blue_dark"/>
+
+	</RelativeLayout>
 	<TableRow
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
@@ -55,8 +65,19 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsDurationDefault"
 	 		/>
+	        
+	        <TextView
+	        android:id="@+id/detailsPageDurationSet"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/detailsPageDuration"
+	        android:paddingLeft="5dp"
+	        android:text=""
+	        android:textColor="#757575"/>
+	        
 	        <TextView
 	            android:layout_marginTop="5dp"
 	            android:id="@+id/detailsPageLength"
@@ -64,8 +85,22 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsLengthDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageLengthSet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageLength"
+	            android:layout_alignBottom="@+id/detailsPageLength"
+	            android:layout_toRightOf="@+id/detailsPageHeight"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
+	        
+	        
 	        <TextView
 	            android:layout_marginTop="5dp"
 	            android:id="@+id/detailsPageHeight"
@@ -73,8 +108,23 @@
 	            android:layout_height="wrap_content"
 	            android:layout_below="@+id/detailsPageLength"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsHeightDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageHeightSet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageHeight"
+	            android:layout_alignBottom="@+id/detailsPageHeight"
+	            android:layout_toRightOf="@+id/detailsPageHeight"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
+	        
+	        
+	        
 	        <TextView
 	            android:layout_marginTop="5dp"
 	            android:id="@+id/detailsPageFrameRate"
@@ -82,8 +132,21 @@
 	            android:layout_below="@+id/detailsPageHeight"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsFrameRateDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageFrameRateSet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageFrameRate"
+	            android:layout_alignBottom="@+id/detailsPageFrameRate"
+	            android:layout_toRightOf="@+id/detailsPageFrameRate"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
+
 	        
 	    </RelativeLayout>
 	</TableRow>
@@ -107,8 +170,22 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsArtistDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageArtistSet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageArtist"
+	            android:layout_alignBottom="@+id/detailsPageArtist"
+	            android:layout_toRightOf="@+id/detailsPageArtist"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
+	        
+	        
 	        <TextView
 	            android:layout_marginTop="5dp"
 	            android:id="@+id/detailsPageHistory"
@@ -116,8 +193,21 @@
 	            android:layout_below="@+id/detailsPageAlbum"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsHistoryDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageHistorySet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageHistory"
+	            android:layout_alignBottom="@+id/detailsPageHistory"
+	            android:layout_toRightOf="@+id/detailsPageHistory"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
+	        
 	        <TextView
 	            android:layout_marginTop="5dp"
 	            android:id="@+id/detailsPageDate"
@@ -125,8 +215,21 @@
 	            android:layout_below="@+id/detailsPageArtist"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsDateDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageDateSet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageDate"
+	            android:layout_alignBottom="@+id/detailsPageDate"
+	            android:layout_toRightOf="@+id/detailsPageDate"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
+	        
 	        <TextView
 	            android:layout_marginTop="5dp"
 	            android:id="@+id/detailsPageAlbum"
@@ -134,8 +237,21 @@
 	            android:layout_below="@+id/detailsPageDate"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsAlbumDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageAlbumSet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageAlbum"
+	            android:layout_alignBottom="@+id/detailsPageAlbum"
+	            android:layout_toRightOf="@+id/detailsPageAlbum"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
+	        
 	        <TextView
 	            android:layout_marginTop="5dp"
 	            android:id="@+id/detailsPageGender"
@@ -143,8 +259,20 @@
 	            android:layout_below="@+id/detailsPageHistory"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
+	            android:textStyle="bold"
 	            android:text="@string/detailsGenderDefault"
 	 		/>
+	        
+	        <TextView
+	            android:id="@+id/detailsPageGenderSet"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/detailsPageGender"
+	            android:layout_alignBottom="@+id/detailsPageGender"
+	            android:layout_toRightOf="@+id/detailsPageGender"
+	            android:paddingLeft="5dp"
+	            android:text=""
+	            android:textColor="#757575" />
 	    </RelativeLayout>
 	</TableRow>
-</TableLayout>
+</LinearLayout>

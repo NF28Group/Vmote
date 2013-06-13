@@ -76,16 +76,16 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
     	rootView = inflater.inflate(
     			R.layout.fragment_lecture_details_layout, container, false);
     	
-    	title = (TextView) rootView.findViewById(R.id.detailsPageElementTitle);
-    	duration = (TextView) rootView.findViewById(R.id.detailsPageDuration);
-    	length = (TextView) rootView.findViewById(R.id.detailsPageLength);
-    	height = (TextView) rootView.findViewById(R.id.detailsPageHeight);
-    	frameRate = (TextView) rootView.findViewById(R.id.detailsPageFrameRate);
-    	date = (TextView) rootView.findViewById(R.id.detailsPageDate);
-    	artist = (TextView) rootView.findViewById(R.id.detailsPageArtist);
-    	album = (TextView) rootView.findViewById(R.id.detailsPageAlbum);
-    	gender = (TextView) rootView.findViewById(R.id.detailsPageGender);
-    	history = (TextView) rootView.findViewById(R.id.detailsPageHistory);
+    	title = (TextView) rootView.findViewById(R.id.detailsPageElementTitleSet);
+    	duration = (TextView) rootView.findViewById(R.id.detailsPageDurationSet);
+    	length = (TextView) rootView.findViewById(R.id.detailsPageLengthSet);
+    	height = (TextView) rootView.findViewById(R.id.detailsPageHeightSet);
+    	frameRate = (TextView) rootView.findViewById(R.id.detailsPageFrameRateSet);
+    	date = (TextView) rootView.findViewById(R.id.detailsPageDateSet);
+    	artist = (TextView) rootView.findViewById(R.id.detailsPageArtistSet);
+    	album = (TextView) rootView.findViewById(R.id.detailsPageAlbumSet);
+    	gender = (TextView) rootView.findViewById(R.id.detailsPageGenderSet);
+    	history = (TextView) rootView.findViewById(R.id.detailsPageHistorySet);
 
     	// bad here
     	//this.model.setDetailsElement();
@@ -113,7 +113,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setTitle(String title) {
-		this.title.setText(getString(R.string.detailsTitleDefault) + " " + title);
+		this.title.setText(title);
 	}
 	
 	public TextView getDuration() {
@@ -121,7 +121,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setDuration(String duration) {
-		this.duration.setText(getString(R.string.detailsDurationDefault) + " " + duration);
+		this.duration.setText(duration);
 	}
 
 	public TextView getLength() {
@@ -129,7 +129,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setLength(String length) {
-		this.length.setText(getString(R.string.detailsLengthDefault) + " " + length);
+		this.length.setText(length);
 	}
 
 	public TextView getHeight() {
@@ -137,7 +137,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setHeight(String height) {
-		this.height.setText(getString(R.string.detailsHeightDefault) + " " + height);
+		this.height.setText(height);
 	}
 
 	public TextView getFrameRate() {
@@ -145,7 +145,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setFrameRate(String frameRate) {
-		this.frameRate.setText(getString(R.string.detailsFrameRateDefault) + " " + frameRate);
+		this.frameRate.setText(frameRate);
 	}
 
 	public TextView getDate() {
@@ -153,7 +153,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setDate(String date) {
-		this.date.setText(getString(R.string.detailsDateDefault) + " " + date);
+		this.date.setText(date);
 	}
 
 	public TextView getArtist() {
@@ -161,7 +161,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setArtist(String artist) {
-		this.artist.setText(getString(R.string.detailsArtistDefault) + " " + artist);
+		this.artist.setText(artist);
 	}
 
 	public TextView getHistory() {
@@ -169,7 +169,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setHistory(String history) {
-		this.history.setText(getString(R.string.detailsHistoryDefault) + " " + history);
+		this.history.setText(history);
 	}
 
 	public TextView getAlbum() {
@@ -177,7 +177,7 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setAlbum(String album) {
-		this.album.setText(getString(R.string.detailsAlbumDefault) + " " + album);
+		this.album.setText(album);
 	}
 
 	public TextView getGender() {
@@ -185,6 +185,6 @@ public class PlayDetailsFragment extends AbstractPlayFragment {
 	}
 
 	public void setGender(String gender) {
-		this.gender.setText(getString(R.string.detailsGenderDefault)+ " " + gender);
+		this.gender.setText(gender);
 	}
 }

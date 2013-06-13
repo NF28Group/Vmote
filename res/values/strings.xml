@@ -77,7 +77,7 @@
     <string name="buttonGoToSubtitles">Param.</string>
     
     <!-- details -->
-    <string name="detailsPageTitle">Informations sur la vidéo</string>
+    <string name="detailsPageTitle">Informations sur le média</string>
     <string name="detailsTitleDefault">Titre :</string>
     <string name="detailsDurationDefault">Durée :</string>
 	<string name="detailsLengthDefault">Largeur trame :</string>

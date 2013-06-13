@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -7,21 +7,33 @@
     <TextView
         android:id="@+id/textNameMedia"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.29"
-	    android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <ImageView
-        android:id="@+id/mediaImage"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/imageMediaInfo"
-        android:gravity="center" />
+	    android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:paddingTop="10dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+       	android:textColor="@android:color/holo_blue_dark"
+        android:text="Title"
+        android:layout_alignParentTop="true"/>
+    
+    <TextView
+        android:id="@+id/playArtistAlbumLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	    android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:paddingTop="2dp"
+        android:textSize="14sp"
+       	android:textColor="@android:color/darker_gray"
+        android:text="Artiste - Album"
+        android:layout_below="@+id/textNameMedia"/>
 
     <RelativeLayout
+        android:id="@+id/soundZone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_above="@+id/playZone">
 
         <ImageButton
             android:id="@+id/buttonMute"
@@ -47,8 +59,10 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/playZone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_alignParentBottom="true">
 
         <ImageButton
             android:id="@+id/buttonPlay"
@@ -100,4 +114,12 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/mediaImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textNameMedia"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/imageMediaInfo" />
+
+</RelativeLayout>
