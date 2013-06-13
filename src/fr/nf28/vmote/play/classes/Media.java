@@ -40,8 +40,11 @@ public class Media {
 	}
 
 	public void setName(String name) {
-		this.name = manageName(name);
 		this.isMovie = manageAudioOrMovie(name);
+		if(isMovie)
+			this.name = manageName(name);
+		else
+			this.name = name.replace("\"", "");
 	}
 		
 	private String manageName(String n){

@@ -14,7 +14,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
        	android:textColor="@android:color/holo_blue_dark"
-        android:text="Title"
         android:layout_alignParentTop="true"/>
     
     <TextView
@@ -26,7 +25,6 @@
         android:paddingTop="2dp"
         android:textSize="14sp"
        	android:textColor="@android:color/darker_gray"
-        android:text="Artiste - Album"
         android:layout_below="@+id/textNameMedia"/>
 
     <RelativeLayout
@@ -70,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/clickbuttoneffect"
+            android:background="@drawable/playbuttoneffect"
             android:contentDescription="@string/buttonPlay"
             android:src="@drawable/play" />
 
@@ -80,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/buttonPlay"
-            android:background="@drawable/clickbuttoneffect"
+            android:background="@drawable/playsmallbuttoneffect"
             android:contentDescription="@string/buttonBackward"
             android:src="@drawable/back" />
 
@@ -90,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/buttonPlay"
-            android:background="@drawable/clickbuttoneffect"
+            android:background="@drawable/playsmallbuttoneffect"
             android:contentDescription="@string/buttonForward"
             android:src="@drawable/next" />
 

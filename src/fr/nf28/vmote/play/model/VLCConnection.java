@@ -358,7 +358,7 @@ IP Nico B. :
      */
     
 	public void updateMedia(View rv) {
-		upateNameMedia((TextView) rv.findViewById(R.id.textNameMedia));
+		upateNameMedia((TextView) rv.findViewById(R.id.textNameMedia), (TextView) rv.findViewById(R.id.playArtistAlbumLabel));
 		updateVolumeMedia((SeekBar) rv.findViewById(R.id.seekBarPlaySound));
 		updateStateMedia((ImageButton) rv.findViewById(R.id.buttonPlay),(ImageButton) rv.findViewById(R.id.buttonRepeat),(ImageButton) rv.findViewById(R.id.buttonShuffle));
 		updateImageMedia((ImageView) rv.findViewById(R.id.mediaImage));
@@ -389,8 +389,20 @@ IP Nico B. :
 			img.setImageResource(R.drawable.music);
 	}
 	
-	private void upateNameMedia(TextView tv){
-    	tv.setText(media.getName());
+	private void upateNameMedia(TextView name, TextView info){
+    	name.setText(media.getName());
+    	
+    	String tmp_str = "";
+    	if(media.getArtist().equals("") && media.getAlbum().equals(""))
+    		tmp_str = "";
+    	else if(media.getArtist().equals("") && !(media.getAlbum().equals("")))
+    		tmp_str = media.getAlbum();
+    	else if(media.getAlbum().equals("") && !(media.getArtist().equals("")))
+    		tmp_str = media.getArtist();
+    	else if(!(media.getAlbum().equals("")) && !(media.getArtist().equals("")))
+    		tmp_str = media.getArtist() + " - " + media.getArtist();
+    	
+		info.setText(tmp_str);
 	}
 	
 	private void updateVolumeMedia(SeekBar sb){
