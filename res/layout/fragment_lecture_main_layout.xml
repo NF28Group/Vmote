@@ -8,26 +8,26 @@
         android:id="@+id/textNameMedia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-	    android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:layout_alignParentTop="true"
+        android:gravity="center"
         android:paddingTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/holo_blue_dark"
         android:textSize="16sp"
-        android:textStyle="bold"
-       	android:textColor="@android:color/holo_blue_dark"
-        android:layout_alignParentTop="true"/>
-    
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/playArtistAlbumLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-	    android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:layout_below="@+id/textNameMedia"
+        android:gravity="center"
         android:paddingTop="2dp"
-        android:textSize="14sp"
-       	android:textColor="@android:color/darker_gray"
-        android:layout_below="@+id/textNameMedia"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
 
-    <RelativeLayout
+     <RelativeLayout
         android:id="@+id/soundZone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
@@ -59,8 +59,8 @@
     <RelativeLayout
         android:id="@+id/playZone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
 
         <ImageButton
             android:id="@+id/buttonPlay"
@@ -86,6 +86,7 @@
             android:id="@+id/buttonForward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/buttonBackward"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/buttonPlay"
             android:background="@drawable/playsmallbuttoneffect"
@@ -93,22 +94,22 @@
             android:src="@drawable/next" />
 
         <ImageButton
-            android:id="@+id/buttonShuffle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/buttonForward"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@string/buttonShuffle"
-            android:src="@drawable/shuffle" />
-
-        <ImageButton
             android:id="@+id/buttonRepeat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:contentDescription="@string/buttonRepeat"
             android:src="@drawable/loop" />
+
+        <ImageButton
+            android:id="@+id/buttonShuffle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/buttonShuffle"
+            android:src="@drawable/shuffle" />
 
     </RelativeLayout>
 
