@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fr.nf28.vmote.db.episode.Episode;
 import fr.nf28.vmote.db.episode.EpisodeDAO;
@@ -151,5 +153,31 @@ public class SeriesModel {
 	}
 	public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
 		pcs.removePropertyChangeListener(listener);
+	}
+	
+	public static void autoAddTvShow(String fileName){
+		System.out.println("Nom de ficher :" + fileName);
+		parsingFileName(fileName);
+	}
+	
+	private static boolean parsingFileName(String fileName){
+		//Format : Name.S01E02   ex : The.Following.S01E03.FASTSUB.VOSTFR.HDTV.XviD-ADDiCTiON.avi
+		boolean parsed = false;
+		Pattern p = Pattern.compile("^(.*)\\.S([0-9]+)E([0-9]+)\\..*$");
+		Matcher m = p.matcher(fileName);
+		
+		if(m.matches()){
+			String tvSeriesTitle = m.group(1).replace('.',' ');
+			String season = m.group(2);
+			String episode = m.group(3);
+			parsed = true;
+			System.out.println("TVShow : " + tvSeriesTitle + ", Season: " + season + ", Episode:" + episode);
+		}
+		
+		return parsed;
+	}
+	
+	private static void checkEpisodeWithTvShowAndSeason(String tvShow, int season){
+		
 	}
 }

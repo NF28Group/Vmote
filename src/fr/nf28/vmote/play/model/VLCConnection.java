@@ -12,6 +12,7 @@ import fr.nf28.vmote.lib.JsonReader;
 import fr.nf28.vmote.play.classes.CheckConnection;
 import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.classes.Media;
+import fr.nf28.vmote.series.model.SeriesModel;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -400,7 +401,7 @@ IP Nico B. :
     	else if(media.getAlbum().equals("") && !(media.getArtist().equals("")))
     		tmp_str = media.getArtist();
     	else if(!(media.getAlbum().equals("")) && !(media.getArtist().equals("")))
-    		tmp_str = media.getArtist() + " - " + media.getArtist();
+    		tmp_str = media.getArtist() + " - " + media.getAlbum();
     	
 		info.setText(tmp_str);
 	}
@@ -426,6 +427,8 @@ IP Nico B. :
 			btn_suffle.setImageResource(R.drawable.shuffle_on);
 		else if(media.getRandom().equals("false"))
 			btn_suffle.setImageResource(R.drawable.shuffle);
+		
+		SeriesModel.autoAddTvShow(media.getName());
 	}
 
     /* 

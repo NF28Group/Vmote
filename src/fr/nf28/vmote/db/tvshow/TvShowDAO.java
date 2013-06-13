@@ -98,6 +98,16 @@ public class TvShowDAO extends DAOBase {
 			return null;
 	}
 	
+	public TvShow selectWithTvShowName(String name) {
+		Cursor c = mDb.rawQuery("SELECT * FROM " + TVSHOW_TABLE_NAME + " WHERE " + TVSHOW_NAME + " = ?", new String[]{name});
+		
+		List<TvShow> series = toTvShows(c);
+		if(series.size() > 0)
+			return series.get(0);
+		else
+			return null;
+	}
+	
 
 	/**
 	 * ! Cursor result must contain all columns 

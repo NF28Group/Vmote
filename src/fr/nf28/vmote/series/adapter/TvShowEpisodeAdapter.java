@@ -33,11 +33,13 @@ public class TvShowEpisodeAdapter extends ArrayAdapter<Episode> {
 			rowView = inflater.inflate(R.layout.tvseries_episode_list_cell, parent, false);
 		
 		TextView episodeTitleLabel = (TextView) rowView.findViewById(R.id.tvShowEpisodeLabel);
+		TextView firstAiredLabel = (TextView) rowView.findViewById(R.id.tvShowFirstAired);
 		ImageButton checkButton = (ImageButton) rowView.findViewById(R.id.tvShowEpisodeCheck);
 
 		final Episode currentEpisode = list.get(position);   
 		String episodeLabel = currentEpisode.getSeasonNumberString() + "x" + currentEpisode.getEpisodeNumberString() + " - " + currentEpisode.getEpisodeName();
 		episodeTitleLabel.setText(episodeLabel);
+		firstAiredLabel.setText("Première diffusion : " + currentEpisode.getFirstAiredString());
 		
 		checkButton.setOnClickListener(new View.OnClickListener() {
 			@Override
