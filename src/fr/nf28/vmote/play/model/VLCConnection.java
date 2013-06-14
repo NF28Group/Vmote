@@ -65,6 +65,10 @@ IP Nico B. :
     private static final int TASK_SUBDELAY = 9;
     private static final String COMMAND_AUDIODELAY = "audiodelay&val=%VALUE%";
     private static final int TASK_AUDIODELAY = 10;
+    private static final String COMMAND_SETSUB = "subtitle_track&val=%VALUE%";
+    private static final int TASK_SETSUB = 11;
+    private static final String COMMAND_SETAUDIO = "audio_track&val=%VALUE%";
+    private static final int TASK_SETAUDIO = 12;
     
 	private VLCConnection() {
 		media = new Media();
@@ -242,6 +246,12 @@ IP Nico B. :
     			d = id_command[1];
     			command_to_execute = COMMAND_SUBDELAY.replace("%VALUE%", String.valueOf(d/1000));
     			break;
+    		case TASK_SETSUB:
+    			command_to_execute = COMMAND_SETSUB.replace("%VALUE%", String.valueOf(id_command[1]));
+    			break;
+    		case TASK_SETAUDIO:
+    			command_to_execute = COMMAND_SETAUDIO.replace("%VALUE%", String.valueOf(id_command[1]));
+    			break;
     		default : command_to_execute = "";    			
     		}
     		
@@ -344,6 +354,18 @@ IP Nico B. :
 	public void audioDelay(int s) {
 		Command audiodelay_task = new Command();
 		audiodelay_task.execute(TASK_AUDIODELAY,s);
+    }
+	
+	/* Definition de la fonction SET SUBTITLE */
+	public void setSubtitle(int s) {
+		Command setsub_task = new Command();
+		setsub_task.execute(TASK_SETSUB,s);
+    }
+
+	/* Definition de la fonction SET AUDIO */
+	public void setAudio(int s) {
+		Command setaudio_task = new Command();
+		setaudio_task.execute(TASK_SETAUDIO,s);
     }
 	
     /* 

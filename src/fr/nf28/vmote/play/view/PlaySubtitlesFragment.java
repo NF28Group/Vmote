@@ -8,11 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
+import fr.nf28.vmote.play.classes.Media;
 import fr.nf28.vmote.play.model.PlayModel;
 
 public class PlaySubtitlesFragment extends AbstractPlayFragment {
@@ -103,6 +107,8 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
             }
  
             public void onStopTrackingTouch(SeekBar seekBar) {
+            	// solution de rechange car MyViewPager marche pas
+            	if(!model.getVlcConnection().getMedia().isMovie())return;
             	model.ajustAudio(value);
             }
         });
@@ -120,12 +126,35 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
             }
  
             public void onStopTrackingTouch(SeekBar seekBar) {
+            	if(!model.getVlcConnection().getMedia().isMovie())return;
             	model.ajustSubtitle(value);
             }
         });
     	
     	// gestion des listes
-    	//this.model.setSubtitlesElement();
+    	if(this.model.getVlcConnection().getMedia().getIsMovie()) {
+        	this.model.setSubtitlesElement();    		
+    	}
+    	
+    	this.audioList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// solution de rechange car MyViewPager marche pas
+            	if(!model.getVlcConnection().getMedia().isMovie())return;
+				model.setAudioPiste(arg2);
+			}
+		});
+    	
+    	this.subtitleList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// solution de rechange car MyViewPager marche pas
+            	if(!model.getVlcConnection().getMedia().isMovie())return;
+				model.setSubtitlePiste(arg2);
+			}
+		});
     	
     	return rootView;
     }

@@ -157,10 +157,25 @@ public class PlayModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public void commandSetAudio(int val){
+		try {
+			this.vlcConnection.setAudio(val);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void commandSetSub(int val){
+		try {
+			this.vlcConnection.setSubtitle(val);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void updateMedia(View rv) {		
 		this.vlcConnection.updateMedia(rv);
-		
 	}
 
 	public void checkMedia(View rv) {
@@ -304,5 +319,13 @@ public class PlayModel {
 		System.out.println("is_loop = " + is_loop);
 		System.out.println("is_repeat = " + is_repeat);
 		
+	}
+
+	public void setAudioPiste(int v) {
+		this.commandSetAudio(v);
+	}
+
+	public void setSubtitlePiste(int v) {
+		this.commandSetSub(v);
 	}
 }

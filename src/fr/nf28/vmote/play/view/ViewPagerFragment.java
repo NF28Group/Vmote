@@ -1,7 +1,9 @@
 package fr.nf28.vmote.play.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +28,7 @@ public class ViewPagerFragment extends AbstractPlayFragment {
 	private Button buttonToMain;
 	private Button buttonToSubtitles;
 	
-    collectionPagerAdapter mCollectionPagerAdapter;
+	CollectionPagerAdapter mCollectionPagerAdapter;
     ViewPager mViewPager;
 	
 	public ViewPagerFragment() {}
@@ -46,7 +48,7 @@ public class ViewPagerFragment extends AbstractPlayFragment {
     			R.layout.fragment_lecture_top_layout, container, false);
     	        
         mViewPager = (ViewPager) rootView.findViewById(R.id.playPager);
-        mViewPager.setAdapter(new collectionPagerAdapter(getChildFragmentManager()));
+        mViewPager.setAdapter(new CollectionPagerAdapter(getChildFragmentManager()));
     	
         // buttons
         buttonToDetails = (Button) rootView.findViewById(R.id.goto_first);
@@ -70,7 +72,9 @@ public class ViewPagerFragment extends AbstractPlayFragment {
         buttonToSubtitles.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mViewPager.setCurrentItem(2);
+				if(model.getVlcConnection().getMedia().isMovie()) {
+					mViewPager.setCurrentItem(2);
+				}
 			}
 		});
         
@@ -111,9 +115,28 @@ public class ViewPagerFragment extends AbstractPlayFragment {
 	public void setButtonToSubtitles(Button buttonToSubtitles) {
 		this.buttonToSubtitles = buttonToSubtitles;
 	}
+	
 
-	public class collectionPagerAdapter extends FragmentPagerAdapter {
-	    public collectionPagerAdapter(FragmentManager fm) {
+/* marche pas : inflate fail
+	public class MyViewPager extends ViewPager {
+		public MyViewPager(Context context, AttributeSet attrs) {	
+			super(context, attrs);
+		}
+		
+		@Override
+		protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
+			if(!model.getVlcConnection().getMedia().getIsMovie() 
+					&& this.getCurrentItem()==1
+					&& dx<0) {
+				Log.i("SWIPE", "Le swipe c'est NON");
+				return false;
+			}
+			return super.canScroll(v, checkV, dx, x, y);    
+		}
+	}
+	*/
+	public class CollectionPagerAdapter extends FragmentPagerAdapter {
+	    public CollectionPagerAdapter(FragmentManager fm) {
 	        super(fm);
 	    }
 	
@@ -134,7 +157,7 @@ public class ViewPagerFragment extends AbstractPlayFragment {
 			case 2:
 				fragment = PlaySubtitlesFragment.newInstance();
 				arguments.putString(PlaySubtitlesFragment.ARG_ITEM_ID, "subtitles_play_fragment");
-				break;
+				break;	
 			default: // back on main
 				fragment = PlayMainFragment.newInstance();
 				arguments.putString(PlayMainFragment.ARG_ITEM_ID, "main_play_fragment");

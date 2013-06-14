@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Media {
 
 	private String[] movieExtension =  {".mp4",".mkv",".avi"};
-	private boolean isMovie = false;
+	private boolean isMovie;
 	private String name;
 	private String state;
 	private String volume;
@@ -31,6 +31,7 @@ public class Media {
 	private String subtitleEcart;
 	
 	public Media(){
+		isMovie = false;
 		subtitleList = new SubtitleList();
 		audioList = new SubtitleList();
 	}
@@ -225,5 +226,9 @@ public class Media {
 
 	public void setRandom(String random) {
 		this.random = random;
+	}
+	
+	public boolean getIsMovie() {
+		return this.isMovie;
 	}
 }
