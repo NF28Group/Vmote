@@ -190,7 +190,7 @@ IP Nico B. :
     	            inetAddress = InetAddress.getByName("192.168.0." + String.valueOf(i));
     	            if(inetAddress.isReachable(10000)){    	            	
     	                hosts.add(inetAddress.getHostName());
-    	                Log.i("IPPPPPPPPPPPP", inetAddress.getHostName());
+    	                //Log.i("IPPPPPPPPPPPP", inetAddress.getHostName());
     	            }
     	        } catch (UnknownHostException e) {
     	            e.printStackTrace();
