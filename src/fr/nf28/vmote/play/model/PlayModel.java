@@ -1,9 +1,9 @@
 package fr.nf28.vmote.play.model;
 
 import fr.nf28.vmote.R;
-import fr.nf28.vmote.play.adapter.SubtitleListAdapter;
 import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.classes.Media;
+import fr.nf28.vmote.play.classes.SubtitleList;
 import fr.nf28.vmote.play.view.PlayDetailsFragment;
 import fr.nf28.vmote.play.view.PlayMainFragment;
 import fr.nf28.vmote.play.view.PlaySubtitlesFragment;
@@ -303,11 +303,26 @@ public class PlayModel {
 	public void setSubtitlesElement() {
 		Media media = this.vlcConnection.getMedia();
 		
-		SubtitleListAdapter subAdapter = new SubtitleListAdapter(media.getSubtitleList());
-		SubtitleListAdapter audioAdapter = new SubtitleListAdapter(media.getAudioList());
-		
-		this.subtitleView.getSubtitleList().setAdapter(subAdapter);
-		this.subtitleView.getAudioList().setAdapter(audioAdapter);
+		try {
+			this.subtitleView.getTvAudioTrack().setText(media.getAudioList().getList().get(0).getText());
+			this.subtitleView.getTvSubtitleTrack().setText(media.getSubtitleList().getList().get(0).getText());
+			media.getAudioList().setCurrent(0);
+			media.getSubtitleList().setCurrent(0);
+			// affiche les fleches
+			this.subtitleView.getBtnAudioNext().setVisibility(View.VISIBLE);
+			this.subtitleView.getBtnAudioPrevious().setVisibility(View.VISIBLE);
+			this.subtitleView.getBtnSubtitleNext().setVisibility(View.VISIBLE);
+			this.subtitleView.getBtnSubtitlePrevious().setVisibility(View.VISIBLE);
+		}
+		catch(IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			
+			// efface les fleches
+			this.subtitleView.getBtnAudioNext().setVisibility(View.INVISIBLE);
+			this.subtitleView.getBtnAudioPrevious().setVisibility(View.INVISIBLE);
+			this.subtitleView.getBtnSubtitleNext().setVisibility(View.INVISIBLE);
+			this.subtitleView.getBtnSubtitlePrevious().setVisibility(View.INVISIBLE);
+		}
 	}
 
 	public void initializeBoolean() {
@@ -321,11 +336,56 @@ public class PlayModel {
 		
 	}
 
-	public void setAudioPiste(int v) {
-		this.commandSetAudio(v);
+	public void setAudioPiste(boolean isPrevious) {
+		Media media = this.vlcConnection.getMedia();
+		SubtitleList audioList = media.getAudioList();
+		int current = audioList.getCurrent();
+		
+		if(isPrevious) {
+			current--;
+			if(current >=0) {
+				this.commandSetAudio(current);
+				this.subtitleView.getTvAudioTrack().setText(audioList.getList().get(current).getText());
+			}
+			else {
+				current++;
+			}
+		}
+		else {
+			current++;
+			if(current < audioList.getList().size()) {
+				this.commandSetAudio(current);
+				this.subtitleView.getTvAudioTrack().setText(audioList.getList().get(current).getText());
+			}
+			else
+				current--;
+		}
 	}
 
-	public void setSubtitlePiste(int v) {
-		this.commandSetSub(v);
+
+	public void setSubtitlePiste(boolean isPrevious) {
+		Media media = this.vlcConnection.getMedia();
+		SubtitleList subList = media.getSubtitleList();
+		int current = subList.getCurrent();
+		
+		if(isPrevious) {
+			current--;
+			if(current >=0) {
+				this.commandSetSub(current);
+				this.subtitleView.getTvSubtitleTrack().setText(subList.getList().get(current).getText());
+			}
+			else {
+				current++;
+			}
+		}
+		else {
+			current++;
+			if(current < subList.getList().size()) {
+				this.commandSetSub(current);
+				this.subtitleView.getTvSubtitleTrack().setText(subList.getList().get(current).getText());
+			}
+			else
+				current--;
+		}
 	}
 }

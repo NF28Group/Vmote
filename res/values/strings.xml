@@ -109,4 +109,6 @@
     <string name="subtitlePageSynchroAudio">Synchronisation audio</string>
     <string name="subtitlePageSynchroSubtitle">Synchronisation sous-titres</string>  
     <string name="subtitlePageDefaultSynchro">+ 0 ms</string>  
+    <string name="subtitlePageNextArrow">Piste suivante</string>
+    <string name="subtitlePagePreviousArrow">Piste précédente</string>
 </resources>

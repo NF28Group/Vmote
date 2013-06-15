@@ -1,22 +1,22 @@
 package fr.nf28.vmote.play.view;
 
-import com.devsmart.android.ui.HorizontalListView;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.interfaces.OnChangePageListener;
-import fr.nf28.vmote.play.classes.Media;
 import fr.nf28.vmote.play.model.PlayModel;
 
 public class PlaySubtitlesFragment extends AbstractPlayFragment {
@@ -29,8 +29,14 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 	private SeekBar sbAudio;
 	private SeekBar sbSubtitle;
 	
-	private HorizontalListView subtitleList;
-	private HorizontalListView audioList;
+	private ImageButton btnAudioPrevious;
+	private ImageButton btnAudioNext;
+	private ImageButton btnSubtitlePrevious;
+	private ImageButton btnSubtitleNext;
+	private TextView tvAudioTrack;
+	private TextView tvSubtitleTrack;
+
+
 	
 	@SuppressWarnings("unused")
 	private OnChangePageListener changePageCallback = sDummyChangePageCallback;
@@ -86,8 +92,12 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     	sbAudio = (SeekBar) rootView.findViewById(R.id.seekBarAudio);
     	sbSubtitle = (SeekBar) rootView.findViewById(R.id.seekBarSubtitle);
     	
-    	subtitleList = (HorizontalListView) rootView.findViewById(R.id.subtitleSelectList);
-    	audioList = (HorizontalListView) rootView.findViewById(R.id.audioSelectList);
+    	btnAudioNext = (ImageButton) rootView.findViewById(R.id.audioRightArrow);
+    	btnAudioPrevious = (ImageButton) rootView.findViewById(R.id.audioLeftArrow);
+    	btnSubtitleNext = (ImageButton) rootView.findViewById(R.id.subtitleRightArrow);
+    	btnSubtitlePrevious = (ImageButton) rootView.findViewById(R.id.subtitleLeftArrow);
+    	tvAudioTrack = (TextView) rootView.findViewById(R.id.tvAudioList);
+    	tvSubtitleTrack = (TextView) rootView.findViewById(R.id.tvSubtitleList);
     	
     	etAudio.setEnabled(false);
     	etSubtitle.setEnabled(false);
@@ -136,7 +146,7 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
         	this.model.setSubtitlesElement();    		
     	}
     	
-    	this.audioList.setOnItemClickListener(new OnItemClickListener() {
+    	/*this.audioList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -144,9 +154,9 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
             	if(!model.getVlcConnection().getMedia().isMovie())return;
 				model.setAudioPiste(arg2);
 			}
-		});
+		});*/
     	
-    	this.subtitleList.setOnItemClickListener(new OnItemClickListener() {
+    	/*this.subtitleList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -154,7 +164,44 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
             	if(!model.getVlcConnection().getMedia().isMovie())return;
 				model.setSubtitlePiste(arg2);
 			}
+		});*/
+    	
+    	this.btnAudioPrevious.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!model.getVlcConnection().getMedia().isMovie())return;
+				model.setAudioPiste(true);
+			}
 		});
+    	
+		this.btnAudioNext.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						if(!model.getVlcConnection().getMedia().isMovie())return;
+						model.setAudioPiste(false);
+					}
+				});
+		
+		this.btnSubtitlePrevious.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!model.getVlcConnection().getMedia().isMovie())return;
+				model.setSubtitlePiste(true);
+			}
+		});
+		
+		this.btnAudioPrevious.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!model.getVlcConnection().getMedia().isMovie())return;
+				model.setSubtitlePiste(false);
+			}
+		});
+
     	
     	return rootView;
     }
@@ -206,19 +253,51 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 		this.etAudio = etAudio;
 	}
 
-	public HorizontalListView getAudioList() {
-		return audioList;
+	public ImageButton getBtnAudioPrevious() {
+		return btnAudioPrevious;
 	}
 
-	public void setAudioList(HorizontalListView audioList) {
-		this.audioList = audioList;
+	public void setBtnAudioPrevious(ImageButton btnAudioPrevious) {
+		this.btnAudioPrevious = btnAudioPrevious;
 	}
 
-	public HorizontalListView getSubtitleList() {
-		return subtitleList;
+	public ImageButton getBtnAudioNext() {
+		return btnAudioNext;
 	}
 
-	public void setSubtitleList(HorizontalListView subtitleList) {
-		this.subtitleList = subtitleList;
+	public void setBtnAudioNext(ImageButton btnAudioNext) {
+		this.btnAudioNext = btnAudioNext;
+	}
+
+	public ImageButton getBtnSubtitlePrevious() {
+		return btnSubtitlePrevious;
+	}
+
+	public void setBtnSubtitlePrevious(ImageButton btnSubtitlePrevious) {
+		this.btnSubtitlePrevious = btnSubtitlePrevious;
+	}
+
+	public ImageButton getBtnSubtitleNext() {
+		return btnSubtitleNext;
+	}
+
+	public void setBtnSubtitleNext(ImageButton btnSubtitleNext) {
+		this.btnSubtitleNext = btnSubtitleNext;
+	}
+
+	public TextView getTvAudioTrack() {
+		return tvAudioTrack;
+	}
+
+	public void setTvAudioTrack(TextView tvAudioTrack) {
+		this.tvAudioTrack = tvAudioTrack;
+	}
+
+	public TextView getTvSubtitleTrack() {
+		return tvSubtitleTrack;
+	}
+
+	public void setTvSubtitleTrack(TextView tvSubtitleTrack) {
+		this.tvSubtitleTrack = tvSubtitleTrack;
 	}
 }

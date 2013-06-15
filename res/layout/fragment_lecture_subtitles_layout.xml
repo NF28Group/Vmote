@@ -33,22 +33,46 @@
 	    >
 		<RelativeLayout
 		    android:layout_width="fill_parent"
-		    android:layout_height="30dp"
+		    android:layout_height="50dp"
 		    android:paddingTop="5dp" 
 		    >
 		  <TextView
+		      		      android:paddingTop="10dp"
 		    android:id="@+id/subtitlePageAudioSelect"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="@string/subtitlePageAudioSelect" />
 	    
-	    <com.devsmart.android.ui.HorizontalListView
+	    <LinearLayout
+	        android:orientation="horizontal"
 	        android:id="@+id/audioSelectList"
 	        android:layout_width="235dp"
 	        android:layout_marginLeft="5dp"
 	        android:layout_toRightOf="@+id/subtitlePageAudioSelect"
-	        android:layout_height="20dp"
-	        />
+	        android:layout_height="30dp"
+	        >
+	        <ImageButton
+	            android:src="@drawable/arrow_left"
+	            style="?android:attr/buttonBarButtonStyle"
+	            android:contentDescription="@string/subtitlePagePreviousArrow"
+	            android:id="@+id/audioLeftArrow"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            />
+	        <TextView
+			    android:id="@+id/tvAudioList"
+			    android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"/>
+	         <ImageButton
+	             android:src="@drawable/arrow_right"
+	             style="?android:attr/buttonBarButtonStyle"
+             	android:contentDescription="@string/subtitlePageNextArrow"
+	            android:id="@+id/audioRightArrow"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            />
+	        
+	        </LinearLayout>
 		</RelativeLayout>
 	</TableRow> 
 	<TableRow 
@@ -64,22 +88,45 @@
 		<RelativeLayout
 		    android:paddingTop="5dp"
 		    android:layout_width="fill_parent"
-		    android:layout_height="30dp" 
+		    android:layout_height="50dp" 
 		    >
 		  <TextView 
+		      android:paddingTop="10dp"
 	        android:id="@+id/subtitlePageSubtitleSelect"
 		    android:layout_width="wrap_content"
 		    android:layout_height="match_parent"
 		    android:text="@string/subtitlePageSubtitleSelect" 
 	        />
 	    
-	    <com.devsmart.android.ui.HorizontalListView
+	    <LinearLayout
+	        android:orientation="horizontal"
 	        android:id="@+id/subtitleSelectList"
 	        android:layout_width="200dp"
 	        android:layout_marginLeft="5dp"
 	        android:layout_toRightOf="@+id/subtitlePageSubtitleSelect"
-	        android:layout_height="20dp"
-	        />
+	        android:layout_height="30dp"
+	        >
+	        <ImageButton
+	            android:src="@drawable/arrow_left"
+	            style="?android:attr/buttonBarButtonStyle"
+	            android:contentDescription="@string/subtitlePagePreviousArrow"
+	            android:id="@+id/subtitleLeftArrow"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            />
+	        <TextView
+			    android:id="@+id/tvSubtitleList"
+			    android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"/>
+	         <ImageButton
+	             android:src="@drawable/arrow_right"
+	             style="?android:attr/buttonBarButtonStyle"
+	             android:contentDescription="@string/subtitlePageNextArrow"
+	            android:id="@+id/subtitleRightArrow"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            />
+	        </LinearLayout>
 		
 		</RelativeLayout>
 	    

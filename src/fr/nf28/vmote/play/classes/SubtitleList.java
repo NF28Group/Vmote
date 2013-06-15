@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class SubtitleList {
 	private ArrayList<Subtitle> list;
+	private int current;
  
 	public SubtitleList() {
+		current = -1;
 		setList(new ArrayList<Subtitle>());
 	}
 
@@ -19,5 +21,13 @@ public class SubtitleList {
 
 	public void add(Subtitle currSub) {
 		this.list.add(currSub);
+	}
+
+	public int getCurrent() {
+		return current;
+	}
+
+	public void setCurrent(int current) {
+		this.current = current;
 	}
 }
