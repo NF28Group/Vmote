@@ -26,12 +26,15 @@
 		android:layout_marginBottom="5dp"
 		android:layout_height="wrap_content"
 	    android:layout_marginLeft="4dp"
+	    	    android:gravity="center"
 	    android:layout_marginRight="4dp"
 	    android:layout_marginTop="10dp"
+	    android:background="@drawable/details_page_background_text"
 	    >
 		<RelativeLayout
 		    android:layout_width="fill_parent"
-		    android:layout_height="30dp" 
+		    android:layout_height="30dp"
+		    android:paddingTop="5dp" 
 		    >
 		  <TextView
 		    android:id="@+id/subtitlePageAudioSelect"
@@ -52,10 +55,14 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginBottom="15dp"
+	    android:layout_marginTop="10dp"
+	    android:gravity="center"
 	    android:layout_marginLeft="4dp"
 	    android:layout_marginRight="4dp"
+	    android:background="@drawable/details_page_background_text"
 	    >
 		<RelativeLayout
+		    android:paddingTop="5dp"
 		    android:layout_width="fill_parent"
 		    android:layout_height="30dp" 
 		    >
@@ -82,15 +89,19 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="4dp"
+	    android:gravity="center"
 	    android:layout_marginRight="4dp"
 	    android:layout_marginTop="20dp"
+	    android:background="@drawable/details_page_background_text"
 	    >
 		<RelativeLayout
+		    android:paddingTop="5dp"
 		    android:layout_width="fill_parent"
 	        android:layout_height="100dp"
 	        android:id="@+id/subtitlePageRelative1" 
 		    >
 		    <TextView
+		        android:paddingTop="5dp"
 	            android:id="@+id/subtitlePageSynchroAudio"
 	            android:layout_width="wrap_content"
 	            android:layout_alignParentLeft="true"
@@ -120,17 +131,22 @@
 	</TableRow>
 	<TableRow 
 	    android:paddingLeft="5dp"
+	    android:layout_marginTop="10dp"
 	    android:layout_width="fill_parent"
+	    android:gravity="center"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="4dp"
 	    android:layout_marginRight="4dp"
+	    android:background="@drawable/details_page_background_text"
 	    >
 	    <RelativeLayout
+	        android:paddingTop="5dp"
 	        android:layout_width="fill_parent"
 	        android:layout_height="100dp"
 	        android:id="@+id/subtitlePageRelative2"
 	        >
 	     <TextView
+	         android:paddingTop="5dp"
 		    android:id="@+id/subtitlePageSynchroSubtitle"
 		    android:layout_alignParentLeft="true"
 		    android:layout_width="wrap_content"
