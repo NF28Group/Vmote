@@ -388,7 +388,7 @@ public class PlayModel {
 			this.subtitleView.getTvAudioTrack().setText(
 					audioList.getList().get(current%audioList.getList().size()).getText());
 			if(current >=0) {
-				this.commandSetAudio(current);
+				this.commandSetAudio(audioList.getList().get(current).getId());
 			}
 			else {
 				current++;
@@ -399,7 +399,7 @@ public class PlayModel {
 			this.subtitleView.getTvSubtitleTrack().setText(
 					audioList.getList().get(current%audioList.getList().size()).getText());
 			if(current < audioList.getList().size()) {
-				this.commandSetAudio(current);
+				this.commandSetAudio(audioList.getList().get(current).getId());
 			}
 			else
 				current--;
@@ -429,7 +429,7 @@ public class PlayModel {
 			this.subtitleView.getTvSubtitleTrack().setText(
 					subList.getList().get(current%subList.getList().size()).getText());
 			if(current >=0) {
-				this.commandSetSub(current);
+				this.commandSetSub(subList.getList().get(current).getId());
 			}
 			else {
 				current++;
@@ -440,7 +440,7 @@ public class PlayModel {
 			this.subtitleView.getTvSubtitleTrack().setText(
 					subList.getList().get(current%subList.getList().size()).getText());
 			if(current < subList.getList().size()) {
-				this.commandSetSub(current);
+				this.commandSetSub(subList.getList().get(current).getId());
 			}
 			else
 				current--;
