@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -145,26 +143,7 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     	if(this.model.getVlcConnection().getMedia().getIsMovie()) {
         	this.model.setSubtitlesElement();    		
     	}
-    	
-    	/*this.audioList.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// solution de rechange car MyViewPager marche pas
-            	if(!model.getVlcConnection().getMedia().isMovie())return;
-				model.setAudioPiste(arg2);
-			}
-		});*/
-    	
-    	/*this.subtitleList.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// solution de rechange car MyViewPager marche pas
-            	if(!model.getVlcConnection().getMedia().isMovie())return;
-				model.setSubtitlePiste(arg2);
-			}
-		});*/
+
     	
     	this.btnAudioPrevious.setOnClickListener(new OnClickListener() {
 			
@@ -177,12 +156,12 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
     	
 		this.btnAudioNext.setOnClickListener(new OnClickListener() {
 					
-					@Override
-					public void onClick(View v) {
-						if(!model.getVlcConnection().getMedia().isMovie())return;
-						model.setAudioPiste(false);
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				if(!model.getVlcConnection().getMedia().isMovie())return;
+				model.setAudioPiste(false);
+			}
+		});
 		
 		this.btnSubtitlePrevious.setOnClickListener(new OnClickListener() {
 			
@@ -193,7 +172,7 @@ public class PlaySubtitlesFragment extends AbstractPlayFragment {
 			}
 		});
 		
-		this.btnAudioPrevious.setOnClickListener(new OnClickListener() {
+		this.btnSubtitleNext.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

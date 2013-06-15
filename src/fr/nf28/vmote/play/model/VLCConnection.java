@@ -135,12 +135,12 @@ IP Nico B. :
             media = JsonReader.getCurrentMediaStatus();
             if(media.getName() == "0"){
                 error.setEtat(4);
-                error.setMessage("Veuillez lancer un m�dia sur VLC !");
+                error.setMessage("Veuillez lancer un media sur VLC !");
     			return error;
             }
     		else{
                 error.setEtat(1);
-                error.setMessage("Pas de probl�me !");
+                error.setMessage("Pas de probleme !");
                 updateMedia(rv[0]);
     			return error;
     		}    	}
@@ -292,35 +292,35 @@ IP Nico B. :
      * 
      */
 	
-    /* D�finition de la fonction PAUSE */
+    /* Definition de la fonction PAUSE */
 	public void pause(View rv) {
 		Command pause_task = new Command();
 		pause_task.execute(TASK_PAUSE);
     	updateMediaWhenTaskEnds(rv,pause_task);
     }
     
-    /* D�finition de la fonction STOP */
+    /* Definition de la fonction STOP */
 	public void stop(View rv) {
 		Command stop_task = new Command();
 		stop_task.execute(TASK_STOP);
     	updateMediaWhenTaskEnds(rv,stop_task);  
     }
     
-    /* D�finition de la fonction NEXT */
+    /* Definition de la fonction NEXT */
 	public void next(View rv) {
 		Command next_task = new Command();
 		next_task.execute(TASK_NEXT);
     	updateMediaWhenTaskEnds(rv,next_task); 
     }
     
-    /* D�finition de la fonction PREVIOUS */
+    /* Definition de la fonction PREVIOUS */
 	public void previous(View rv)  {
 		Command previous_task = new Command();
 		previous_task.execute(TASK_PREVIOUS);
     	updateMediaWhenTaskEnds(rv,previous_task); 
     }
     
-    /* D�finition de la fonction RANDOM */
+    /* Definition de la fonction RANDOM */
 	public void random(View rv) {
 		Command random_task = new Command();
 		random_task.execute(TASK_RANDOM); 
@@ -332,13 +332,13 @@ IP Nico B. :
 		loop_task.execute(TASK_LOOP);
     }
     
-    /* D�finition de la fonction REPEAT */
+    /* Definition de la fonction REPEAT */
 	public void repeat(View rv) {
 		Command repeat_task = new Command();
 		repeat_task.execute(TASK_REPEAT); 
     }
     
-    /* D�finition de la fonction VOLUME */
+    /* Definition de la fonction VOLUME */
 	public void volume(int d) {
 		Command volume_task = new Command();
 		volume_task.execute(TASK_VOLUME,d);

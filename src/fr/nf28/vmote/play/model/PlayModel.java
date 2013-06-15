@@ -3,11 +3,13 @@ package fr.nf28.vmote.play.model;
 import fr.nf28.vmote.R;
 import fr.nf28.vmote.play.classes.LaunchError;
 import fr.nf28.vmote.play.classes.Media;
+import fr.nf28.vmote.play.classes.Subtitle;
 import fr.nf28.vmote.play.classes.SubtitleList;
 import fr.nf28.vmote.play.view.PlayDetailsFragment;
 import fr.nf28.vmote.play.view.PlayMainFragment;
 import fr.nf28.vmote.play.view.PlaySubtitlesFragment;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,8 +26,23 @@ public class PlayModel {
 	private PlayDetailsFragment detailsView;
 	private PlaySubtitlesFragment subtitleView;
 	
+	/*public SubtitleList al;
+	public SubtitleList sl;
+	public int current;*/
+	
 	private PlayModel() {
 		setVlcConnection(VLCConnection.getInstance());
+		/*
+		al = new SubtitleList();
+		al.add(new Subtitle("Piste 1", 0));
+		al.add(new Subtitle("Piste 2", 1));
+		al.add(new Subtitle("Piste 3", 2));
+		al.add(new Subtitle("Piste 4", 3));
+		sl = new SubtitleList();
+		sl.add(new Subtitle("Piste 1", 0));
+		sl.add(new Subtitle("Piste 2", 1));
+		sl.add(new Subtitle("Piste 3", 2));
+		current = 0;*/
 	}
 	
 	private static class PlayModelHolder {
@@ -181,6 +198,8 @@ public class PlayModel {
 	public void checkMedia(View rv) {
 		try {
 			this.vlcConnection.checkMedia(rv);
+			this.setSubtitlesElement();
+			this.setDetailsElement();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -303,6 +322,27 @@ public class PlayModel {
 	public void setSubtitlesElement() {
 		Media media = this.vlcConnection.getMedia();
 		
+		Log.i("TEST", "subList ");
+		for(Subtitle s : media.getSubtitleList().getList()) {
+			Log.i("TEST", "LE SUBTITLE TRACK : " + s.getText());
+		}
+		/*
+		 * TMP
+		 */
+		/*current = 0;
+		this.subtitleView.getTvAudioTrack().setText(this.al.getList().get(current).getText());
+		this.subtitleView.getTvSubtitleTrack().setText(this.sl.getList().get(current).getText());
+
+		// affiche les fleches
+		this.subtitleView.getBtnAudioNext().setVisibility(View.VISIBLE);
+		this.subtitleView.getBtnAudioPrevious().setVisibility(View.VISIBLE);
+		this.subtitleView.getBtnSubtitleNext().setVisibility(View.VISIBLE);
+		this.subtitleView.getBtnSubtitlePrevious().setVisibility(View.VISIBLE);
+		*/
+		/*
+		 * END tmp
+		 */
+		
 		try {
 			this.subtitleView.getTvAudioTrack().setText(media.getAudioList().getList().get(0).getText());
 			this.subtitleView.getTvSubtitleTrack().setText(media.getSubtitleList().getList().get(0).getText());
@@ -338,14 +378,17 @@ public class PlayModel {
 
 	public void setAudioPiste(boolean isPrevious) {
 		Media media = this.vlcConnection.getMedia();
+
+		
 		SubtitleList audioList = media.getAudioList();
 		int current = audioList.getCurrent();
 		
 		if(isPrevious) {
 			current--;
+			this.subtitleView.getTvAudioTrack().setText(
+					audioList.getList().get(current%audioList.getList().size()).getText());
 			if(current >=0) {
 				this.commandSetAudio(current);
-				this.subtitleView.getTvAudioTrack().setText(audioList.getList().get(current).getText());
 			}
 			else {
 				current++;
@@ -353,26 +396,40 @@ public class PlayModel {
 		}
 		else {
 			current++;
+			this.subtitleView.getTvSubtitleTrack().setText(
+					audioList.getList().get(current%audioList.getList().size()).getText());
 			if(current < audioList.getList().size()) {
 				this.commandSetAudio(current);
-				this.subtitleView.getTvAudioTrack().setText(audioList.getList().get(current).getText());
 			}
 			else
 				current--;
 		}
+		media.getAudioList().setCurrent(current);
+		
 	}
 
 
 	public void setSubtitlePiste(boolean isPrevious) {
+		/*if(isPrevious) {
+			this.subtitleView.getTvSubtitleTrack().setText(
+					sl.getList().get((current--)%sl.getList().size()).getText());
+		}
+		else {
+			this.subtitleView.getTvSubtitleTrack().setText(
+					sl.getList().get((current++)%sl.getList().size()).getText());	
+		}*/
 		Media media = this.vlcConnection.getMedia();
+
+		
 		SubtitleList subList = media.getSubtitleList();
 		int current = subList.getCurrent();
 		
 		if(isPrevious) {
 			current--;
+			this.subtitleView.getTvSubtitleTrack().setText(
+					subList.getList().get(current%subList.getList().size()).getText());
 			if(current >=0) {
 				this.commandSetSub(current);
-				this.subtitleView.getTvSubtitleTrack().setText(subList.getList().get(current).getText());
 			}
 			else {
 				current++;
@@ -380,12 +437,15 @@ public class PlayModel {
 		}
 		else {
 			current++;
+			this.subtitleView.getTvSubtitleTrack().setText(
+					subList.getList().get(current%subList.getList().size()).getText());
 			if(current < subList.getList().size()) {
 				this.commandSetSub(current);
-				this.subtitleView.getTvSubtitleTrack().setText(subList.getList().get(current).getText());
 			}
 			else
 				current--;
 		}
+		media.getSubtitleList().setCurrent(current);
+		
 	}
 }
