@@ -326,28 +326,10 @@ public class PlayModel {
 		for(Subtitle s : media.getSubtitleList().getList()) {
 			Log.i("TEST", "LE SUBTITLE TRACK : " + s.getText());
 		}
-		/*
-		 * TMP
-		 */
-		/*current = 0;
-		this.subtitleView.getTvAudioTrack().setText(this.al.getList().get(current).getText());
-		this.subtitleView.getTvSubtitleTrack().setText(this.sl.getList().get(current).getText());
-
-		// affiche les fleches
-		this.subtitleView.getBtnAudioNext().setVisibility(View.VISIBLE);
-		this.subtitleView.getBtnAudioPrevious().setVisibility(View.VISIBLE);
-		this.subtitleView.getBtnSubtitleNext().setVisibility(View.VISIBLE);
-		this.subtitleView.getBtnSubtitlePrevious().setVisibility(View.VISIBLE);
-		*/
-		/*
-		 * END tmp
-		 */
 		
 		try {
 			this.subtitleView.getTvAudioTrack().setText(media.getAudioList().getList().get(0).getText());
 			this.subtitleView.getTvSubtitleTrack().setText(media.getSubtitleList().getList().get(0).getText());
-			media.getAudioList().setCurrent(0);
-			media.getSubtitleList().setCurrent(0);
 			// affiche les fleches
 			this.subtitleView.getBtnAudioNext().setVisibility(View.VISIBLE);
 			this.subtitleView.getBtnAudioPrevious().setVisibility(View.VISIBLE);
@@ -386,7 +368,8 @@ public class PlayModel {
 				current--;
 				this.subtitleView.getTvAudioTrack().setText(
 						audioList.getList().get(current).getText());
-				this.commandSetAudio(audioList.getList().get(current).getId());
+				this.commandSetAudio(this.vlcConnection.getMedia().getAudioList().getList().get(current).getId());
+				this.vlcConnection.getMedia().getAudioList().setCurrent(current);
 			}
 		}
 		else {
@@ -394,25 +377,18 @@ public class PlayModel {
 				current++;
 				this.subtitleView.getTvAudioTrack().setText(
 						audioList.getList().get(current).getText());
-				this.commandSetAudio(audioList.getList().get(current).getId());
+				this.commandSetAudio(this.vlcConnection.getMedia().getAudioList().getList().get(current).getId());
+				this.vlcConnection.getMedia().getAudioList().setCurrent(current);
 			}
 		}
-		media.getAudioList().setCurrent(current);
 	}
 
 
 	public void setSubtitlePiste(boolean isPrevious) {
-		/*if(isPrevious) {
-			this.subtitleView.getTvSubtitleTrack().setText(
-					sl.getList().get((current--)%sl.getList().size()).getText());
-		}
-		else {
-			this.subtitleView.getTvSubtitleTrack().setText(
-					sl.getList().get((current++)%sl.getList().size()).getText());	
-		}*/
 		Media media = this.vlcConnection.getMedia();
 		SubtitleList subList = media.getSubtitleList();
 		int current = subList.getCurrent();
+		Log.i("TRACK","current n : " + current);
 		
 		
 		if(isPrevious) {
@@ -421,7 +397,8 @@ public class PlayModel {
 				this.subtitleView.getTvSubtitleTrack().setText(
 						subList.getList().get(current).getText());
 				Log.i("TRACK","previous.piste n : " + subList.getList().get(current).getId());
-				this.commandSetSub(subList.getList().get(current).getId());
+				this.commandSetSub(this.vlcConnection.getMedia().getSubtitleList().getList().get(current).getId());
+				this.vlcConnection.getMedia().getSubtitleList().setCurrent(current);
 			}
 		}
 		else {
@@ -430,10 +407,10 @@ public class PlayModel {
 				this.subtitleView.getTvSubtitleTrack().setText(
 						subList.getList().get(current).getText());
 				Log.i("TRACK","next.piste n : " + subList.getList().get(current).getId());
-				this.commandSetSub(subList.getList().get(current).getId());
+				this.commandSetSub(this.vlcConnection.getMedia().getSubtitleList().getList().get(current).getId());
+				this.vlcConnection.getMedia().getSubtitleList().setCurrent(current);
 			}
 		}
-		media.getSubtitleList().setCurrent(current);
 		
 	}
 }

@@ -7,7 +7,7 @@ public class SubtitleList {
 	private int current;
  
 	public SubtitleList() {
-		current = -1;
+		current = 0;
 		setList(new ArrayList<Subtitle>());
 	}
 
