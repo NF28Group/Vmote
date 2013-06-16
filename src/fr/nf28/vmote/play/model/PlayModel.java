@@ -378,34 +378,26 @@ public class PlayModel {
 
 	public void setAudioPiste(boolean isPrevious) {
 		Media media = this.vlcConnection.getMedia();
-
-		
 		SubtitleList audioList = media.getAudioList();
 		int current = audioList.getCurrent();
 		
 		if(isPrevious) {
-			current--;
-			this.subtitleView.getTvAudioTrack().setText(
-					audioList.getList().get(current%audioList.getList().size()).getText());
-			if(current >=0) {
+			if((current-1) >= 0) {
+				current--;
+				this.subtitleView.getTvAudioTrack().setText(
+						audioList.getList().get(current).getText());
 				this.commandSetAudio(audioList.getList().get(current).getId());
-			}
-			else {
-				current++;
 			}
 		}
 		else {
-			current++;
-			this.subtitleView.getTvSubtitleTrack().setText(
-					audioList.getList().get(current%audioList.getList().size()).getText());
-			if(current < audioList.getList().size()) {
+			if((current+1) < audioList.getList().size()) {
+				current++;
+				this.subtitleView.getTvAudioTrack().setText(
+						audioList.getList().get(current).getText());
 				this.commandSetAudio(audioList.getList().get(current).getId());
 			}
-			else
-				current--;
 		}
 		media.getAudioList().setCurrent(current);
-		
 	}
 
 
@@ -419,31 +411,25 @@ public class PlayModel {
 					sl.getList().get((current++)%sl.getList().size()).getText());	
 		}*/
 		Media media = this.vlcConnection.getMedia();
-
-		
 		SubtitleList subList = media.getSubtitleList();
 		int current = subList.getCurrent();
 		
+		
 		if(isPrevious) {
-			current--;
-			this.subtitleView.getTvSubtitleTrack().setText(
-					subList.getList().get(current%subList.getList().size()).getText());
-			if(current >=0) {
+			if((current-1) >= 0) {
+				current--;
+				this.subtitleView.getTvSubtitleTrack().setText(
+						subList.getList().get(current).getText());
 				this.commandSetSub(subList.getList().get(current).getId());
-			}
-			else {
-				current++;
 			}
 		}
 		else {
-			current++;
-			this.subtitleView.getTvSubtitleTrack().setText(
-					subList.getList().get(current%subList.getList().size()).getText());
-			if(current < subList.getList().size()) {
+			if((current+1) < subList.getList().size()) {
+				current++;
+				this.subtitleView.getTvSubtitleTrack().setText(
+						subList.getList().get(current).getText());
 				this.commandSetSub(subList.getList().get(current).getId());
 			}
-			else
-				current--;
 		}
 		media.getSubtitleList().setCurrent(current);
 		
