@@ -420,6 +420,7 @@ public class PlayModel {
 				current--;
 				this.subtitleView.getTvSubtitleTrack().setText(
 						subList.getList().get(current).getText());
+				Log.i("TRACK","previous.piste n : " + subList.getList().get(current).getId());
 				this.commandSetSub(subList.getList().get(current).getId());
 			}
 		}
@@ -428,6 +429,7 @@ public class PlayModel {
 				current++;
 				this.subtitleView.getTvSubtitleTrack().setText(
 						subList.getList().get(current).getText());
+				Log.i("TRACK","next.piste n : " + subList.getList().get(current).getId());
 				this.commandSetSub(subList.getList().get(current).getId());
 			}
 		}
